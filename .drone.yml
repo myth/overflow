@@ -1,4 +1,5 @@
 pipeline:
+  # If we have cached build folders, restore them
   restore-cache:
     image: drillster/drone-volume-cache
     restore: true
@@ -7,6 +8,7 @@ pipeline:
     volumes:
       - /tmp/drone-cache:/cache
 
+  # Install dependencies and test the python code
   backend:
     image: python:3
     group: build
@@ -18,13 +20,14 @@ pipeline:
       - . env/bin/activate
       - make install
       - make test
-
+  # Install dependencies, build and test the typescript code
   frontend:
     image: python:3
     group: build
     commands:
       - echo "Simulating frontend build ..."
 
+  # Deploy backend to prod
   deploy_backend:
     image: appleboy/drone-ssh
     group: deploy
@@ -39,6 +42,7 @@ pipeline:
       - echo "Simulating backend deploy ..."
       - date
 
+  # Deploy frontend to prod
   deploy_frontend:
     image: appleboy/drone-ssh
     group: deploy
@@ -53,6 +57,7 @@ pipeline:
       - echo "Simulating frontend deploy ..."
       - date
 
+  # Rebuild cache volume from current build pipeline
   rebuild-cache:
     image: drillster/drone-volume-cache
     rebuild: true
