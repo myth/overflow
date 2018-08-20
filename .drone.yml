@@ -4,7 +4,7 @@ pipeline:
     image: drillster/drone-volume-cache
     restore: true
     mount:
-      - env
+      - backend/env
     volumes:
       - /tmp/drone-cache:/cache
 
