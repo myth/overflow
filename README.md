@@ -5,7 +5,7 @@ Overflow
 
 Codebase for [overflow.no](https://overflow.no)
 
-# Backend
+## Backend
 
 Set up the Python environment and install dependencies
 
@@ -31,7 +31,7 @@ make test
 make run
 ```
 
-# Frontend
+## Frontend
 
 Setup the Webpack / Typescript / React environment
 
