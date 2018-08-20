@@ -1,39 +1,62 @@
 pipeline:
-    backend:
-        image: python:3
-        group: build
-        commands:
-            - cd backend
-            - make install
-            - make test
-    frontend:
-        image: python:3
-        group: build
-        commands:
-            - echo "Simulating frontend build ..."
-    deploy_backend:
-        image: appleboy/drone-ssh
-        group: deploy
-        when:
-            branch: master
-            event: push
-        host: ace.ulv.io
-        port: 22
-        username: root
-        secrets: [ ssh_key ]
-        script:
-            - echo "Simulating backend deploy ..."
-            - date
-    deploy_frontend:
-        image: appleboy/drone-ssh
-        group: deploy
-        when:
-            branch: master
-            event: push
-        host: ace.ulv.io
-        port: 22
-        username: root
-        secrets: [ ssh_key ]
-        script:
-            - echo "Simulating frontend deploy ..."
-            - date
+  restore-cache:
+    image: drillster/drone-volume-cache
+    restore: true
+    mount:
+      - env
+    volumes:
+      - /tmp/drone-cache:/cache
+
+  backend:
+    image: python:3
+    group: build
+    commands:
+      - ls -lah
+      - cd backend
+      - ls -lah
+      - make env
+      - . env/bin/activate
+      - make install
+      - make test
+
+  frontend:
+    image: python:3
+    group: build
+    commands:
+      - echo "Simulating frontend build ..."
+
+  deploy_backend:
+    image: appleboy/drone-ssh
+    group: deploy
+    when:
+      branch: master
+      event: push
+    host: ace.ulv.io
+    port: 22
+    username: root
+    secrets: [ ssh_key ]
+    script:
+      - echo "Simulating backend deploy ..."
+      - date
+
+  deploy_frontend:
+    image: appleboy/drone-ssh
+    group: deploy
+    when:
+      branch: master
+      event: push
+    host: ace.ulv.io
+    port: 22
+    username: root
+    secrets: [ ssh_key ]
+    script:
+      - echo "Simulating frontend deploy ..."
+      - date
+
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    rebuild: true
+    mount:
+      - ./backend/env
+    volumes:
+      - /tmp/drone-cache:/cache
