@@ -1,13 +1,13 @@
 pipeline:
     backend:
-        image: python3
+        image: python:3
         group: build
         commands:
             - cd backend
             - source env/bin/activate
             - python src/manage.py migrate
     frontend:
-        image: python3
+        image: python:3
         group: build
         commands:
             - echo "Simulating frontend build ..."
