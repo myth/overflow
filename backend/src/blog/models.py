@@ -3,8 +3,10 @@ from django.db import models
 
 # Create your models here.
 
+
 class Tag(models.Model):
     name = models.CharField(max_length=256)
+
 
 class Post(models.Model):
     title = models.CharField(max_length=256)

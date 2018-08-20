@@ -1,2 +1,6 @@
-Django==2.1
-djangorestframework==3.8.1
+# Main dependencies
+Django == 2.1
+djangorestframework == 3.8.2
+
+# Development dependencies
+-r requirements-dev.txt
