@@ -4,7 +4,7 @@ pipeline:
         group: build
         commands:
             - cd backend
-            - source env/bin/activate
+            - . env/bin/activate
             - python src/manage.py migrate
     frontend:
         image: python:3
