@@ -1,0 +1,38 @@
+pipeline:
+    backend:
+        image: python3
+        group: build
+        commands:
+            - cd backend
+            - source env/bin/activate
+            - python src/manage.py migrate
+    frontend:
+        image: python3
+        group: build
+        commands:
+            - echo "Simulating frontend build ..."
+    deploy:
+        backend:
+            image: appleboy/drone-ssh
+            when:
+                branch: master
+                event: push
+            host: ace.ulv.io
+            port: 22
+            username: root
+            secrets: [ ssh_key ]
+            script:
+                - "Simulating backend deploy ..."
+                - date
+        frontend:
+            image: appleboy/drone-ssh
+            when:
+                branch: master
+                event: push
+            host: ace.ulv.io
+            port: 22
+            username: root
+            secrets: [ ssh_key ]
+            script:
+                - echo "Simulating frontend deploy..."
+                - date
