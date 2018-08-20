@@ -1,5 +1,5 @@
 pipeline:
-  # If we have cached build folders, restore them
+  # Restore potentially cached build folders
   restore-cache:
     image: drillster/drone-volume-cache
     restore: true
@@ -13,9 +13,7 @@ pipeline:
     image: python:3
     group: build
     commands:
-      - ls -lah
       - cd backend
-      - ls -lah
       - make env
       - . env/bin/activate
       - make install
@@ -57,7 +55,7 @@ pipeline:
       - echo "Simulating frontend deploy ..."
       - date
 
-  # Rebuild cache volume from current build pipeline
+  # Rebuild cache volume from current build workspace
   rebuild-cache:
     image: drillster/drone-volume-cache
     rebuild: true
