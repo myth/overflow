@@ -42,8 +42,15 @@ TODO: Setup Webpack + Typescript + React
 ```
 cd frontend
 apt install nodejs yarn
-yarn install
-yarn run build
+make install
+```
+
+#### Build
+
+TODO: Set up build task in webpack.conf
+
+```
+make
 ```
 
 #### Test
@@ -51,7 +58,7 @@ yarn run build
 TODO: Add some linting or something, no tests plz
 
 ```
-yarn run test
+make test
 ```
 
 #### Run
@@ -59,5 +66,5 @@ yarn run test
 TODO: Setup webpack devserver
 
 ```
-yarn run devserver
+make run
 ```
