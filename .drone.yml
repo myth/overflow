@@ -4,8 +4,8 @@ pipeline:
         group: build
         commands:
             - cd backend
-            - . env/bin/activate
-            - python src/manage.py migrate
+            - make install
+            - make test
     frontend:
         image: python:3
         group: build

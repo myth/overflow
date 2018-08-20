@@ -1,18 +1,21 @@
 default: install
 
-install: env
+install:
 	@echo "Installing python dependencies ..."
-	. env/bin/activate && pip3 install --upgrade pip && pip3 install -r requirements.txt
+	pip3 install --upgrade pip
+	pip3 install -r requirements.txt
+	@echo "Applying migrations ..."
+	python src/manage.py migrate
 
 env:
 	@echo "Ensuring Python 3 environment ..."
 	python3 -m venv env
 
-run: env
+run:
 	@echo "Starting development server ..."
-	. env/bin/activate && python src/manage.py migrate && python src/manage.py runserver 0.0.0.0:8000
+	python src/manage.py runserver 0.0.0.0:8000
 
-test: env
+test:
 	@echo "Checking imports ..."
 	isort -c -rc src
 
