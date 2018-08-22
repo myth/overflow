@@ -25,9 +25,9 @@ pipeline:
     group: build
     commands:
       - cd frontend
-      - make install
-      - make prod
-      - make test
+      - yarn install
+      - yarn run build:prod
+      - yarn run test
 
   # Deploy backend to prod
   deploy_backend:
