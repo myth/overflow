@@ -105,3 +105,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# NodeJS / NPM / Yarn
+frontend/dist/
+node_modules/
+npm-error.log
+yarn-error.log

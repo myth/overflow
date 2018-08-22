@@ -5,6 +5,7 @@ pipeline:
     restore: true
     mount:
       - backend/env
+      - frontend/node_modules
     volumes:
       - /tmp/drone-cache:/cache
 
@@ -20,10 +21,13 @@ pipeline:
       - make test
   # Install dependencies, build and test the typescript code
   frontend:
-    image: python:3
+    image: node:10-alpine
     group: build
     commands:
-      - echo "Simulating frontend build ..."
+      - cd frontend
+      - make install
+      - make prod
+      - make test
 
   # Deploy backend to prod
   deploy_backend:
@@ -61,5 +65,6 @@ pipeline:
     rebuild: true
     mount:
       - ./backend/env
+      - ./frontend/node_modules
     volumes:
       - /tmp/drone-cache:/cache
