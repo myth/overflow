@@ -17,7 +17,7 @@ run:
 	yarn run dev
 
 test:
-	@echo "Checking imports ..."
+	@echo "Running tests ..."
 	yarn run test
 
 clean:
