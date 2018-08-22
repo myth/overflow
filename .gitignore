@@ -17,7 +17,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -107,7 +106,6 @@ venv.bak/
 .mypy_cache/
 
 # NodeJS / NPM / Yarn
-frontend/dist/
 node_modules/
 npm-error.log
 yarn-error.log
