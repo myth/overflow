@@ -2,7 +2,7 @@ default: dev
 
 install:
 	@echo "Installing javascript dependencies ..."
-	yarn install
+	yarn install --ignore-optional
 
 dev:
 	@echo "Building bundle for DEVELOPMENT ..."
