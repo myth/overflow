@@ -37,7 +37,7 @@ Setup the Webpack / Typescript / React environment
 
 #### Install
 
-TODO: Setup Webpack + Typescript + React
+Install Nodejs + Yarn + Webpack + Typescript + React
 
 ```
 cd frontend
@@ -47,15 +47,21 @@ make install
 
 #### Build
 
-TODO: Set up build task in webpack.conf
+Build a development bundle
 
 ```
-make
+make dev
+```
+
+Build a production bundle
+
+```
+make prod
 ```
 
 #### Test
 
-TODO: Add some linting or something, no tests plz
+Run linting and tests
 
 ```
 make test
@@ -63,7 +69,7 @@ make test
 
 #### Run
 
-TODO: Setup webpack devserver
+Run webpack development server
 
 ```
 make run

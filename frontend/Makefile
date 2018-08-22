@@ -20,4 +20,8 @@ test:
 	@echo "Checking imports ..."
 	yarn run test
 
-.PHONY: dev install prod run test
+clean:
+	@echo "Cleaning build folder ..."
+	rm -rf dist/*
+
+.PHONY: clean dev install prod run test
