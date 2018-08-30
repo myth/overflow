@@ -1,6 +1,5 @@
 from decouple import config
 
-
 # (security.W018) You should not have DEBUG set to True in deployment.
 PRODUCTION = config('OF_PRODUCTION', default=False, cast=bool)
 DEBUG = not PRODUCTION
