@@ -13,6 +13,7 @@ pipeline:
   backend:
     image: python:3
     group: build
+    secrets: [ OF_SECRET_KEY ]
     commands:
       - cd backend
       - make env
