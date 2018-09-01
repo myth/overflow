@@ -1,71 +1,61 @@
 pipeline:
-  # Restore potentially cached build folders
-  restore-cache:
-    image: drillster/drone-volume-cache
-    restore: true
-    mount:
-      - backend/env
-      - frontend/node_modules
-    volumes:
-      - /tmp/drone-cache:/cache
-
   # Install dependencies and test the python code
   backend:
-    image: python:3
+    image: plugins/docker
     group: build
-    secrets: [ OF_SECRET_KEY ]
-    commands:
-      - cd backend
-      - make env
-      - . env/bin/activate
-      - make install
-      - make test
+    secrets:
+      - docker_username
+      - docker_password
+      - of_secret_key
+    repo: mythern/overflow-backend
+    dockerfile: backend/Dockerfile
+    auto_tag: true
+    build_args_from_env:
+      - of_secret_key
+    when:
+      branch: master
+      event: push
+
   # Install dependencies, build and test the typescript code
   frontend:
-    image: node:10-alpine
+    image: plugins/docker
     group: build
-    commands:
-      - cd frontend
-      - yarn install
-      - yarn run build:prod
-      - yarn run test
-
-  # Deploy backend to prod
-  deploy_backend:
-    image: appleboy/drone-ssh
-    group: deploy
+    secrets:
+      - docker_username
+      - docker_password
+    repo: mythern/overflow-frontend
+    dockerfile: frontend/Dockerfile
+    auto_tag: true
     when:
       branch: master
       event: push
-    host: ace.ulv.io
-    port: 22
-    username: root
-    secrets: [ ssh_key ]
-    script:
-      - echo "Simulating backend deploy ..."
-      - date
 
-  # Deploy frontend to prod
-  deploy_frontend:
-    image: appleboy/drone-ssh
-    group: deploy
+  # Copy compose-file
+  configure:
+    image: appleboy/drone-scp
+    host: ace.ulv.io
+    secrets:
+      - ssh_key
+    target: /srv/www/overflow/docker-compose.yml
+    source: docker-compose.yml
     when:
       branch: master
       event: push
-    host: ace.ulv.io
-    port: 22
-    username: root
-    secrets: [ ssh_key ]
-    script:
-      - echo "Simulating frontend deploy ..."
-      - date
 
-  # Rebuild cache volume from current build workspace
-  rebuild-cache:
-    image: drillster/drone-volume-cache
-    rebuild: true
-    mount:
-      - ./backend/env
-      - ./frontend/node_modules
-    volumes:
-      - /tmp/drone-cache:/cache
+  # Pull fresh images, restart, cleanup and report status
+  deploy:
+    image: appleboy/drone-ssh
+    host: ace.ulv.io
+    secrets:
+      - ssh_key
+    script:
+      - cd /srv/www/overflow
+      - sed -i 's,backend/src/,,g' docker-compose.yml
+      - docker-compose pull
+      - docker-compose down
+      - docker-compose up -d
+      - docker image prune -f
+      - docker-compose ps
+    when:
+      branch: master
+      event: push

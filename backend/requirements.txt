@@ -1,5 +1,7 @@
 # Main dependencies
 Django == 2.1
+psycopg2 == 2.7.5
+django-redis == 4.9.0
 djangorestframework == 3.8.2
 python-decouple == 3.1
 
