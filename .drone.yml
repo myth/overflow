@@ -8,10 +8,8 @@ pipeline:
       - docker_password
       - of_secret_key
     repo: mythern/overflow-backend
-    dockerfile: backend/Dockerfile
+    context: backend
     auto_tag: true
-    build_args_from_env:
-      - of_secret_key
     when:
       branch: master
       event: push
@@ -24,7 +22,7 @@ pipeline:
       - docker_username
       - docker_password
     repo: mythern/overflow-frontend
-    dockerfile: frontend/Dockerfile
+    context: frontend
     auto_tag: true
     when:
       branch: master
