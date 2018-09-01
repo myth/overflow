@@ -34,6 +34,7 @@ pipeline:
   configure:
     image: appleboy/drone-scp
     host: ace.ulv.io
+    username: root
     secrets:
       - ssh_key
     target: /srv/www/overflow/docker-compose.yml
@@ -46,6 +47,7 @@ pipeline:
   deploy:
     image: appleboy/drone-ssh
     host: ace.ulv.io
+    username: root
     secrets:
       - ssh_key
     script:
