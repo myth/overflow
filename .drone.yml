@@ -8,6 +8,7 @@ pipeline:
       - docker_password
       - of_secret_key
     repo: mythern/overflow-backend
+    dockerfile: backend/Dockerfile
     context: backend
     auto_tag: true
     when:
@@ -22,6 +23,7 @@ pipeline:
       - docker_username
       - docker_password
     repo: mythern/overflow-frontend
+    dockerfile: frontend/Dockerfile
     context: frontend
     auto_tag: true
     when:
