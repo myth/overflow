@@ -12,7 +12,6 @@ pipeline:
   # Install dependencies and test the python code
   backend:
     image: plugins/docker
-    group: build
     secrets:
       - docker_username
       - docker_password
@@ -29,7 +28,6 @@ pipeline:
   # Install dependencies, build and test the typescript code
   frontend:
     image: plugins/docker
-    group: build
     secrets:
       - docker_username
       - docker_password
