@@ -21,6 +21,7 @@ pipeline:
     context: backend
     auto_tag: true
     storage_path: /drone/docker
+    purge: false
     when:
       branch: master
       event: push
@@ -36,6 +37,7 @@ pipeline:
     context: frontend
     auto_tag: true
     storage_path: /drone/docker
+    purge: false
     when:
       branch: master
       event: push
