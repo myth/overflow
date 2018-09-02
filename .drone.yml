@@ -65,7 +65,6 @@ pipeline:
       - sed -i 's#backend/src/##g' docker-compose.yml
       - sed -i '/build:/d' docker-compose.yml
       - docker-compose pull
-      - docker-compose down
       - docker-compose up -d
       - docker image prune -f
       - docker-compose ps
