@@ -3,6 +3,7 @@ pipeline:
   restore-cache:
     image: drillster/drone-volume-cache
     restore: true
+    # Auto-delete files that are older than 7 days
     ttl: 7
     mount:
       - /drone/docker

@@ -6,4 +6,10 @@ sleep 6
 python3 manage.py migrate --no-input
 
 # Start the application socket
-uwsgi --uwsgi-socket 0.0.0.0:13571 --plugins python3 --uid uwsgi --module overflow.wsgi
+uwsgi \
+    --uwsgi-socket 0.0.0.0:13571 \
+    --plugins python3 \
+    --uid uwsgi \
+    --module overflow.wsgi \
+    --master \
+    --workers 5
