@@ -62,7 +62,7 @@ pipeline:
       - ssh_key
     script:
       - cd /srv/www/overflow
-      - sed -i 's,backend/src/,,g' docker-compose.yml
+      - sed -i 's#backend/src/##g' docker-compose.yml
       - sed -i '/build:/d' docker-compose.yml
       - docker-compose pull
       - docker-compose down
