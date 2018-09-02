@@ -21,6 +21,7 @@ pipeline:
     dockerfile: backend/Dockerfile
     context: backend
     auto_tag: true
+    storage_path: /drone/docker
     when:
       branch: master
       event: push
@@ -36,6 +37,7 @@ pipeline:
     dockerfile: frontend/Dockerfile
     context: frontend
     auto_tag: true
+    storage_path: /drone/docker
     when:
       branch: master
       event: push
