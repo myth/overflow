@@ -1,4 +1,14 @@
 pipeline:
+  # Use layer cache
+  restore-cache:
+    image: drillster/drone-volume-cache
+    restore: true
+    ttl: 7
+    mount:
+      - /drone/docker
+    volumes:
+      - /tmp/drone-cache:/cache
+
   # Install dependencies and test the python code
   backend:
     image: plugins/docker
@@ -37,7 +47,7 @@ pipeline:
     username: root
     secrets:
       - ssh_key
-    target: /srv/www/overflow/docker-compose.yml
+    target: /srv/www/overflow/
     source: docker-compose.yml
     when:
       branch: master
@@ -61,3 +71,12 @@ pipeline:
     when:
       branch: master
       event: push
+
+  # Rebuild layer cache
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    rebuild: true
+    mount:
+      - /drone/docker
+    volumes:
+      - /tmp/drone-cache:/cache
