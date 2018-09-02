@@ -25,6 +25,9 @@ RUN apk add --update --no-cache \
 COPY docker-entrypoint.sh /usr/local/bin/
 COPY src/ ./
 
+# Collect static files for the frontend container to serve
+RUN python3 manage.py collectstatic --no-input
+
 # Set correct ownership
 RUN chown -R uwsgi:uwsgi .
 

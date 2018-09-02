@@ -5,7 +5,7 @@ PRODUCTION = config('OF_PRODUCTION', default=False, cast=bool)
 DEBUG = not PRODUCTION
 SECURITY_HARDENING = config('OF_SECURE', default=False, cast=bool)
 
-SECRET_KEY = config('OF_SECRET_KEY')
+SECRET_KEY = config('OF_SECRET_KEY', default='replaceme')
 DB_PASS = config('POSTGRES_PASSWORD', default='replaceme')
 
 # (security.W020) ALLOWED_HOSTS must not be empty in deployment.

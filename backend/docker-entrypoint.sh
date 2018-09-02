@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Do some housekeeping
-python3 manage.py collectstatic --no-input
-
 # Give PostgreSQL a few extra seconds to get ready
 sleep 6
 # Migrate database
