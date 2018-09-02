@@ -5,6 +5,16 @@ Overflow
 
 Codebase for [overflow.no](https://overflow.no)
 
+## Docker
+
+Depends on a `.env` file in `backend/src/.env`
+
+```
+docker-compose build
+docker-compose up -d
+docker-compose down
+```
+
 ## Backend
 
 Set up the Python environment and install dependencies
