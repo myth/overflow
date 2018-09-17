@@ -64,6 +64,8 @@ pipeline:
       - cd /srv/www/overflow
       - sed -i 's#backend/src/##g' docker-compose.yml
       - sed -i '/build:/d' docker-compose.yml
+      - sed -i '/dockerfile:/d' docker-compose.yml
+      - sed -i '/context:/d' docker-compose.yml
       - docker-compose pull
       - docker-compose up -d
       - docker image prune -f
