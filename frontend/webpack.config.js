@@ -77,7 +77,7 @@ module.exports = (env, argv) => {
         'GIT_VERSION': JSON.stringify(grp.version()),
         'GIT_COMMITHASH': JSON.stringify(grp.commithash()),
         'GIT_BRANCH': JSON.stringify(grp.branch()),
-        'BUILD_DATE': new Date().toISOString()
+        'BUILD_DATE': JSON.stringify(new Date().toISOString())
       })
     ],
 
