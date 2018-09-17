@@ -1,0 +1,23 @@
+@import '../../lib/scss/colors.scss';
+
+#site-footer {
+  padding: 15px 0px;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#copyright {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+#git {
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}

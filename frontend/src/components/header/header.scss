@@ -1,0 +1,12 @@
+@import '../../lib/scss/colors.scss';
+
+#site-header {
+  height: 70px;
+  background-color: black;
+  color: white;
+  border-bottom: 1px solid #666;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,7 +1,13 @@
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const GitRevisionPlugin = require("git-revision-webpack-plugin");
+
+const grp = new GitRevisionPlugin({
+  versionCommand: 'describe --always --tags --dirty --long'
+});
 
 module.exports = (env, argv) => {
   // PRODUCTION will trigger optimization and compile all css into one minified file
@@ -66,6 +72,11 @@ module.exports = (env, argv) => {
         title: "Overflow",
         template: __dirname + "/src/app.html",
         filename: "index.html"
+      }),
+      new webpack.DefinePlugin({
+        'GIT_VERSION': JSON.stringify(grp.version()),
+        'GIT_COMMITHASH': JSON.stringify(grp.commithash()),
+        'GIT_BRANCH': JSON.stringify(grp.branch()),
       })
     ],
 
