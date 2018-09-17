@@ -2,6 +2,8 @@ FROM node:alpine as builder
 
 WORKDIR /app
 
+RUN apk update && apk add --no-cache git
+
 COPY package.json tsconfig.json webpack.config.js .yarnrc yarn.lock ./
 RUN yarn install --ignore-optional
 
