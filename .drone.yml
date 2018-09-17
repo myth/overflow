@@ -24,7 +24,7 @@ pipeline:
     storage_path: /drone/docker
     purge: false
     when:
-      event: tag
+      event: [push, tag]
 
   # Install dependencies, build and test the typescript code
   frontend:
@@ -39,7 +39,7 @@ pipeline:
     storage_path: /drone/docker
     purge: false
     when:
-      event: tag
+      event: [push, tag]
 
   # Copy compose-file
   configure:
@@ -51,7 +51,7 @@ pipeline:
     target: /srv/www/overflow/
     source: docker-compose.yml
     when:
-      event: tag
+      event: [push, tag]
 
   # Pull fresh images, restart, cleanup and report status
   deploy:
@@ -71,7 +71,7 @@ pipeline:
       - docker image prune -f
       - docker-compose ps
     when:
-      event: tag
+      event: [push, tag]
 
   # Rebuild layer cache
   rebuild-cache:
