@@ -3,7 +3,9 @@ version: '3.6'
 services:
   # Django container
   backend:
-    build: backend/
+    build:
+      dockerfile: Dockerfile.backend
+      context: .
     image: mythern/overflow-backend
     restart: unless-stopped
     env_file: backend/src/.env
@@ -15,7 +17,9 @@ services:
 
   # nginx container
   frontend:
-    build: frontend/
+    build:
+      dockerfile: Dockerfile.frontend
+      context: .
     image: mythern/overflow-frontend
     restart: unless-stopped
     networks:

@@ -2,7 +2,7 @@ FROM alpine:latest
 
 WORKDIR /app
 
-ADD requirements.txt requirements-dev.txt ./
+ADD backend/requirements.txt backend/requirements-dev.txt ./
 RUN apk add --update --no-cache \
     python3 \
     uwsgi \
@@ -22,8 +22,8 @@ RUN apk add --update --no-cache \
     rm -f /usr/lib/python*/pydoc.py && \
     rm -rf /root/.cache /var/cache
 
-COPY docker-entrypoint.sh /usr/local/bin/
-COPY src/ ./
+COPY backend/docker-entrypoint.sh /usr/local/bin/
+COPY backend/src/ ./
 
 # Collect static files for the frontend container to serve
 RUN python3 manage.py collectstatic --no-input
