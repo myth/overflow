@@ -18,8 +18,8 @@ pipeline:
       - docker_password
       - of_secret_key
     repo: mythern/overflow-backend
-    dockerfile: backend/Dockerfile
-    context: backend
+    dockerfile: Dockerfile.backend
+    context: .
     auto_tag: true
     storage_path: /drone/docker
     purge: false
@@ -33,8 +33,8 @@ pipeline:
       - docker_username
       - docker_password
     repo: mythern/overflow-frontend
-    dockerfile: frontend/Dockerfile
-    context: frontend
+    dockerfile: Dockerfile.frontend
+    context: .
     auto_tag: true
     storage_path: /drone/docker
     purge: false
