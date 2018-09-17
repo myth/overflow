@@ -6,7 +6,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const GitRevisionPlugin = require("git-revision-webpack-plugin");
 
 const grp = new GitRevisionPlugin({
-  versionCommand: 'describe --always --tags --dirty --long'
+  versionCommand: 'describe --always --tags --long'
 });
 
 module.exports = (env, argv) => {

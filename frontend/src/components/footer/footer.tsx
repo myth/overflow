@@ -8,7 +8,7 @@ export const Footer = () => {
   return (
     <footer id="site-footer">
       <span id="copyright">{now.getFullYear()} &copy; <a href="/">Overflow</a></span>
-      <span id="git">{GIT_VERSION} ({GIT_BRANCH})</span>
+      <span id="git">{GIT_COMMITHASH}</span>
     </footer>
   );
 }
