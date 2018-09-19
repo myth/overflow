@@ -39,12 +39,6 @@ const Content = () => {
       <div className="bg-white padding-vertical-20"></div>
       <div className="bg-tangerine padding-vertical-20"></div>
       <div className="bg-white padding-vertical-20"></div>
-      <div className="center padding-top-20">
-        {createButton(ButtonType.DEFAULT, "Default Button", "Button Title")}
-        {createButton(ButtonType.GREEN, "Green Button", "Button Title")}
-        {createButton(ButtonType.RED, "Red Button", "Button Title")}
-        {createButton(ButtonType.ORANGE, "Orange Button", "Button Title")}
-      </div>
     </main>
   );
 }
