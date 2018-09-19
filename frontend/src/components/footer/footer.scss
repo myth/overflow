@@ -2,8 +2,8 @@
 
 #site-footer {
   padding: 15px 0px;
-  background-color: black;
-  color: white;
+  background-color: $eerieblack-dark;
+  color: $white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,3 +21,7 @@
   margin-top: 5px;
   margin-bottom: 30px;
 }
+#git a { color: #666; }
+#git a:visited,
+#git a:hover,
+#git a:active { color: lighten(#666, 10%); }
