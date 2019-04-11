@@ -1,12 +1,8 @@
 @import '../../lib/scss/colors.scss';
 
 #site-header {
-  height: 70px;
-  background-color: $eerieblack;
+  background-color: $eerieblack-dark;
   color: white;
-  border-bottom: 1px solid #666;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 1.5rem;
+  padding: 20px;
 }

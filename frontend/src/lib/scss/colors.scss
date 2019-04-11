@@ -40,11 +40,47 @@ $link-hover: $darktangerine-light;
 $link-dark: darken($darktangerine-dark, 10%);
 $link-dark-hover: $darktangerine;
 
-// Classes
+/*
+ * Classes
+ */
+// Background
 .bg-white { background-color: $white; }
 .bg-black { background-color: $black; }
 .bg-eerie { background-color: $eerieblack; };
+.bg-eerie-light { background-color: $eerieblack-light; };
+.bg-eerie-lightest { background-color: lighten($eerieblack-light, 10%); };
+.bg-eerie-dark { background-color: $eerieblack-dark; };
 .bg-cerulean { background-color: $darkcerulean; }
+.bg-cerulean-light { background-color: $darkcerulean-light; }
+.bg-cerulean-lightest { background-color: lighten($darkcerulean-light, 10%); }
+.bg-cerulean-dark { background-color: $darkcerulean-dark; }
 .bg-teal { background-color: $steelteal; }
+.bg-teal-light { background-color: $steelteal-light; }
+.bg-teal-lightest { background-color: lighten($steelteal-light, 10%); }
+.bg-teal-dark { background-color: $steelteal-dark; }
 .bg-olivine { background-color: $olivine; }
+.bg-olivine-light { background-color: $olivine-light; }
+.bg-olivine-lightest { background-color: lighten($olivine-light, 10%); }
+.bg-olivine-dark { background-color: $olivine-dark; }
 .bg-tangerine { background-color: $darktangerine; }
+.bg-tangerine-light { background-color: $darktangerine-light; }
+.bg-tangerine-lightest { background-color: lighten($darktangerine-light, 10%); }
+.bg-tangerine-dark { background-color: $darktangerine-dark; }
+// Text
+.text-white { color: $white; }
+.text-black { color: $black; }
+.text-eerie { color: $eerieblack; };
+.text-eerie-light { color: $eerieblack-light; };
+.text-eerie-dark { color: $eerieblack-dark; };
+.text-cerulean { color: $darkcerulean; }
+.text-cerulean-light { color: $darkcerulean-light; }
+.text-cerulean-dark { color: $darkcerulean-dark; }
+.text-teal { color: $steelteal; }
+.text-teal-light { color: $steelteal-light; }
+.text-teal-dark { color: $steelteal-dark; }
+.text-olivine { color: $olivine; }
+.text-olivine-light { color: $olivine-light; }
+.text-olivine-dark { color: $olivine-dark; }
+.text-tangerine { color: $darktangerine; }
+.text-tangerine-light { color: $darktangerine-light; }
+.text-tangerine-dark { color: $darktangerine-dark; }

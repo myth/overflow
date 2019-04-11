@@ -30,7 +30,7 @@ export interface PostMetaProps {
  * @param props PostMeta properties
  */
 export const PostMeta: React.SFC<PostMetaProps> = props => {
-  return <span className="post-meta">Created: {props.created} Edited: {props.edited}</span>;
+  return <span className="post-meta">C: {props.created} | U: {props.edited}</span>;
 }
 
 /**

@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import "./button.scss";
-import { checkPropTypes } from "prop-types";
 
 export enum ButtonType {
   DEFAULT = "btn-gray",

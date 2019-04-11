@@ -4,6 +4,7 @@ import * as ReactDOM from "react-dom";
 // Stylesheet
 import "./app.scss";
 
+import { About } from "./components/about/about";
 import { createButton, ButtonType } from "./components/button/button";
 import { Header } from "./components/header/header";
 import { Post, PostProps, PostSummary, PostSummaryProps } from "./components/post/post";
@@ -11,40 +12,39 @@ import { Footer } from "./components/footer/footer";
 
 const examplePostSummary: PostSummaryProps = {
   header: {
-    title: "Example Post Title",
+    title: "Test Post",
     meta: {
-      created: "2018-09-13 21:17:00",
-      edited: "2018-09-13 21:28:13",
+      created: "2019-04-11 23:56:00",
+      edited: "2018-04-12 00:28:13",
     },
   },
-  description: "Description",
+  description: "Finally started refurbishing ye ole website...",
 }
 
 const examplePost: PostProps = {
   ...examplePostSummary,
-  content: "Example complete article content (markdown?)"
+  content: "Maybe add some markdown support for the content section. Yes, let's do that."
 }
 
 const Content = () => {
   return (
     <main id="content">
-      <div className="bg-white padding-vertical-20"></div>
-      <div className="bg-eerie padding-vertical-20"></div>
-      <div className="bg-white padding-vertical-20"></div>
-      <div className="bg-cerulean padding-vertical-20"></div>
-      <div className="bg-white padding-vertical-20"></div>
-      <div className="bg-teal padding-vertical-20"></div>
-      <div className="bg-white padding-vertical-20"></div>
-      <div className="bg-olivine padding-vertical-20"></div>
-      <div className="bg-white padding-vertical-20"></div>
-      <div className="bg-tangerine padding-vertical-20"></div>
-      <div className="bg-white padding-vertical-20"></div>
+      <section className="margin-bottom-50">
+        <div className="row around-xs">
+          <div className="col-xs-12 col-md-8 col-lg-8">
+            <Post {...examplePost}></Post>
+          </div>
+          <div className="col-xs-12 col-md-4 col-lg-4 first-xs last-md">
+            <About></About>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
 
 ReactDOM.render(
-  <div id="container">
+  <div id="root">
     <Header></Header>
     <Content></Content>
     <Footer></Footer>

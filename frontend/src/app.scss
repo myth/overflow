@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css");
+
 @import './lib/scss/reset.scss';
 @import './lib/scss/colors.scss';
 @import './lib/scss/layout.scss';
@@ -7,7 +9,14 @@ body,
 #app {
   width: 100%;
   height: 100%;
-  font-family: 'Noto', sans-serif;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.96rem;
+  color: $eerieblack-dark;
+}
+
+p {
+  margin: 20px;
+  line-height: 1.4rem;
 }
 
 a,
@@ -20,21 +29,17 @@ a:hover {
   color: $link-hover;
   text-decoration: underline;
 }
-
 hr {
   margin: 15px 0px;
   border: 0px;
   height: 1px;
   background-image: linear-gradient(to right, #fafafa, #ccc, #fafafa);
 }
-
-#container {
+#root {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  background-color: rgb(255, 255, 255);
+  min-height: 100%;
 }
-
 #content {
   display: flex;
   flex-direction: column;

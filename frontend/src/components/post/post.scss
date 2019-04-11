@@ -1,23 +1,30 @@
 @import '../../lib/scss/colors.scss';
 
+.post {
+  margin: 20px;
+}
 .post-header {
-  margin: 30px 0px;
+  margin: 20px 0px;
 }
 .post-title {
-  font-size: 2.5rem;
+  font-size: 2.0rem;
   font-weight: 100;
   margin: 10px 0px;
+
+}
+h1.post-title:first-letter {
+  margin-left: -0.1em;
 }
 .post-meta {
   color: #777;
   font-weight: 300;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 .post-description {
-  margin: 30px 0px;
+  margin: 25px 0;
   font-size: 1.3rem;
   font-weight: 300;
 }
 .post-content {
-  margin: 30px 0px;
+  margin: 20px 0;
 }
