@@ -1,12 +1,12 @@
 kind: pipeline
-name: build and deploy
+name: build
 
 steps:
-- name: clone
-  image: plugins/git
-  settings:
-    tags: true
-    recursive: true
+  # Default clone does not fetch tags
+- name: fetch-tags
+  image: docker:git
+  commands:
+    - git fetch --tags
 
   # Use layer cache
 - name: restore-cache
