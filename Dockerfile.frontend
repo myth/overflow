@@ -2,14 +2,14 @@ FROM node:alpine as builder
 
 WORKDIR /app
 
-RUN apk add --no-cache --virtual .gyp python git && apk del .gyp
+RUN apk add --no-cache --virtual .gyp python git
 
 COPY frontend/package.json frontend/tsconfig.json frontend/webpack.config.js frontend/.yarnrc frontend/yarn.lock ./
 RUN yarn install --ignore-optional
 
 COPY frontend/src/ src/
 COPY .git .git
-RUN yarn build:prod
+RUN yarn build:prod && apk del .gyp
 
 
 FROM nginx:alpine as runner
