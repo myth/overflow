@@ -25,7 +25,6 @@ steps:
   # Install dependencies and test the python code
 - name: backend
   image: plugins/docker
-    - of_secret_key
   settings:
     username:
       from_secret: docker_username
