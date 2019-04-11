@@ -18,7 +18,9 @@ steps:
     mount:
       - /drone/docker
   volumes:
-    - /tmp/drone-cache:/cache
+    - name: cache
+      host:
+        path: /tmp/drone-cache:/cache
 
   # Install dependencies and test the python code
 - name: backend
@@ -97,4 +99,6 @@ steps:
     mount:
       - /drone/docker
   volumes:
-    - /tmp/drone-cache:/cache
+    - name: cache
+      host:
+        path: /tmp/drone-cache:/cache
