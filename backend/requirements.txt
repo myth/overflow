@@ -1,9 +1,9 @@
 # Main dependencies
-Django == 2.1
-psycopg2-binary == 2.7.5
-django-redis == 4.9.0
-djangorestframework == 3.8.2
-python-decouple == 3.1
+Django ~= 2.2.0
+psycopg2-binary ~= 2.7.5
+django-redis ~= 4.9.0
+djangorestframework ~= 3.8.2
+python-decouple ~= 3.1
 
 # Development dependencies
 -r requirements-dev.txt
