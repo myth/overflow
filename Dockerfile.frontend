@@ -2,7 +2,7 @@ FROM node:alpine as builder
 
 WORKDIR /app
 
-RUN apk update && apk add --no-cache git
+RUN apk add --no-cache --virtual .gyp python git && apk del .gyp
 
 COPY frontend/package.json frontend/tsconfig.json frontend/webpack.config.js frontend/.yarnrc frontend/yarn.lock ./
 RUN yarn install --ignore-optional
