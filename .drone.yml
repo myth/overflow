@@ -1,71 +1,81 @@
-clone:
-  git:
-    image: plugins/git
+kind: pipeline
+name: build and deploy
+
+steps:
+- name: clone
+  image: plugins/git
+  settings:
     tags: true
     recursive: true
 
-pipeline:
   # Use layer cache
-  restore-cache:
-    image: drillster/drone-volume-cache
+- name: restore-cache
+  image: drillster/drone-volume-cache
+  settings:
     restore: true
     # Auto-delete files that are older than 7 days
     ttl: 7
     mount:
       - /drone/docker
-    volumes:
-      - /tmp/drone-cache:/cache
+  volumes:
+    - /tmp/drone-cache:/cache
 
   # Install dependencies and test the python code
-  backend:
-    image: plugins/docker
-    secrets:
-      - docker_username
-      - docker_password
-      - of_secret_key
+- name: backend
+  image: plugins/docker
+    - of_secret_key
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
     repo: mythern/overflow-backend
     dockerfile: Dockerfile.backend
     context: .
     auto_tag: true
     storage_path: /drone/docker
     purge: false
-    when:
-      event: [push, tag]
+  when:
+    event: [push, tag]
 
   # Install dependencies, build and test the typescript code
-  frontend:
-    image: plugins/docker
-    secrets:
-      - docker_username
-      - docker_password
+- name: frontend
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
     repo: mythern/overflow-frontend
     dockerfile: Dockerfile.frontend
     context: .
     auto_tag: true
     storage_path: /drone/docker
     purge: false
-    when:
-      event: [push, tag]
+  when:
+    event: [push, tag]
 
   # Copy compose-file
-  configure:
-    image: appleboy/drone-scp
+- name: configure
+  image: appleboy/drone-scp
+  settings:
     host: ace.ulv.io
     username: root
-    secrets:
-      - ssh_key
+    key:
+      from_secret: ssh_key
     target: /srv/www/overflow/
     source: docker-compose.yml
-    when:
-      event: [push, tag]
+  when:
+    event: [push, tag]
 
   # Pull fresh images, restart, cleanup and report status
-  deploy:
-    image: appleboy/drone-ssh
+- name: deploy
+  image: appleboy/drone-ssh
+  settings:
     host: ace.ulv.io
     username: root
-    secrets:
-      - ssh_key
+    key:
+      from_secret: ssh_key
     script:
       - cd /srv/www/overflow
       - sed -i 's#backend/src/##g' docker-compose.yml
@@ -76,14 +86,15 @@ pipeline:
       - docker-compose up -d
       - docker image prune -f
       - docker-compose ps
-    when:
-      event: [push, tag]
+  when:
+    event: [push, tag]
 
   # Rebuild layer cache
-  rebuild-cache:
-    image: drillster/drone-volume-cache
+- name: rebuild-cache
+  image: drillster/drone-volume-cache
+  settings:
     rebuild: true
     mount:
       - /drone/docker
-    volumes:
-      - /tmp/drone-cache:/cache
+  volumes:
+    - /tmp/drone-cache:/cache
