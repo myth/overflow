@@ -100,8 +100,10 @@ steps:
       - sed -i '/dockerfile:/d' docker-compose.yml
       - sed -i '/context:/d' docker-compose.yml
       - docker-compose pull
+      - docker-compose down
       - docker-compose up -d -t 600
       - docker image prune -f
+      - docker-compose ps
   when:
     event: [push]
 
