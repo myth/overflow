@@ -8,20 +8,6 @@ steps:
   commands:
     - git fetch --tags
 
-  # Use layer cache, requires trusted repo
-- name: restore-cache
-  image: drillster/drone-volume-cache
-  settings:
-    restore: true
-    # Auto-delete files that are older than 7 days
-    ttl: 7
-    mount:
-      - /drone/docker
-  volumes:
-    - name: cache
-      host:
-        path: /tmp/drone-cache:/cache
-
   # Install dependencies and test the python code
 - name: backend
   image: plugins/docker
@@ -34,12 +20,14 @@ steps:
     dockerfile: Dockerfile.backend
     context: .
     auto_tag: true
-    tags:
-      - latest
-    storage_path: /drone/docker
+    cache_from: mythern/overflow-backend:latest
     purge: false
   when:
     event: [push, tag]
+  volumes:
+    - name: docker-socket
+      host:
+        path: /var/run/docker.sock:/var/run/docker.sock
 
   # Install dependencies, build and test the typescript code
 - name: frontend
@@ -53,12 +41,14 @@ steps:
     dockerfile: Dockerfile.frontend
     context: .
     auto_tag: true
-    tags:
-      - latest
-    storage_path: /drone/docker
+    cache_from: mythern/overflow-frontend:latest
     purge: false
   when:
     event: [push, tag]
+  volumes:
+    - name: docker_socket
+      host:
+        path: /var/run/docker.sock:/var/run/docker.sock
 
   # Copy compose-file
 - name: configure
@@ -88,20 +78,8 @@ steps:
       - sed -i '/dockerfile:/d' docker-compose.yml
       - sed -i '/context:/d' docker-compose.yml
       - docker-compose pull
-      - docker-compose up -d
+      - docker-compose up -d -t 60
       - docker image prune -f
-      - docker-compose ps
   when:
     event: [tag]
 
-  # Rebuild layer cache, requires trusted repo
-- name: rebuild-cache
-  image: drillster/drone-volume-cache
-  settings:
-    rebuild: true
-    mount:
-      - /drone/docker
-  volumes:
-    - name: cache
-      host:
-        path: /tmp/drone-cache:/cache
