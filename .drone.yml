@@ -30,6 +30,28 @@ steps:
         path: /var/run/docker.sock:/var/run/docker.sock
 
   # Install dependencies, build and test the typescript code
+- name: frontend-builder
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: mythern/overflow-frontend-builder
+    dockerfile: Dockerfile.frontend
+    context: .
+    auto_tag: true
+    target: builder
+    cache_from: mythern/overflow-frontend-builder:latest
+    purge: false
+  when:
+    event: [push]
+  volumes:
+    - name: docker_socket
+      host:
+        path: /var/run/docker.sock:/var/run/docker.sock
+
+  # Build the production runtime container
 - name: frontend
   image: plugins/docker
   settings:
