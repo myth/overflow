@@ -8,7 +8,7 @@ steps:
   commands:
     - git fetch --tags
 
-  # Use layer cache
+  # Use layer cache, requires trusted repo
 - name: restore-cache
   image: drillster/drone-volume-cache
   settings:
@@ -90,7 +90,7 @@ steps:
   when:
     event: [push, tag]
 
-  # Rebuild layer cache
+  # Rebuild layer cache, requires trusted repo
 - name: rebuild-cache
   image: drillster/drone-volume-cache
   settings:
