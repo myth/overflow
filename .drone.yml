@@ -63,7 +63,7 @@ steps:
     dockerfile: Dockerfile.frontend
     context: .
     auto_tag: true
-    cache_from: mythern/overflow-frontend:latest
+    cache_from: mythern/overflow-frontend-builder:latest
     purge: false
   when:
     event: [push]
