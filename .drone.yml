@@ -23,7 +23,7 @@ steps:
     cache_from: mythern/overflow-backend:latest
     purge: false
   when:
-    event: [push, tag]
+    event: [push]
   volumes:
     - name: docker-socket
       host:
@@ -44,7 +44,7 @@ steps:
     cache_from: mythern/overflow-frontend:latest
     purge: false
   when:
-    event: [push, tag]
+    event: [push]
   volumes:
     - name: docker_socket
       host:
@@ -61,7 +61,7 @@ steps:
     target: /srv/www/overflow/
     source: docker-compose.yml
   when:
-    event: [tag]
+    event: [push]
 
   # Pull fresh images, restart, cleanup and report status
 - name: deploy
@@ -81,5 +81,5 @@ steps:
       - docker-compose up -d -t 60
       - docker image prune -f
   when:
-    event: [tag]
+    event: [push]
 
