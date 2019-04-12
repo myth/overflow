@@ -34,6 +34,8 @@ steps:
     dockerfile: Dockerfile.backend
     context: .
     auto_tag: true
+    tags:
+      - latest
     storage_path: /drone/docker
     purge: false
   when:
@@ -51,6 +53,8 @@ steps:
     dockerfile: Dockerfile.frontend
     context: .
     auto_tag: true
+    tags:
+      - latest
     storage_path: /drone/docker
     purge: false
   when:
