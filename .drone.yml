@@ -71,7 +71,7 @@ steps:
     target: /srv/www/overflow/
     source: docker-compose.yml
   when:
-    event: [push, tag]
+    event: [tag]
 
   # Pull fresh images, restart, cleanup and report status
 - name: deploy
@@ -92,7 +92,7 @@ steps:
       - docker image prune -f
       - docker-compose ps
   when:
-    event: [push, tag]
+    event: [tag]
 
   # Rebuild layer cache, requires trusted repo
 - name: rebuild-cache

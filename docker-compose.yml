@@ -6,7 +6,7 @@ services:
     build:
       dockerfile: Dockerfile.backend
       context: .
-    image: mythern/overflow-backend
+    image: mythern/overflow-backend:0.0
     restart: unless-stopped
     env_file: backend/src/.env
     volumes:
@@ -20,7 +20,7 @@ services:
     build:
       dockerfile: Dockerfile.frontend
       context: .
-    image: mythern/overflow-frontend
+    image: mythern/overflow-frontend:0.0
     restart: unless-stopped
     networks:
       - default
