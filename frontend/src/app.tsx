@@ -11,7 +11,7 @@ import { Header } from "./components/header/header";
 import { Post, PostProps } from "./components/post/post";
 import { Footer } from "./components/footer/footer";
 
-const api = new Api("http://localhost:8000/api");
+const api = new Api("/api");
 const endpoint = new Endpoint<PostObject>(api, "/posts/");
 
 interface AppProps { }
@@ -22,28 +22,16 @@ interface AppState {
 class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
-
     this.state = { posts: [] };
   }
 
-  public updatePosts(postList: PostObject[]) {
-    console.log('updatePosts called');
-    this.setState({ ...this.state, posts: postList });
-  }
-
   public componentDidMount() {
-    console.log('componentDidMount');
     endpoint.getAll().then(postList => {
-      this.updatePosts(postList);
+      this.setState({ ...this.state, posts: postList });
     });
   }
 
-  public componentDidUpdate() {
-    console.log('componentDidUpdate');
-  }
-
   public render() {
-    console.log('render called');
     return (
       <div id="root">
         <Header></Header>
