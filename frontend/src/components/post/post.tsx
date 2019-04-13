@@ -34,7 +34,7 @@ export interface PostMetaProps {
 export const PostMeta: React.SFC<PostMetaProps> = props => {
   return (
     <span className="post-meta">
-      C: {toDateString(props.created)} | U: {toDateString(props.edited)}
+      C: {new Date(props.created).toISOString()} | U: {new Date(props.edited).toISOString()}
     </span>
   );
 }
