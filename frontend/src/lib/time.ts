@@ -1,4 +1,13 @@
-import { leftPad } from "./utils";
+/**
+ * Transform a number to a string and add leading characters
+ * @param num The number to left pad
+ * @param len The desired length of the formatted number (defaults to 2)
+ * @param ch The desired padding character (defaults to "0")
+ */
+function lz(num: number, len: number = 2, ch = "0"): string {
+    let sign = Math.sign(num) === -1 ? '-' : '';
+    return sign + new Array(len).concat([Math.abs(num)]).join(ch).slice(-len);
+}
 
 /**
  * Transform any JS parseable date string to the following format:
@@ -8,13 +17,12 @@ import { leftPad } from "./utils";
 export function toDateString(dateTimeString: string) {
     const dateObj = new Date(dateTimeString);
 
-    const y = dateObj.getFullYear().toString();
-    const M = (dateObj.getMonth() + 1).toString();
-    const d = dateObj.getDay().toString();
-    const h = dateObj.getHours().toString();
-    const m = dateObj.getMinutes().toString();
-    const s = dateObj.getSeconds().toString();
+    const y = dateObj.getFullYear();
+    const M = (dateObj.getMonth() + 1);
+    const d = dateObj.getDay();
+    const h = dateObj.getHours();
+    const m = dateObj.getMinutes();
+    const s = dateObj.getSeconds();
 
-    return `${y}-${leftPad(M, 2, "0")}-${leftPad(d, 2, "0")}
-        ${leftPad(h, 2, "0")}:${leftPad(m, 2, "0")}:${leftPad(s, 2, "0")} UTC`
+    return `${y}-${lz(M)}-${lz(d)} ${lz(h)}:${lz(m)}:${lz(s)} UTC`
 }
