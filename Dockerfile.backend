@@ -10,7 +10,7 @@ RUN apk add --update --no-cache \
     postgresql-libs && \
     apk add --virtual .build-deps python3-dev gcc musl-dev postgresql-dev && \
     pip3 install --no-cache-dir --upgrade pip && \
-    pip3 install --no-cache-dir -r requirements.txt && \
+    pip3 install --no-cache-dir -r requirements-dev.txt && \
     apk --purge del .build-deps && \
     find / -type d -name __pycache__ -exec rm -r {} + && \
     rm -rf /usr/lib/python*/ensurepip && \

@@ -1,6 +1,8 @@
+import { Marked } from "../../../node_modules/marked-ts/dist/marked";
 import * as React from "react";
 
 import "./post.scss";
+import { toDateString } from "../../lib/time";
 
 /**
  * PostTitle properties
@@ -30,7 +32,11 @@ export interface PostMetaProps {
  * @param props PostMeta properties
  */
 export const PostMeta: React.SFC<PostMetaProps> = props => {
-  return <span className="post-meta">C: {props.created} | U: {props.edited}</span>;
+  return (
+    <span className="post-meta">
+      C: {toDateString(props.created)} | U: {toDateString(props.edited)}
+    </span>
+  );
 }
 
 /**
@@ -82,7 +88,8 @@ export interface PostContentProps {
  * @param props PostContent properties
  */
 export const PostContent: React.SFC<PostContentProps> = props => {
-  return <main className="post-content">{props.content}</main>;
+  return <main className="post-content"
+    dangerouslySetInnerHTML={{ __html: Marked.parse(props.content) }}></ main>;
 }
 
 /**

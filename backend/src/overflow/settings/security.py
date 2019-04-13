@@ -12,7 +12,8 @@ DB_PASS = config('POSTGRES_PASSWORD', default='replaceme')
 if PRODUCTION:
     ALLOWED_HOSTS = ['overflow.no']
 else:
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['*']
+    CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Password validation
@@ -45,11 +46,13 @@ if SECURITY_HARDENING:
         # Without this, your site cannot be submitted to the browser preload list.
         SECURE_HSTS_PRELOAD = config('OF_SECURE_HSTS_PRELOAD', default=True, cast=bool)
 
-    # (security.W006) If not set to True, pages will not be served with an 'x-content-type-options: nosniff' header.
+    # (security.W006) If not set to True, pages will not be served with an
+    # 'x-content-type-options: nosniff' header.
     # Consider enabling this header to prevent the browser from identifying content types incorrectly.
     SECURE_CONTENT_TYPE_NOSNIFF = config('OF_SECURE_CONTENT_TYPE_NOSNIFF', default=True, cast=bool)
 
-    # (security.W007) If not set to True, pages will not be served with an 'x-xss-protection: 1; mode=block' header.
+    # (security.W007) If not set to True, pages will not be served with an
+    # 'x-xss-protection: 1; mode=block' header.
     # Consider enabling this header to activate the browser's XSS filtering and help prevent XSS attacks.
     SECURE_BROWSER_XSS_FILTER = config('OF_SECURE_BROWSER_XSS_FILTER', default=True, cast=bool)
 
@@ -64,6 +67,7 @@ if SECURITY_HARDENING:
     # sniffers to steal the CSRF token.
     CSRF_COOKIE_SECURE = config('OF_CSRF_COOKIE_SECURE', default=True, cast=bool)
 
-    # (security.W019) The default for X_FRAME_OPTIONS is 'SAMEORIGIN', but unless there is a good reason for the site
+    # (security.W019) The default for X_FRAME_OPTIONS is 'SAMEORIGIN',
+    # but unless there is a good reason for the site
     # to serve other parts of itself in a frame, it should changed to 'DENY'.
     X_FRAME_OPTIONS = config('OF_X_FRAME_OPTIONS', default='DENY')

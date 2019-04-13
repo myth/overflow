@@ -2,6 +2,12 @@
 
 .post {
   margin: 20px;
+
+  pre {
+    background: $lightgray;
+    color: $darkgray;
+    padding: 20px;
+  }
 }
 .post-header {
   margin: 20px 0px;
@@ -10,15 +16,13 @@
   font-size: 2.0rem;
   font-weight: 100;
   margin: 10px 0px;
+  color: $steelteal;
 
-}
-h1.post-title:first-letter {
-  margin-left: -0.1em;
 }
 .post-meta {
   color: #777;
   font-weight: 300;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 .post-description {
   margin: 25px 0;
@@ -27,4 +31,38 @@ h1.post-title:first-letter {
 }
 .post-content {
   margin: 20px 0;
+
+  p {
+    margin: 20px 0;
+    font-weight: 300;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: normal;
+    color: $darktangerine;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.35rem;
+  }
+  h4 {
+    font-size: 1.25rem;
+  }
+  h5 {
+    font-size: 1.2rem;
+  }
+  h6 {
+    font-size: 1.1rem;
+  }
 }
