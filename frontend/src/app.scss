@@ -22,11 +22,11 @@ p {
 a,
 a:visited,
 a:active {
-  color: $link;
+  color: $link-dark;
   text-decoration: none;
 }
 a:hover {
-  color: $link-hover;
+  color: $link-dark-hover;
   text-decoration: underline;
 }
 hr {

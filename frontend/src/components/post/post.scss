@@ -1,7 +1,7 @@
 @import '../../lib/scss/colors.scss';
 
 .post {
-  margin: 20px 0px 50px 0px;
+  margin: 20px 20px 50px 20px;
 
   pre {
     background: $lightgray;
@@ -45,7 +45,7 @@
   h6 {
     font-weight: normal;
     color: $darktangerine;
-    margin-bottom: 30px;
+    margin-top: 30px;
   }
 
   h1 {
