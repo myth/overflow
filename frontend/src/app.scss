@@ -29,17 +29,21 @@ a:hover {
   color: $link-dark-hover;
   text-decoration: underline;
 }
+a:hover > img { text-decoration: none; }
+
 hr {
   margin: 15px 0px;
   border: 0px;
   height: 1px;
   background-image: linear-gradient(to right, #fafafa, #ccc, #fafafa);
 }
+
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100%;
 }
+
 #content {
   display: flex;
   flex-direction: column;

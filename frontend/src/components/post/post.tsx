@@ -2,7 +2,6 @@ import { Marked } from "../../../node_modules/marked-ts/dist/marked";
 import * as React from "react";
 
 import "./post.scss";
-import { toDateString } from "../../lib/time";
 
 /**
  * PostTitle properties

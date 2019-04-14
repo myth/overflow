@@ -18,6 +18,11 @@ export const Footer = () => {
             </a>
           </span>
         </div>
+        <div className="col-xs-12 padding-vertical-5">
+          <a href="https://ci.ulv.io/myth/overflow" title="Build Status">
+            <img src="https://ci.ulv.io/api/badges/myth/overflow/status.svg" alt="Build status badge" title="Build Status" />
+          </a>
+        </div>
       </div>
     </footer>
   );
