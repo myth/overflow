@@ -72,7 +72,7 @@ const Content: React.SFC<PostListProps> = props => {
       <section className="margin-bottom-50">
         <div className="row around-xs">
           {postList}
-          <div className="col-xs-12 col-md-4 col-lg-4 first-xs last-md">
+          <div className="col-xs-12 col-md-4 col-lg-4 last-xs last-md">
             <About></About>
           </div>
         </div>

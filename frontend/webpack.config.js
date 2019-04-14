@@ -26,8 +26,8 @@ module.exports = (env, argv) => {
     devtool: "source-map",
 
     resolve: {
-      // Add '.ts' and '.tsx' as resolvable extensions.
-      extensions: [".ts", ".tsx", ".js", ".json"]
+      // All extensions that should be parsed
+      extensions: [".ts", ".tsx", ".js", ".json", ".svg"]
     },
 
     module: {
@@ -59,6 +59,12 @@ module.exports = (env, argv) => {
             'sass-loader',
           ],
         },
+
+        // Inline SVG files
+        {
+          test: /\.svg$/,
+          loader: "svg-inline-loader"
+        }
       ]
     },
 

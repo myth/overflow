@@ -1,3 +1,8 @@
+declare module "*.svg" {
+    const content: any;
+    export default content;
+}
+
 declare const BUILD_DATE: string;
 
 declare const GIT_BRANCH: string;

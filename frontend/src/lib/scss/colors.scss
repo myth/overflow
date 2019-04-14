@@ -23,6 +23,7 @@ $steelteal-dark: rgba(53, 85, 76, 1);
 // Olivine
 $olivine: #a1c181;
 $olivine-light: rgba(203, 221, 186, 1);
+$olivine-lightest: lighten($olivine-light, 10%);
 $olivine-dark: rgba(88, 106, 71, 1);
 
 // Dark Tangerine
@@ -80,6 +81,7 @@ $link-dark-hover: $darkcerulean-dark;
 .text-teal-dark { color: $steelteal-dark; }
 .text-olivine { color: $olivine; }
 .text-olivine-light { color: $olivine-light; }
+.text-olivine-lightest { color: $olivine-lightest; }
 .text-olivine-dark { color: $olivine-dark; }
 .text-tangerine { color: $darktangerine; }
 .text-tangerine-light { color: $darktangerine-light; }
