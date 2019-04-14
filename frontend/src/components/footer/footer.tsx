@@ -19,7 +19,7 @@ export const Footer = () => {
           </span>
         </div>
         <div className="col-xs-12">
-          <a href="https://ci.ulv.io/myth/overflow" title="Build Status">
+          <a href="https://ci.ulv.io/myth/overflow" target="_blank" title="Build Status">
             <img id="footer__build-status" src="https://ci.ulv.io/api/badges/myth/overflow/status.svg" alt="Build status badge" title="Build Status" />
           </a>
         </div>
