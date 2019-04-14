@@ -1,6 +1,6 @@
 @import '../../lib/scss/colors.scss';
 
-#site-footer {
+#footer {
   padding: 20px;
   background-color: $eerieblack-dark;
   color: $white;
@@ -10,15 +10,24 @@
   a:active { color: $link-hover; }
   a:hover { color: $link; }
 }
+
 #copyright {
   color: #ccc;
   font-size: 0.9rem;
 }
+
 #git {
   color: #666;
   font-size: 0.8rem;
+
+  a { color: #666; }
+  a:visited,
+  a:hover,
+  a:active { color: lighten(#666, 10%); }
 }
-#git a { color: #666; }
-#git a:visited,
-#git a:hover,
-#git a:active { color: lighten(#666, 10%); }
+
+#footer__build-status {
+  opacity: 0.75;
+  margin-top: 10px;
+}
+#footer__build-status:hover { opacity: 1.0; }
