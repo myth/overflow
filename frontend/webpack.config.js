@@ -4,6 +4,7 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const GitRevisionPlugin = require("git-revision-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const grp = new GitRevisionPlugin({
   versionCommand: 'describe --always --tags --long'
@@ -84,7 +85,10 @@ module.exports = (env, argv) => {
         'GIT_COMMITHASH': JSON.stringify(grp.commithash()),
         'GIT_BRANCH': JSON.stringify(grp.branch()),
         'BUILD_DATE': JSON.stringify(new Date().toISOString())
-      })
+      }),
+      new CopyWebpackPlugin([
+        { from: './src/static', to: './static' }
+      ])
     ],
 
     // Optimizations are enabled when PRODUCTION is true
