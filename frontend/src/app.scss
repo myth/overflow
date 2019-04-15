@@ -41,6 +41,10 @@ hr {
   background-image: linear-gradient(to right, #fafafa, #ccc, #fafafa);
 }
 
+pre {
+  overflow-x: scroll;
+}
+
 #root {
   display: flex;
   flex-direction: column;
