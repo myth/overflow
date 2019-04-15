@@ -11,7 +11,7 @@ import { Header } from "./components/header/header";
 import { Post, PostProps } from "./components/post/post";
 import { Footer } from "./components/footer/footer";
 
-const local = "http://localhost:8000"
+const local = ""
 const api = new Api(`${local}/api`);
 const endpoint = new Endpoint<PostObject>(api, "/posts/");
 
