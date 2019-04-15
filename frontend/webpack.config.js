@@ -87,7 +87,7 @@ module.exports = (env, argv) => {
         'BUILD_DATE': JSON.stringify(new Date().toISOString())
       }),
       new CopyWebpackPlugin([
-        { from: './src/static', to: './static' }
+        { from: __dirname + '/src/static/images', to: 'images' },
       ])
     ],
 
