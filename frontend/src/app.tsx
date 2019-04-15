@@ -11,8 +11,7 @@ import { Header } from "./components/header/header";
 import { Post, PostProps } from "./components/post/post";
 import { Footer } from "./components/footer/footer";
 
-const local = ""
-const api = new Api(`${local}/api`);
+const api = new Api(API_BASE_URI);
 const endpoint = new Endpoint<PostObject>(api, "/posts/");
 
 interface AppProps { }

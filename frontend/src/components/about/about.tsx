@@ -14,14 +14,7 @@ export const AboutHeader = () => {
 
 export const AboutPicture = () => {
   return (
-    <div className="col-xs-12 bg-olivine-light text-eerie-dark">
-      <p>
-        <a href="/">overflow.no</a> is the playground of Aleksander Skraastad. I'm a programmer,
-        Artificial Intelligence major, former Air Force officer and outdoors enthusiast.
-        I work as an R&amp;D engineer and team lead for Appear TV.
-        This is a <b>personal</b> website which reflects my own views and opinions and not that of Appear TV.
-      </p>
-    </div>
+    <div className="col-xs-12 bg-olivine-light text-eerie-dark"></div>
   )
 }
 
@@ -30,7 +23,7 @@ export const AboutBody = () => {
     <div className="col-xs-12 bg-olivine-light text-eerie-dark">
       <p>
         <a href="/">overflow.no</a> is the playground of Aleksander Skraastad. I'm a programmer,
-        Artificial Intelligence major, ex Air Force officer and outdoors enthusiast.
+        Artificial Intelligence major, former Air Force officer and outdoors enthusiast.
         I work as an R&amp;D engineer and team lead for Appear TV.
         This is a <b>personal</b> website which reflects my own views and opinions and not that of Appear TV.
       </p>

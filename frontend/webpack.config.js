@@ -9,10 +9,12 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const grp = new GitRevisionPlugin({
   versionCommand: 'describe --always --tags --long'
 });
+const localApiUri = "http://localhost:8000/api";
 
 module.exports = (env, argv) => {
   // PRODUCTION will trigger optimization and compile all css into one minified file
-  const PRODUCTION = argv.mode ? argv.mode === 'production' : process.env.NODE_ENV === 'production'
+  const PRODUCTION = argv.mode ? argv.mode === 'production' : process.env.NODE_ENV === 'production';
+  const API_BASE_URI = PRODUCTION ? "/api" : localApiUri;
 
   return {
     entry: "./src/app.tsx",
@@ -84,7 +86,8 @@ module.exports = (env, argv) => {
         'GIT_VERSION': JSON.stringify(grp.version()),
         'GIT_COMMITHASH': JSON.stringify(grp.commithash()),
         'GIT_BRANCH': JSON.stringify(grp.branch()),
-        'BUILD_DATE': JSON.stringify(new Date().toISOString())
+        'BUILD_DATE': JSON.stringify(new Date().toISOString()),
+        'API_BASE_URI': JSON.stringify(API_BASE_URI),
       }),
       new CopyWebpackPlugin([
         { from: __dirname + '/src/static/images', to: 'images' },
