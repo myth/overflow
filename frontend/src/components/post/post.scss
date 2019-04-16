@@ -1,12 +1,30 @@
 @import '../../lib/scss/colors.scss';
 
-.post {
+.post,
+.post-summary {
   margin: 20px 20px 50px 20px;
 
   pre {
     background: $lightgray;
     color: $darkgray;
     padding: 20px;
+
+    code {
+      color: unset;
+      padding: unset;
+      background: transparent;
+    }
+  }
+
+  code {
+    background: $lightgray;
+    padding: 1px 5px;
+    color: $darkcerulean;
+  }
+
+  img {
+    max-width: 100%;
+    margin: 0 auto;
   }
 }
 .post-header {
@@ -22,7 +40,7 @@
 .post-meta {
   color: #777;
   font-weight: 300;
-  font-size: 0.75rem;
+  font-size: 0.71rem;
 }
 .post-description {
   margin: 25px 0;
@@ -32,11 +50,6 @@
 }
 .post-content {
   margin: 20px 0;
-
-  img {
-    max-width: 100%;
-    margin: 0 auto;
-  }
 
   p {
     margin: 20px 0;

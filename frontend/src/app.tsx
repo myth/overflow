@@ -8,7 +8,7 @@ import { Api, Endpoint } from "./lib/api/client";
 import { Post as PostObject } from "./lib/api/models";
 import { About } from "./components/about/about";
 import { Header } from "./components/header/header";
-import { Post, PostProps } from "./components/post/post";
+import { Post, PostProps, PostSummary, PostSummaryProps } from "./components/post/post";
 import { Footer } from "./components/footer/footer";
 
 const api = new Api(API_BASE_URI);
@@ -48,20 +48,23 @@ interface PostListProps {
 
 const Content: React.SFC<PostListProps> = props => {
   let postList = props.posts.map((p, i) => {
-    const postProps: PostProps = {
+    const postProps = {
       header: {
         title: p.title,
         meta: {
           created: p.published,
           edited: p.edited,
+          illustration: p.illustration,
         },
       },
       description: p.description,
       content: p.content
     }
     return (
-      <div key={i} className="col-xs-12 col-md-8 col-lg-8">
-        <Post {...postProps}></Post>
+      <div key={i} className="row">
+        <div className="col-md-12">
+          <PostSummary {...postProps}></PostSummary>
+        </div>
       </div>
     );
   });
@@ -70,7 +73,9 @@ const Content: React.SFC<PostListProps> = props => {
     <main id="content">
       <section className="margin-bottom-50">
         <div className="row around-xs">
-          {postList}
+          <div className="col-xs-12 col-md-8 col-lg-8">
+            {postList}
+          </div>
           <div className="col-xs-12 col-md-4 col-lg-4 last-xs last-md">
             <About></About>
           </div>

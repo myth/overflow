@@ -14,5 +14,6 @@ export interface Post {
     published: string,
     edited: string,
     content: string,
+    illustration: string | null,
     tags: Tag[]
 }

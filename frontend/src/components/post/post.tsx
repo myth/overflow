@@ -19,11 +19,13 @@ export const PostTitle: React.SFC<PostTitleProps> = props => {
 }
 
 /**
- * PostMeta properties
+ * A props object containing the creation date, last edited timestamp and optional
+ * illustration used to represent a blog post.
  */
 export interface PostMetaProps {
   created: string;
   edited: string;
+  illustration: string | null;
 }
 
 /**
@@ -31,10 +33,21 @@ export interface PostMetaProps {
  * @param props PostMeta properties
  */
 export const PostMeta: React.SFC<PostMetaProps> = props => {
+  const illustration = props.illustration !== null && props.illustration !== "" ? (
+    <div className="col-xs-12">
+      <img className="post-illustration" src={props.illustration} alt="Illustration"></img>
+    </div>
+  ) : null;
+
   return (
-    <span className="post-meta">
-      C: {new Date(props.created).toISOString()} | U: {new Date(props.edited).toISOString()}
-    </span>
+    <div className="row">
+      {illustration}
+      <div className="col-xs-12">
+        <span className="post-meta">
+          C: {new Date(props.created).toISOString()} | U: {new Date(props.edited).toISOString()}
+        </span>
+      </div>
+    </div>
   );
 }
 
