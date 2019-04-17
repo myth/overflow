@@ -6,3 +6,13 @@
   font-size: 1.5rem;
   padding: 20px;
 }
+
+#site-title > a,
+#site-title > a:visited {
+  color: inherit;
+}
+#site-title > a:active,
+#site-title > a:hover {
+  color: $darktangerine;
+  text-decoration: none;
+}
