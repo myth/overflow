@@ -24,7 +24,7 @@
 
   img {
     max-width: 100%;
-    margin: 0 auto;
+    margin: 5px auto;
   }
 }
 .post-header {
@@ -36,8 +36,17 @@
   margin: 10px 0px;
   color: $steelteal;
 
+  a,
+  a:visited { color: $steelteal; }
+  a:active,
+  a:hover {
+    color: $steelteal-dark;
+    text-decoration: none;
+    border-bottom: 1px solid $steelteal-dark;
+  }
 }
 .post-meta {
+  margin: 10px 0;
   color: #777;
   font-weight: 300;
   font-size: 0.71rem;

@@ -3,14 +3,6 @@ from django.db import models
 from django.utils.text import slugify
 
 
-class Image(models.Model):
-    path = models.CharField(max_length=2048)
-    title = models.CharField(max_length=512)
-
-    def __str__(self):
-        return "{} ({})".format(self.path, self.title)
-
-
 class Tag(models.Model):
     name = models.CharField(max_length=256)
 
@@ -27,7 +19,7 @@ class Post(models.Model):
     content = models.TextField()
     tags = models.ManyToManyField(Tag, blank=True)
     illustration = models.CharField(max_length=2048, blank=True, null=True)
-    slug = models.SlugField(max_length=256, null=True)
+    slug = models.SlugField(max_length=256, unique=True)
 
     class Meta:
         ordering = ('-published',)

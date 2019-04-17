@@ -1,83 +1,68 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+import { ApiPost } from "./lib/api/models";
+import { About } from "./components/about/about";
+import { Header } from "./components/header/header";
+import { PostList, Post } from "./components/post/post";
+import { Footer } from "./components/footer/footer";
 
 // Stylesheet
 import "./app.scss";
+import { Api } from "./lib/api/api";
 
-import { Api, Endpoint } from "./lib/api/client";
-import { Post as PostObject } from "./lib/api/models";
-import { About } from "./components/about/about";
-import { Header } from "./components/header/header";
-import { Post, PostProps, PostSummary, PostSummaryProps } from "./components/post/post";
-import { Footer } from "./components/footer/footer";
+const api = new Api();
 
-const api = new Api(API_BASE_URI);
-const endpoint = new Endpoint<PostObject>(api, "/posts/");
-
-interface AppProps { }
-interface AppState {
-  posts: PostObject[];
+interface MainState {
+  posts: ApiPost[],
+}
+interface MainProps {
+  post?: ApiPost,
+  posts?: ApiPost[],
 }
 
-class App extends React.Component<AppProps, AppState> {
-  constructor(props: AppProps) {
+class Main extends React.PureComponent<MainProps, MainState> {
+  constructor(props: MainProps) {
     super(props);
-    this.state = { posts: [] };
+    this.state = { posts: [] }
   }
 
   public componentDidMount() {
-    endpoint.getAll().then(postList => {
-      this.setState({ ...this.state, posts: postList });
+    api.fetch().then(() => {
+      this.setState({ ...this.state, posts: api.posts });
     });
+  }
+
+  private generateRoutes() {
+    return this.state.posts.map(p => {
+      return (
+        <Route exact path={`/blog/${p.rawData.slug}`} component={() => <Post {...p.toPost()} />} />
+      );
+    })
   }
 
   public render() {
     return (
-      <div id="root">
-        <Header></Header>
-        <Content {...{ posts: this.state.posts }}></Content>
-        <Footer></Footer>
-      </div >
+      <Switch>
+        <Route exact path="/"
+          component={() => <PostList posts={this.state.posts.map(p => p.toPostSummary())} />} />
+        {this.generateRoutes()}
+      </Switch>
     );
   }
 }
 
-interface PostListProps {
-  posts: PostObject[]
-}
-
-const Content: React.SFC<PostListProps> = props => {
-  let postList = props.posts.map((p, i) => {
-    const postProps = {
-      header: {
-        title: p.title,
-        meta: {
-          created: p.published,
-          edited: p.edited,
-          illustration: p.illustration,
-        },
-      },
-      description: p.description,
-      content: p.content
-    }
-    return (
-      <div key={i} className="row">
-        <div className="col-md-12">
-          <PostSummary {...postProps}></PostSummary>
-        </div>
-      </div>
-    );
-  });
-
+const Content: React.FunctionComponent = () => {
   return (
     <main id="content">
       <section className="margin-bottom-50">
         <div className="row around-xs">
           <div className="col-xs-12 col-md-8 col-lg-8">
-            {postList}
+            <Main />
           </div>
           <div className="col-xs-12 col-md-4 col-lg-4 last-xs last-md">
-            <About></About>
+            <About />
           </div>
         </div>
       </section>
@@ -85,7 +70,19 @@ const Content: React.SFC<PostListProps> = props => {
   );
 }
 
+const App: React.FunctionComponent = () => {
+  return (
+    <div id="root">
+      <Header />
+      <Content />
+      <Footer />
+    </div >
+  );
+}
+
 ReactDOM.render(
-  <App></App>,
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
   document.getElementById("app"),
 );

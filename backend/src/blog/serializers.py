@@ -7,11 +7,12 @@ from user.serializers import UserSerializer
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ('name')
+        fields = ('name',)
 
 
 class PostSerializer(serializers.ModelSerializer):
     author = UserSerializer()
+    tags = TagSerializer(many=True)
 
     class Meta:
         model = Post
@@ -23,5 +24,6 @@ class PostSerializer(serializers.ModelSerializer):
             'description',
             'content',
             'tags',
-            'illustration'
+            'illustration',
+            'slug',
         )

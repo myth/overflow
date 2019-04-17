@@ -14,7 +14,7 @@ export const AboutHeader = () => {
 
 export const AboutPicture = () => {
   return (
-    <div className="col-xs-12 bg-olivine-light text-eerie-dark"></div>
+    <div className="col-xs-12 bg-olivine-light"></div>
   )
 }
 
@@ -33,7 +33,7 @@ export const AboutBody = () => {
 
 export const AboutFooter = () => {
   return (
-    <div className="col-xs-12 bg-olivine-lightest padding-20 text-eerie-dark">
+    <div className="col-xs-12 bg-olivine-lightest padding-20">
       <a href="https://github.com/myth" target="_blank">
         <GitHubIcon></GitHubIcon>
       </a>

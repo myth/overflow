@@ -1,5 +1,8 @@
 import { Marked } from "../../../node_modules/marked-ts/dist/marked";
 import * as React from "react";
+import { Link } from "react-router-dom";
+
+import { dateToISOStringWithoutMs } from "../../lib/utils";
 
 import "./post.scss";
 
@@ -8,6 +11,7 @@ import "./post.scss";
  */
 export interface PostTitleProps {
   title: string;
+  slug?: string;
 }
 
 /**
@@ -15,7 +19,14 @@ export interface PostTitleProps {
  * @param props PostTitle properties
  */
 export const PostTitle: React.SFC<PostTitleProps> = props => {
-  return <h1 className="post-title">{props.title}</h1>;
+  if (props.slug) {
+    return (
+      <h1 className="post-title">
+        <Link to={`/blog/${props.slug}`}>{props.title}</Link>
+      </h1>
+    )
+  }
+  else return <h1 className="post-title">{props.title}</h1>
 }
 
 /**
@@ -44,7 +55,8 @@ export const PostMeta: React.SFC<PostMetaProps> = props => {
       {illustration}
       <div className="col-xs-12">
         <span className="post-meta">
-          C: {new Date(props.created).toISOString()} | U: {new Date(props.edited).toISOString()}
+          C: {dateToISOStringWithoutMs(new Date(props.created))} |
+          U: {dateToISOStringWithoutMs(new Date(props.edited))}
         </span>
       </div>
     </div>
@@ -56,6 +68,7 @@ export const PostMeta: React.SFC<PostMetaProps> = props => {
  */
 export interface PostHeaderProps {
   title: string;
+  slug?: string;
   meta: PostMetaProps;
 }
 
@@ -66,8 +79,8 @@ export interface PostHeaderProps {
 export const PostHeader: React.SFC<PostHeaderProps> = props => {
   return (
     <header className="post-header">
-      <PostTitle title={props.title}></PostTitle>
-      <PostMeta {...props.meta}></PostMeta>
+      <PostTitle title={props.title} slug={props.slug} />
+      <PostMeta {...props.meta} />
     </header>
   );
 }
@@ -101,7 +114,7 @@ export interface PostContentProps {
  */
 export const PostContent: React.SFC<PostContentProps> = props => {
   return <main className="post-content"
-    dangerouslySetInnerHTML={{ __html: Marked.parse(props.content) }}></ main>;
+    dangerouslySetInnerHTML={{ __html: Marked.parse(props.content) }}></main>;
 }
 
 /**
@@ -119,8 +132,8 @@ export interface PostSummaryProps {
 export const PostSummary: React.SFC<PostSummaryProps> = props => {
   return (
     <article className="post-summary">
-      <PostHeader {...props.header}></PostHeader>
-      <PostDescription description={props.description}></PostDescription>
+      <PostHeader {...props.header} />
+      <PostDescription description={props.description} />
     </article>
   );
 }
@@ -141,9 +154,34 @@ export interface PostProps {
 export const Post: React.SFC<PostProps> = props => {
   return (
     <article className="post">
-      <PostHeader {...props.header}></PostHeader>
-      <PostDescription description={props.description}></PostDescription>
-      <PostContent content={props.content}></PostContent>
+      <PostHeader {...props.header} />
+      <PostDescription description={props.description} />
+      <PostContent content={props.content} />
     </article>
   );
+}
+
+/**
+ * Wrapper around an array of Post properties
+ */
+export interface PostListProps {
+  posts: PostSummaryProps[]
+}
+
+/**
+ * Renders a list of post summaries with title, image, metadata and description.
+ * @param props PostList properties
+ */
+export const PostList: React.SFC<PostListProps> = props => {
+  const posts = props.posts.map((p, i) => {
+    return (
+      <div key={i} className="row">
+        <div className="col-md-12">
+          <PostSummary {...p} />
+        </div>
+      </div>
+    );
+  });
+
+  return <div id="post-list">{posts}</div>
 }
