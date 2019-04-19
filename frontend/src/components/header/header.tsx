@@ -9,7 +9,7 @@ export const Header = () => {
       <div className="row center-xs">
         <div className="col-xs-12">
           <h1 id="site-title">
-            <Link to="/">overflow.no</Link>
+            <a href="/">overflow.no</a>
           </h1>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { PostProps, PostSummaryProps } from "../../components/post/post";
+import { PostProps, PostViewMode } from "../../components/post/post";
 
 export interface RawApiUser {
   username: string,
@@ -35,35 +35,26 @@ export class ApiPost {
    */
   public toPost(): PostProps {
     return {
-      header: {
-        title: this.rawData.title,
-        meta: {
-          created: this.rawData.published,
-          edited: this.rawData.edited,
-          illustration: this.rawData.illustration
-        },
-      },
+      title: this.rawData.title,
+      illustration: this.rawData.illustration,
+      created: this.rawData.published,
+      edited: this.rawData.edited,
       description: this.rawData.description,
       content: this.rawData.content,
+      slug: this.rawData.slug,
+      mode: PostViewMode.FULL,
     }
   }
 
   /**
    * Transform this raw API post object to PostSummary component properties
    */
-  public toPostSummary(): PostSummaryProps {
-    return {
-      header: {
-        title: this.rawData.title,
-        meta: {
-          created: this.rawData.published,
-          edited: this.rawData.edited,
-          illustration: this.rawData.illustration
-        },
-        slug: this.rawData.slug
-      },
-      description: this.rawData.description,
-    }
+  public toPostSummary(): PostProps {
+    const post = this.toPost();
+
+    post.mode = PostViewMode.SUMMARY;
+
+    return post;
   }
 
   /**
