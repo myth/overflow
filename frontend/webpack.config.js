@@ -21,8 +21,9 @@ module.exports = (env, argv) => {
     mode: PRODUCTION ? 'production' : 'development',
 
     output: {
-      filename: "app.js",
-      path: __dirname + "/dist"
+      filename: "app.[hash:7].js",
+      path: __dirname + "/dist",
+      publicPath: "/",
     },
 
     // Enable sourcemaps for debugging webpack's output.
