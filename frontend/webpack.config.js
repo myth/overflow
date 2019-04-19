@@ -23,6 +23,9 @@ module.exports = (env, argv) => {
     output: {
       filename: "app.[hash:7].js",
       path: __dirname + "/dist",
+      // We need to force the script tag to use / prefix when using BrowserRouter
+      // as otherwise the app.js would be fetched relative to whatever URI is
+      // being directly accessed (/blog/some-article/app.js instead of /app.js)
       publicPath: "/",
     },
 
