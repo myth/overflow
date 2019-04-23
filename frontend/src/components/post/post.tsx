@@ -17,7 +17,7 @@ export interface PostProps {
   created: string,
   edited: string,
   description: string,
-  slug: string,
+  url: string,
   content: string,
   mode: PostViewMode
 }
@@ -30,7 +30,7 @@ export const PostTitle: React.FunctionComponent<PostProps> = props => {
   if (props.mode === PostViewMode.SUMMARY) {
     return (
       <h1 className="post-title">
-        <Link to={`/blog/${props.slug}`}>{props.title}</Link>
+        <Link to={props.url}>{props.title}</Link>
       </h1>
     )
   }
@@ -47,7 +47,7 @@ export const PostIllustration: React.FunctionComponent<PostProps> = props => {
     if (props.mode === PostViewMode.SUMMARY) {
       return (
         <div className="col-xs-12">
-          <Link to={`/blog/${props.slug}`}>{image}</Link>
+          <Link to={props.url}>{image}</Link>
         </div>
       );
     }

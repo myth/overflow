@@ -36,8 +36,9 @@ class Main extends React.PureComponent<MainProps, MainState> {
 
   private generateRoutes() {
     return this.state.posts.map((p, i) => {
+      const post = p.toPost();
       return (
-        <Route key={i} exact path={`/blog/${p.rawData.slug}`} component={() => <Post {...p.toPost()} />} />
+        <Route key={i} exact path={post.url} component={() => <Post {...post} />} />
       );
     })
   }

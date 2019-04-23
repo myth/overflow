@@ -23,6 +23,22 @@ export interface RawApiPost {
   slug: string,
 }
 
+/**
+ * Create a full post URL for a post in a /blog/year/month/day/slug format.
+ * @param created A Date object from the published datetime string
+ * @param slug The raw post slug field
+ */
+function generatePostUrl(created: Date, slug: string): string {
+  const year = created.getFullYear();
+  const month = created.getMonth() + 1; // Months are zero indexed
+  const day = created.getDay();
+
+  const monthStr = month < 10 ? `0${month}` : `${month}`;
+  const dayStr = day < 10 ? `0${day}` : `${day}`;
+
+  return `/blog/${year}/${monthStr}/${dayStr}/${slug}`;
+}
+
 export class ApiTag {
   constructor(readonly rawData: RawApiTag) { }
 }
@@ -41,7 +57,7 @@ export class ApiPost {
       edited: this.rawData.edited,
       description: this.rawData.description,
       content: this.rawData.content,
-      slug: this.rawData.slug,
+      url: generatePostUrl(new Date(this.rawData.published), this.rawData.slug),
       mode: PostViewMode.FULL,
     }
   }
