@@ -59,7 +59,7 @@ class Main extends React.PureComponent<MainProps, MainState> {
         <Route exact path="/"
           component={() => <PostList posts={this.state.posts.map(p => p.toPostSummary())} />} />
         {this.generateRoutes()}
-        <Route path="/" />
+        <Route component={NotFound} />
       </Switch>
     );
   }
