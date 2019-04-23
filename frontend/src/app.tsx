@@ -22,6 +22,16 @@ interface MainProps {
   posts?: ApiPost[],
 }
 
+const NotFound: React.FunctionComponent = props => {
+  return (
+    <div className="row">
+      <div className="col-xs-12">
+        <h4>After several milliseconds, the hamsters gave up trying to find content for this URL.</h4>
+      </div>
+    </div>
+  );
+}
+
 class Main extends React.PureComponent<MainProps, MainState> {
   constructor(props: MainProps) {
     super(props);
@@ -49,6 +59,7 @@ class Main extends React.PureComponent<MainProps, MainState> {
         <Route exact path="/"
           component={() => <PostList posts={this.state.posts.map(p => p.toPostSummary())} />} />
         {this.generateRoutes()}
+        <Route path="/" />
       </Switch>
     );
   }
