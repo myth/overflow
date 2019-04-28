@@ -1,8 +1,9 @@
 import * as React from 'react';
 
+import "./about.scss";
+
 import { GitHubIcon, FacebookIcon, TwitterIcon, InstagramIcon, LinkedInIcon } from "../icons";
 
-import "./about.scss";
 
 export const AboutHeader = () => {
   return (

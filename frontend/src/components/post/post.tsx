@@ -2,10 +2,12 @@ import { Marked } from "../../../node_modules/marked-ts/dist/marked";
 import * as React from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
 
-import { dateToISOStringWithoutMs } from "../../lib/utils";
-
 import "./post.scss";
+
+import { dateToISOStringWithoutMs } from "../../lib/utils";
 import { NotFound } from "../404/404";
+import { PostFilterParams, PostFilter } from "./filter";
+
 
 export enum PostViewMode {
   FULL,
@@ -139,15 +141,6 @@ export const Post: React.FunctionComponent<PostProps> = props => {
 }
 
 /**
- * Post filters matching the url params matched by ReactRouter
- */
-export interface PostFilterParams {
-  year?: string,
-  month?: string,
-  day?: string,
-}
-
-/**
  * Props for the front page post summary list
  */
 export interface PostListProps extends RouteComponentProps<PostFilterParams> {
@@ -159,6 +152,8 @@ export interface PostListProps extends RouteComponentProps<PostFilterParams> {
  * @param props An array of Post properties
  */
 export const PostList: React.FunctionComponent<PostListProps> = props => {
+  const subfilters: string[] = [];
+
   const filteredPosts = props.posts.filter(p => {
     const f = props.match.params;
 
@@ -166,9 +161,17 @@ export const PostList: React.FunctionComponent<PostListProps> = props => {
     let month = true;
     let day = true;
 
-    if (f.year) year = f.year === p.created.slice(0, 4);
-    if (f.month) month = f.month === p.created.slice(5, 7);
-    if (f.day) day = f.day === p.created.slice(8, 10);
+    const dayStr = p.created.slice(8, 10);
+    const monthStr = p.created.slice(5, 7);
+    const yearStr = p.created.slice(0, 4);
+
+    if (f.day) day = f.day === dayStr;
+    if (f.month) month = f.month === monthStr;
+    if (f.year) year = f.year === yearStr;
+
+    if (!f.year) subfilters.push(yearStr);
+    else if (year && !f.month) subfilters.push(monthStr);
+    else if (year && month && !f.day) subfilters.push(dayStr);
 
     return year && month && day;
   });
@@ -185,5 +188,12 @@ export const PostList: React.FunctionComponent<PostListProps> = props => {
     );
   });
 
-  return <div id="post-list">{posts}</div>
+  return (
+    <div>
+      <PostFilter subfilters={subfilters} {...props} />
+      <div id="post-list">
+        {posts}
+      </div>
+    </div>
+  );
 }

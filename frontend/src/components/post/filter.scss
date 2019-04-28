@@ -1,0 +1,14 @@
+@import "../../lib/scss/colors.scss";
+
+#filters {
+  color: $olivine-lightest;
+
+  a,
+  a:visited,
+  a:active {
+    color: $link;
+  }
+  a:hover {
+    color: $link-hover;
+  }
+}

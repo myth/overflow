@@ -1,5 +1,6 @@
 import { PostProps, PostViewMode } from "../../components/post/post";
 
+
 export interface RawApiUser {
   username: string,
   first_name: string,
