@@ -1,10 +1,11 @@
 import { Marked } from "../../../node_modules/marked-ts/dist/marked";
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 
 import { dateToISOStringWithoutMs } from "../../lib/utils";
 
 import "./post.scss";
+import { NotFound } from "../404/404";
 
 export enum PostViewMode {
   FULL,
@@ -138,9 +139,18 @@ export const Post: React.FunctionComponent<PostProps> = props => {
 }
 
 /**
+ * Post filters matching the url params matched by ReactRouter
+ */
+export interface PostFilterParams {
+  year?: string,
+  month?: string,
+  day?: string,
+}
+
+/**
  * Props for the front page post summary list
  */
-export interface PostListProps {
+export interface PostListProps extends RouteComponentProps<PostFilterParams> {
   posts: PostProps[];
 }
 
@@ -149,7 +159,23 @@ export interface PostListProps {
  * @param props An array of Post properties
  */
 export const PostList: React.FunctionComponent<PostListProps> = props => {
-  const posts = props.posts.map((p, i) => {
+  const filteredPosts = props.posts.filter(p => {
+    const f = props.match.params;
+
+    let year = true;
+    let month = true;
+    let day = true;
+
+    if (f.year) year = f.year === p.created.slice(0, 4);
+    if (f.month) month = f.month === p.created.slice(5, 7);
+    if (f.day) day = f.day === p.created.slice(8, 10);
+
+    return year && month && day;
+  });
+
+  if (!filteredPosts.length) return <NotFound />
+
+  const posts = filteredPosts.map((p, i) => {
     return (
       <div key={i} className="row">
         <div className="col-md-12">

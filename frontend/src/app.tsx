@@ -1,16 +1,17 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, RouteComponentProps, Link } from "react-router-dom";
 
-import { ApiPost } from "./lib/api/models";
+import { NotFound } from "./components/404/404";
 import { About } from "./components/about/about";
 import { Header } from "./components/header/header";
-import { PostList, Post } from "./components/post/post";
+import { PostList, Post, PostFilterParams } from "./components/post/post";
 import { Footer } from "./components/footer/footer";
+import { Api } from "./lib/api/api";
+import { ApiPost } from "./lib/api/models";
 
 // Stylesheet
 import "./app.scss";
-import { Api } from "./lib/api/api";
 
 const api = new Api();
 
@@ -20,19 +21,6 @@ interface MainState {
 interface MainProps {
   post?: ApiPost,
   posts?: ApiPost[],
-}
-
-const NotFound: React.FunctionComponent = props => {
-  return (
-    <div className="row">
-      <div className="col-xs-12">
-        <div id="not-found">
-          <h4>The server hamster couldn't find anything here and gave up.</h4>
-          <img src="/images/server-hamster.jpg" id="not-found__image" />
-        </div>
-      </div>
-    </div>
-  );
 }
 
 class Main extends React.PureComponent<MainProps, MainState> {
@@ -57,10 +45,17 @@ class Main extends React.PureComponent<MainProps, MainState> {
   }
 
   public render() {
+    const postList = (match: RouteComponentProps<PostFilterParams>) => (
+      <PostList posts={this.state.posts.map(p => p.toPostSummary())} {...match} />
+    );
+
+    // TODO: Clean up this mess
     return (
       <Switch>
-        <Route exact path="/"
-          component={() => <PostList posts={this.state.posts.map(p => p.toPostSummary())} />} />
+        <Route exact path="/" component={postList} />
+        <Route exact path="/blog/:year([0-9]{4})/" component={postList} />
+        <Route exact path="/blog/:year([0-9]{4})/:month([0-9]{2})/" component={postList} />
+        <Route exact path="/blog/:year([0-9]{4})/:month([0-9]{2})/:day([0-9]{2})/" component={postList} />
         {this.generateRoutes()}
         <Route component={NotFound} />
       </Switch>
