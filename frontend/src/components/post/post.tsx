@@ -6,7 +6,7 @@ import "./post.scss";
 
 import { dateToISOStringWithoutMs } from "../../lib/utils";
 import { NotFound } from "../404/404";
-import { PostFilterParams, PostFilter } from "./filter";
+import { PostFilter, PostFilterProps } from "./filter";
 
 
 export enum PostViewMode {
@@ -143,8 +143,9 @@ export const Post: React.FunctionComponent<PostProps> = props => {
 /**
  * Props for the front page post summary list
  */
-export interface PostListProps extends RouteComponentProps<PostFilterParams> {
-  posts: PostProps[];
+export interface PostListProps {
+  posts: PostProps[],
+  filter: PostFilterProps,
 }
 
 /**
@@ -152,33 +153,9 @@ export interface PostListProps extends RouteComponentProps<PostFilterParams> {
  * @param props An array of Post properties
  */
 export const PostList: React.FunctionComponent<PostListProps> = props => {
-  const subfilters: string[] = [];
+  if (!props.posts.length && props.posts.length > 0) return <NotFound />
 
-  const filteredPosts = props.posts.filter(p => {
-    const f = props.match.params;
-
-    let year = true;
-    let month = true;
-    let day = true;
-
-    const dayStr = p.created.slice(8, 10);
-    const monthStr = p.created.slice(5, 7);
-    const yearStr = p.created.slice(0, 4);
-
-    if (f.day) day = f.day === dayStr;
-    if (f.month) month = f.month === monthStr;
-    if (f.year) year = f.year === yearStr;
-
-    if (!f.year) subfilters.push(yearStr);
-    else if (year && !f.month) subfilters.push(monthStr);
-    else if (year && month && !f.day) subfilters.push(dayStr);
-
-    return year && month && day;
-  });
-
-  if (!filteredPosts.length && props.posts.length > 0) return <NotFound />
-
-  const posts = filteredPosts.map((p, i) => {
+  const posts = props.posts.map((p, i) => {
     return (
       <div key={i} className="row">
         <div className="col-md-12">
@@ -190,7 +167,7 @@ export const PostList: React.FunctionComponent<PostListProps> = props => {
 
   return (
     <div>
-      <PostFilter subfilters={subfilters} {...props} />
+      <PostFilter {...props.filter} />
       <div id="post-list">
         {posts}
       </div>

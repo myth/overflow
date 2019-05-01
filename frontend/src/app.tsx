@@ -7,63 +7,33 @@ import "./app.scss";
 
 import { NotFound } from "./components/404/404";
 import { About } from "./components/about/about";
+import { Blog, BlogRouteParams } from "./components/blog/blog";
 import { Header } from "./components/header/header";
-import { PostList, Post } from "./components/post/post";
-import { PostFilterParams } from "./components/post/filter";
 import { Footer } from "./components/footer/footer";
 import { Api } from "./lib/api/api";
-import { ApiPost } from "./lib/api/models";
 
 
 const api = new Api();
 
-interface MainState {
-  posts: ApiPost[],
-}
 interface MainProps { }
 
-class Main extends React.PureComponent<MainProps, MainState> {
-  constructor(props: MainProps) {
-    super(props);
-    this.state = { posts: [] }
-  }
+const Main: React.FunctionComponent<MainProps> = props => {
+  const blog = (route: RouteComponentProps<BlogRouteParams>) => (
+    <Blog api={api} filters={{ ...route.match.params }} />
+  );
 
-  public componentDidMount() {
-    api.fetch().then(() => {
-      this.setState({ ...this.state, posts: api.posts });
-    });
-  }
-
-  /**
-   * Generate full URLs for all existing posts
-   */
-  private generateRoutes() {
-    return this.state.posts.map((p, i) => {
-      const post = p.toPost();
-      return (
-        <Route key={i} exact path={post.url} component={() => <Post {...post} />} />
-      );
-    })
-  }
-
-  public render() {
-    const postList = (match: RouteComponentProps<PostFilterParams>) => (
-      <PostList posts={this.state.posts.map(p => p.toPostSummary())} {...match} />
-    );
-
-    return (
-      <div>
-        <Switch>
-          <Route exact path="/" component={postList} />
-          <Route exact path="/blog/:year([0-9]{4})/" component={postList} />
-          <Route exact path="/blog/:year([0-9]{4})/:month([0-9]{2})/" component={postList} />
-          <Route exact path="/blog/:year([0-9]{4})/:month([0-9]{2})/:day([0-9]{2})/" component={postList} />
-          {this.generateRoutes()}
-          <Route component={NotFound} />
-        </Switch>
-      </div>
-    );
-  }
+  return (
+    <Switch>
+      <Route exact path="/" component={blog} />
+      <Route exact path="/blog/:year([0-9]{4})/" component={blog} />
+      <Route exact path="/blog/:year([0-9]{4})/:month([0-9]{2})/" component={blog} />
+      <Route exact path="/blog/:year([0-9]{4})/:month([0-9]{2})/:day([0-9]{2})/" component={blog} />
+      <Route exact path="/blog/tag/:tag([a-zA-Z0-9_\-]+)/" component={blog} />
+      <Route path="/blog/tag/" component={blog} />
+      <Route path="/blog/" component={blog} />
+      <Route component={NotFound} />
+    </Switch>
+  );
 }
 
 const Content: React.FunctionComponent = () => {

@@ -56,10 +56,10 @@ export const AboutFooter = () => {
 
 export const About = () => {
   return (
-    <div id="about" className="row">
+    <aside id="about" className="row">
       <AboutHeader></AboutHeader>
       <AboutBody></AboutBody>
       <AboutFooter></AboutFooter>
-    </div>
+    </aside>
   )
 }

@@ -1,42 +1,49 @@
 import * as React from "react";
-import { RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
 
 import "./filter.scss";
 
 /**
- * Post filters matching the url params matched by ReactRouter
+ * What type of filter is currently being shown.
+ * Value is used for description text
  */
-export interface PostFilterParams {
-  year?: string,
-  month?: string,
-  day?: string,
+export enum PostFilterType {
+  YEAR = "year",
+  MONTH = "month",
+  DAY = "day",
+  TAG = "tag",
+  HOURS = "hours",
+  NONE = "none",
 }
 
-export interface PostFilterProps extends RouteComponentProps<PostFilterParams> {
-  subfilters: string[],
+export interface PostFilterProps {
+  filters: string[],
+  type: PostFilterType,
+  baseUrl: string,
+}
+
+/**
+ * What text prefix to display before the filter links.
+ * @param props PostFilterProps
+ */
+const filterTitle = (props: PostFilterProps) => {
+  if (props.type === PostFilterType.NONE) return "";
+  else if (props.type === PostFilterType.HOURS) return "Filter by hours? Hah.";
+  else return `Filter by ${props.type}:`;
 }
 
 export const PostFilter: React.FunctionComponent<PostFilterProps> = props => {
-  const p = props.match.params;
-  const filterTitle = p.day ? "hours? Hah." : p.month ? "day:" : p.year ? "month:" : "year:";
+  const filters = props.filters.sort((a, b) => b.localeCompare(a)).map((f, i) => {
+    const path = `${props.baseUrl}${f}/`;
 
-  const filters = props.subfilters.sort((a, b) => b.localeCompare(a)).map((f, i) => {
-    let path = `/blog/`;
-
-    if (p.year) path += `${p.year}/`
-    if (p.month) path += `${p.month}/`
-
-    path += `${f}/`;
-
-    if (i < props.subfilters.length - 1) return <span key={i}><Link to={path}>{f}</Link> | </span>;
+    if (i < props.filters.length - 1) return <span key={i}><Link to={path}>{f}</Link> | </span>;
     else return <span key={i}><Link to={path}>{f}</Link></span>
   });
 
   return (
     <div className="row">
       <div id="filters" className="col-xs-12 bg-olivine-dark padding-20 text-olivine-lightest">
-        Filter by {filterTitle} {filters}
+        {filterTitle(props)} {filters}
       </div>
     </div>
   )
