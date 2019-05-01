@@ -25,7 +25,13 @@ const Main: React.FunctionComponent<MainProps> = props => {
   return (
     <Switch>
       <Route exact path="/" component={blog} />
-      <Route path="/blog/" component={blog} />
+      <Route exact path="/blog/" component={blog} />
+      <Route exact path="/blog/:year([0-9]{4})/" component={blog} />
+      <Route exact path="/blog/:year([0-9]{4})/:month([0-9]{2})/" component={blog} />
+      <Route exact path="/blog/:year([0-9]{4})/:month([0-9]{2})/:day([0-9]{2})/" component={blog} />
+      <Route exact path="/blog/:year([0-9]{4})/:month([0-9]{2})/:day([0-9]{2})/:slug([a-zA-Z0-9_\-]+)" component={blog} />
+      <Route exact path="/blog/tag/:tag([a-zA-Z0-9_\-]+)/" component={blog} />
+      <Route exact path="/blog/tag/" component={blog} />
       <Route component={NotFound} />
     </Switch>
   );
