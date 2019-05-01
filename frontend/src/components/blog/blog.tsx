@@ -5,6 +5,7 @@ import { ApiPost } from "../../lib/api/models";
 import { Post, PostList } from "../post/post";
 import { Api } from "../../lib/api/api";
 import { PostFilterProps, PostFilterType } from "../post/filter";
+import { NotFound } from "../404/404";
 
 
 export interface BlogProps {
@@ -163,7 +164,12 @@ export class Blog extends React.PureComponent<BlogProps, BlogState> {
       <Switch>
         {this.generateBlogPostRoutes()}
         <Route exact path="/" component={postList} />
-        <Route path="/blog/" component={postList} />
+        <Route exact path="/blog/:year([0-9]{4})/" component={postList} />
+        <Route exact path="/blog/:year([0-9]{4})/:month([0-9]{2})/" component={postList} />
+        <Route exact path="/blog/:year([0-9]{4})/:month([0-9]{2})/:day([0-9]{2})/" component={postList} />
+        <Route exact path="/blog/tag/:tag([a-zA-Z0-9_\-]+)/" component={postList} />
+        <Route exact path="/blog/tag/" component={postList} />
+        <Route component={NotFound} />
       </Switch>
     )
   }
