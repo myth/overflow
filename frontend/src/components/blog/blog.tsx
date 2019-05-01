@@ -76,9 +76,21 @@ export class Blog extends React.PureComponent<BlogProps, BlogState> {
     this.subfilters = [];
     this.baseUrl = "/blog/";
 
-    if (f.year) this.baseUrl += `${f.year}/`;
-    if (f.month) this.baseUrl += `${f.month}/`;
-    if (f.day) this.baseUrl += `${f.day}/`;
+    if (!f.year) {
+      this.filterType = PostFilterType.YEAR;
+    }
+    if (f.year) {
+      this.filterType = PostFilterType.MONTH;
+      this.baseUrl += `${f.year}/`;
+    }
+    if (f.month) {
+      this.filterType = PostFilterType.DAY;
+      this.baseUrl += `${f.month}/`;
+    }
+    if (f.day) {
+      this.filterType = PostFilterType.HOUR;
+      this.baseUrl += `${f.day}/`;
+    }
 
     return posts.filter(p => {
       let year = true;
@@ -89,30 +101,18 @@ export class Blog extends React.PureComponent<BlogProps, BlogState> {
       const monthStr = p.rawData.published.slice(5, 7);
       const yearStr = p.rawData.published.slice(0, 4);
 
-      if (f.year) {
-        year = f.year === yearStr;
-      }
-      if (f.month) {
-        month = f.month === monthStr;
-      }
-      if (f.day) {
-        day = f.day === dayStr;
-      }
+      if (f.year) year = f.year === yearStr;
+      if (f.month) month = f.month === monthStr;
+      if (f.day) day = f.day === dayStr;
 
       if (!f.year) {
         this.subfilters.push(yearStr);
-        this.filterType = PostFilterType.YEAR;
       }
       else if (year && !f.month) {
         this.subfilters.push(monthStr);
-        this.filterType = PostFilterType.MONTH;
       }
       else if (year && month && !f.day) {
         this.subfilters.push(dayStr);
-        this.filterType = PostFilterType.DAY;
-      }
-      else if (year && month && day) {
-        this.filterType = PostFilterType.HOURS;
       }
 
       return year && month && day;

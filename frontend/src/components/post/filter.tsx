@@ -12,7 +12,7 @@ export enum PostFilterType {
   MONTH = "month",
   DAY = "day",
   TAG = "tag",
-  HOURS = "hours",
+  HOUR = "hours",
   NONE = "none",
 }
 
@@ -28,7 +28,7 @@ export interface PostFilterProps {
  */
 const filterTitle = (props: PostFilterProps) => {
   if (props.type === PostFilterType.NONE) return "";
-  else if (props.type === PostFilterType.HOURS) return "Filter by hours? Hah.";
+  else if (props.type === PostFilterType.HOUR) return "Filter by hours? Hah.";
   else return `Filter by ${props.type}:`;
 }
 
