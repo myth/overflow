@@ -21,7 +21,7 @@ export const PostFilter: React.FunctionComponent<PostFilterProps> = props => {
   const p = props.match.params;
   const filterTitle = p.day ? "hours? Hah." : p.month ? "day:" : p.year ? "month:" : "year:";
 
-  let filters = props.subfilters.sort((a, b) => b.localeCompare(a)).map(f => {
+  const filters = props.subfilters.sort((a, b) => b.localeCompare(a)).map((f, i) => {
     let path = `/blog/`;
 
     if (p.year) path += `${p.year}/`
@@ -29,10 +29,9 @@ export const PostFilter: React.FunctionComponent<PostFilterProps> = props => {
 
     path += `${f}/`;
 
-    return <Link to={path}>{f}</Link>
+    if (i < props.subfilters.length - 1) return <span key={i}><Link to={path}>{f}</Link> | </span>;
+    else return <span key={i}><Link to={path}>{f}</Link></span>
   });
-
-  if (filters.length > 1) filters = [filters.reduce((p, c) => <span>{p} | {c}</span>)];
 
   return (
     <div className="row">

@@ -176,7 +176,7 @@ export const PostList: React.FunctionComponent<PostListProps> = props => {
     return year && month && day;
   });
 
-  if (!filteredPosts.length) return <NotFound />
+  if (!filteredPosts.length && props.posts.length > 0) return <NotFound />
 
   const posts = filteredPosts.map((p, i) => {
     return (

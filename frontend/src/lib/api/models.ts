@@ -32,7 +32,7 @@ export interface RawApiPost {
 function generatePostUrl(created: Date, slug: string): string {
   const year = created.getFullYear();
   const month = created.getMonth() + 1; // Months are zero indexed
-  const day = created.getDay();
+  const day = created.getDate();
 
   const monthStr = month < 10 ? `0${month}` : `${month}`;
   const dayStr = day < 10 ? `0${day}` : `${day}`;
