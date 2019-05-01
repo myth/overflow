@@ -93,7 +93,7 @@ steps:
     username: root
     key:
       from_secret: ssh_key
-    command_timeout: 600
+    command_timeout: 600s
     script:
       - cd /srv/www/overflow
       - sed -i 's#backend/src/##g' docker-compose.yml
