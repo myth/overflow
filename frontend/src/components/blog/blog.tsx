@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Route, Switch } from "react-router";
+import { Route, Switch, RouteComponentProps } from "react-router";
 
 import { ApiPost } from "../../lib/api/models";
 import { Post, PostList } from "../post/post";
@@ -9,7 +9,7 @@ import { PostFilterProps, PostFilterType } from "../post/filter";
 
 export interface BlogProps {
   api: Api,
-  filters: BlogRouteParams,
+  filters: RouteComponentProps<BlogRouteParams>,
 };
 
 export interface BlogState {
@@ -58,7 +58,8 @@ export class Blog extends React.PureComponent<BlogProps, BlogState> {
    * @param posts The original blog post array
    */
   private filterPosts(posts: ApiPost[]) {
-    if (this.props.filters.tag) {
+    if (this.props.filters.match.params.tag ||
+      this.props.filters.location.pathname.startsWith("/blog/tag/")) {
       return this.filterPostsByTag(posts);
     }
     else {
@@ -71,7 +72,7 @@ export class Blog extends React.PureComponent<BlogProps, BlogState> {
    * @param posts The original blog post array
    */
   private filterPostsByDate(posts: ApiPost[]) {
-    const f = this.props.filters;
+    const f = this.props.filters.match.params;
 
     this.subfilters = [];
     this.baseUrl = "/blog/";
@@ -124,21 +125,16 @@ export class Blog extends React.PureComponent<BlogProps, BlogState> {
    * @param posts The original blog post array
    */
   private filterPostsByTag(posts: ApiPost[]) {
-    const f = this.props.filters;
+    const f = this.props.filters.match.params;
 
     this.baseUrl = "/blog/tag/";
     this.filterType = PostFilterType.TAG;
-    this.subfilters = [];
+    this.subfilters = Array.from(this.tags);
 
-    if (f.tag) this.baseUrl += `${f.tag}/`;
-
-    return posts.filter(p => {
-      const tags = p.rawData.tags.map(t => t.name);
-
-      this.subfilters = this.subfilters.concat(tags);
-
-      return f.tag && tags.some(t => t === f.tag);
-    });
+    if (f.tag) {
+      return posts.filter(p => f.tag && p.rawData.tags.map(t => t.name).some(t => t === f.tag));
+    }
+    else return posts;
   }
 
   /**
@@ -165,8 +161,8 @@ export class Blog extends React.PureComponent<BlogProps, BlogState> {
 
     return (
       <Switch>
-        <Route exact path="/" component={postList} />
         {this.generateBlogPostRoutes()}
+        <Route exact path="/" component={postList} />
         <Route path="/blog/" component={postList} />
       </Switch>
     )

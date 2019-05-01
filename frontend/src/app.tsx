@@ -19,7 +19,7 @@ interface MainProps { }
 
 const Main: React.FunctionComponent<MainProps> = props => {
   const blog = (route: RouteComponentProps<BlogRouteParams>) => (
-    <Blog api={api} filters={{ ...route.match.params }} />
+    <Blog api={api} filters={{ ...route }} />
   );
 
   return (
@@ -29,7 +29,6 @@ const Main: React.FunctionComponent<MainProps> = props => {
       <Route exact path="/blog/:year([0-9]{4})/:month([0-9]{2})/" component={blog} />
       <Route exact path="/blog/:year([0-9]{4})/:month([0-9]{2})/:day([0-9]{2})/" component={blog} />
       <Route exact path="/blog/tag/:tag([a-zA-Z0-9_\-]+)/" component={blog} />
-      <Route path="/blog/tag/" component={blog} />
       <Route path="/blog/" component={blog} />
       <Route component={NotFound} />
     </Switch>
