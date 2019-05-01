@@ -22,7 +22,8 @@ export interface PostProps {
   description: string,
   url: string,
   content: string,
-  mode: PostViewMode
+  mode: PostViewMode,
+  tags: string[],
 }
 
 /**
@@ -91,7 +92,28 @@ export const PostHeader: React.FunctionComponent<PostProps> = props => {
     <header className="post-header">
       <PostTitle {...props} />
       <PostMeta {...props} />
+      <PostTags {...props} />
     </header>
+  );
+}
+
+/**
+ * Create a tags component that lists all tags as links to tag filter
+ * @param props Post properties
+ */
+export const PostTags: React.FunctionComponent<PostProps> = props => {
+  const tags = props.tags.map((t, i) => {
+    return <Link className="post-tag" key={i} to={`/blog/tag/${t}/`}>{t}</Link>
+  });
+
+  return (
+    <div className="row">
+      <div className="col-xs-12">
+        <section className="post-tags">
+          {tags}
+        </section>
+      </div>
+    </div>
   );
 }
 

@@ -60,6 +60,7 @@ export class ApiPost {
       content: this.rawData.content,
       url: generatePostUrl(new Date(this.rawData.published), this.rawData.slug),
       mode: PostViewMode.FULL,
+      tags: this.rawData.tags.map(t => t.name),
     }
   }
 

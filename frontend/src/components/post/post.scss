@@ -57,6 +57,21 @@
   font-weight: 400;
   line-height: 1.5;
 }
+.post-tags {
+  margin-top: 10px;
+
+  .post-tag {
+    font-size: 0.7rem;
+    padding: 4px;
+    margin-right: 10px;
+    color: $darktangerine-dark;
+    background-color: $darktangerine-light;
+  }
+  .post-tag:hover {
+    color: $darktangerine-dark;
+    background-color: $darktangerine;
+  }
+}
 .post-content {
   margin: 20px 0;
 
