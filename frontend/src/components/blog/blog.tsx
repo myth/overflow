@@ -26,7 +26,7 @@ export interface BlogRouteParams {
 
 export class Blog extends React.PureComponent<BlogProps, BlogState> {
   private tags: Set<string>;
-  private subfilters: string[];
+  private subfilters: Set<string>;
   private filterType: PostFilterType;
   private baseUrl: string;
 
@@ -35,7 +35,7 @@ export class Blog extends React.PureComponent<BlogProps, BlogState> {
 
     this.state = { posts: [] };
     this.tags = new Set();
-    this.subfilters = [];
+    this.subfilters = new Set();
     this.baseUrl = "/blog/";
     this.filterType = PostFilterType.NONE;
   }
@@ -75,7 +75,7 @@ export class Blog extends React.PureComponent<BlogProps, BlogState> {
   private filterPostsByDate(posts: ApiPost[]) {
     const f = this.props.filters.match.params;
 
-    this.subfilters = [];
+    this.subfilters.clear();
     this.baseUrl = "/blog/";
 
     if (!f.year) {
@@ -108,13 +108,13 @@ export class Blog extends React.PureComponent<BlogProps, BlogState> {
       if (f.day) day = f.day === dayStr;
 
       if (!f.year) {
-        this.subfilters.push(yearStr);
+        this.subfilters.add(yearStr);
       }
       else if (year && !f.month) {
-        this.subfilters.push(monthStr);
+        this.subfilters.add(monthStr);
       }
       else if (year && month && !f.day) {
-        this.subfilters.push(dayStr);
+        this.subfilters.add(dayStr);
       }
 
       return year && month && day;
@@ -130,7 +130,7 @@ export class Blog extends React.PureComponent<BlogProps, BlogState> {
 
     this.baseUrl = "/blog/tag/";
     this.filterType = PostFilterType.TAG;
-    this.subfilters = Array.from(this.tags);
+    this.subfilters = this.tags;
 
     if (f.tag) {
       return posts.filter(p => f.tag && p.rawData.tags.map(t => t.name).some(t => t === f.tag));
@@ -153,7 +153,7 @@ export class Blog extends React.PureComponent<BlogProps, BlogState> {
   public render() {
     const posts = this.filterPosts(this.state.posts).map(p => p.toPostSummary());
     const postFilter: PostFilterProps = {
-      filters: this.subfilters,
+      filters: Array.from(this.subfilters),
       baseUrl: this.baseUrl,
       type: this.filterType,
     }
