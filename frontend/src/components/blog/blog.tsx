@@ -4,7 +4,8 @@ import { Route, Switch, RouteComponentProps } from "react-router";
 import { ApiPost } from "../../lib/api/models";
 import { Post, PostList } from "../post/post";
 import { Api } from "../../lib/api/api";
-import { PostFilterProps, PostFilterType } from "../post/filter";
+import { PostFilterProps, PostFilterType, PostFilter } from "../post/filter";
+import { NotFound } from "../404/404";
 
 
 export interface BlogProps {
@@ -157,7 +158,21 @@ export class Blog extends React.PureComponent<BlogProps, BlogState> {
       type: this.filterType,
     }
 
-    const postList = () => <PostList posts={posts} filter={postFilter} />
+    const postList = () => {
+      if (!this.props.api.posts.length) {
+        postFilter.type = PostFilterType.NONE;
+      }
+      else if (!posts.length && this.props.api.posts.length) {
+        return (
+          <div>
+            <PostFilter {...postFilter} />
+            <NotFound />
+          </div>
+        );
+      }
+
+      return <PostList posts={posts} filter={postFilter} />
+    }
 
     return (
       <Switch>

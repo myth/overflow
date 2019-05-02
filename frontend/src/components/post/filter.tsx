@@ -27,7 +27,7 @@ export interface PostFilterProps {
  * @param props PostFilterProps
  */
 const filterTitle = (props: PostFilterProps) => {
-  if (props.type === PostFilterType.NONE) return "";
+  if (props.type === PostFilterType.NONE) return "These are not the droids you are looking for...";
   else if (props.type === PostFilterType.HOUR) return "Filter by hours? Hah.";
   else return `Filter by ${props.type}:`;
 }

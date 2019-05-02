@@ -6,7 +6,7 @@ import "./post.scss";
 
 import { dateToISOStringWithoutMs } from "../../lib/utils";
 import { NotFound } from "../404/404";
-import { PostFilter, PostFilterProps } from "./filter";
+import { PostFilter, PostFilterProps, PostFilterType } from "./filter";
 
 
 export enum PostViewMode {
@@ -175,13 +175,6 @@ export interface PostListProps {
  * @param props An array of Post properties
  */
 export const PostList: React.FunctionComponent<PostListProps> = props => {
-  if (!props.posts.length) return (
-    <div>
-      <PostFilter {...props.filter} />
-      <NotFound />
-    </div>
-  )
-
   const posts = props.posts.map((p, i) => {
     return (
       <div key={i} className="row">
