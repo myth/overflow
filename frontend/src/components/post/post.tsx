@@ -175,7 +175,7 @@ export interface PostListProps {
  * @param props An array of Post properties
  */
 export const PostList: React.FunctionComponent<PostListProps> = props => {
-  if (!props.posts.length && props.posts.length > 0) return <NotFound />
+  if (!props.posts.length) return <NotFound />
 
   const posts = props.posts.map((p, i) => {
     return (
