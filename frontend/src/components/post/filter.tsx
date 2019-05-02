@@ -27,9 +27,19 @@ export interface PostFilterProps {
  * @param props PostFilterProps
  */
 const filterTitle = (props: PostFilterProps) => {
-  if (props.type === PostFilterType.NONE) return "These are not the droids you are looking for...";
-  else if (props.type === PostFilterType.HOUR) return "Filter by hours? Hah.";
-  else return `Filter by ${props.type}:`;
+  switch (props.type) {
+    case PostFilterType.NONE:
+      return "These are not the droids you are looking for...";
+
+    case PostFilterType.TAG:
+      return "Filter by tag";
+
+    case PostFilterType.HOUR:
+      return "Filter by hours? Hah.";
+
+    default:
+      return `Filter by ${props.type}:`;
+  }
 }
 
 export const PostFilter: React.FunctionComponent<PostFilterProps> = props => {
@@ -40,12 +50,26 @@ export const PostFilter: React.FunctionComponent<PostFilterProps> = props => {
     else return <span key={i}><Link to={path}>{f}</Link></span>
   });
 
-  return (
-    <div className="row">
-      <div id="filters" className="col-xs-12 bg-olivine-dark padding-20 text-olivine-lightest">
-        {filterTitle(props)} {filters}
+  if (props.type === PostFilterType.TAG) {
+    return (
+      <div className="row">
+        <div id="filters" className="col-xs-12 bg-olivine-dark padding-20 text-olivine-lightest">
+          {filterTitle(props)}
+        </div>
+        <div id="filters__tags" className="col-xs-12">
+          {filters}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+  else {
+    return (
+      <div className="row">
+        <div id="filters" className="col-xs-12 bg-olivine-dark padding-20 text-olivine-lightest">
+          {filterTitle(props)} {filters}
+        </div>
+      </div>
+    )
+  }
 }
 
