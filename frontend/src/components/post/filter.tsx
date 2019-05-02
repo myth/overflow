@@ -43,7 +43,12 @@ const filterTitle = (props: PostFilterProps) => {
 }
 
 export const PostFilter: React.FunctionComponent<PostFilterProps> = props => {
-  const filters = props.filters.sort((a, b) => b.localeCompare(a)).map((f, i) => {
+  const sortFunc = (a: string, b: string) => {
+    if (props.type === PostFilterType.TAG) return a.localeCompare(b);
+    else return b.localeCompare(a);
+  };
+
+  const filters = props.filters.sort(sortFunc).map((f, i) => {
     const path = `${props.baseUrl}${f}/`;
 
     if (i < props.filters.length - 1) return <span key={i}><Link to={path}>{f}</Link> | </span>;
