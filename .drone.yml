@@ -77,6 +77,7 @@ steps:
   image: appleboy/drone-scp
   settings:
     host: ace.ulv.io
+    port: 22000
     username: root
     key:
       from_secret: ssh_key
