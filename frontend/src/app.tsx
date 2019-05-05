@@ -11,6 +11,7 @@ import { Blog, BlogRouteParams } from "./components/blog/blog";
 import { Header } from "./components/header/header";
 import { Footer } from "./components/footer/footer";
 import { Api } from "./lib/api/api";
+import { ScrollToTop } from "./lib/scroll";
 
 
 const api = new Api();
@@ -66,7 +67,9 @@ const App: React.FunctionComponent = () => {
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <ScrollToTop>
+      <App />
+    </ScrollToTop>
   </BrowserRouter>,
   document.getElementById("app"),
 );
