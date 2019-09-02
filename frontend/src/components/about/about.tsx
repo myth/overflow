@@ -25,8 +25,8 @@ export const AboutBody = () => {
       <p>
         <a href="/">overflow.no</a> is the playground of Aleksander Skraastad. I'm a programmer,
         Artificial Intelligence major, former Air Force officer and outdoors enthusiast.
-        I work as an R&amp;D engineer and team lead for Appear TV.
-        This is a <b>personal</b> website which reflects my own views and opinions and not that of Appear TV.
+        I work as a software developer for <a href="https://kodeworks.no">Kodeworks</a>.
+        This is a <b>personal</b> website which reflects my own views and opinions and not that of Kodeworks.
       </p>
     </div>
   )
