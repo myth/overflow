@@ -71,7 +71,7 @@ make prod
 
 #### Test
 
-Run linting and tests
+Run linting and tests (there are no tests)
 
 ```
 make test
