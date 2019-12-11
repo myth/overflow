@@ -8,6 +8,27 @@ steps:
   commands:
     - git fetch --tags
 
+  # Intermediate builder container. Make sure it's built as target to be cacheable
+- name: overflow-frontend-builder
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: mythern/overflow-frontend-builder
+    context: .
+    auto_tag: true
+    target: builder
+    cache_from: mythern/overflow-frontend-builder:latest
+    purge: false
+  when:
+    event: [push]
+  volumes:
+    - name: docker_socket
+      host:
+        path: /var/run/docker.sock:/var/run/docker.sock
+
   # Install dependencies and test the python code
 - name: overflow
   image: plugins/docker
@@ -17,7 +38,6 @@ steps:
     password:
       from_secret: docker_password
     repo: mythern/overflow
-    dockerfile: Dockerfile
     context: .
     auto_tag: true
     cache_from: mythern/overflow:latest
