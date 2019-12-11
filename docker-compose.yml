@@ -9,8 +9,6 @@ services:
     image: mythern/overflow
     restart: unless-stopped
     env_file: .env
-    ports:
-      - "80:13571"
     depends_on:
       - db
       - redis
