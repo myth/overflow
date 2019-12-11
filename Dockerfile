@@ -53,5 +53,5 @@ RUN python3 manage.py collectstatic --no-input
 # Set correct ownership
 RUN chown -R nginx:nginx /var/www/html && chown -R nginx:nginx /run/nginx
 
-EXPOSE 13571
+EXPOSE 80
 ENTRYPOINT [ "docker-entrypoint.sh" ]
