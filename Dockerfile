@@ -42,13 +42,14 @@ RUN apk add --update --no-cache \
 
 
 RUN mkdir -p /var/www/html/media /var/www/html/static /run/nginx
-COPY --from=frontend-builder /app/src/overflow/static/ /var/www/html/static
+COPY --from=frontend-builder /app/src/overflow/static/ /app/src/overflow/static
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY docker-entrypoint.sh /usr/local/bin/
 COPY src/ ./
 
 # Collect static files for the frontend container to serve
 RUN python3 manage.py collectstatic --no-input
+RUN mv /static /var/www/html/
 
 # Set correct ownership
 RUN chown -R nginx:nginx /var/www/html && chown -R nginx:nginx /run/nginx
