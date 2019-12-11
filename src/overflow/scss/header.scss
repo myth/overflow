@@ -1,0 +1,19 @@
+@import './colors.scss';
+
+#page-header {
+  background-color: $page-header-bg;
+  color: $page-header-text;
+  font-size: 1.7rem;
+  padding: 20px;
+}
+
+#page-header a,
+#page-header a:visited {
+  font-weight: 300;
+  color: $page-header-link;
+}
+#page-header a:active,
+#page-header a:hover {
+  color: $page-header-link-hover;
+  text-decoration: none;
+}

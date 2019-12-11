@@ -1,0 +1,8 @@
+<section id="post-filters">
+  <header id="post-filters__header">Filter by tag</header>
+  <section id="post-filters__values">
+    {% for tag in tags %}
+    <a href="{% url 'blog:tag' tag %}" title="{{ tag }}" class="{% if '/blog/tag/' in request.path and tag.name in request.path %}active{% endif %}">{{ tag }}</a>{% if not forloop.last %} | {% endif %}
+    {% endfor %}
+  </section>
+</section>

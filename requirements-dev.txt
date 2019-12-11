@@ -1,0 +1,7 @@
+# Main dependencies
+-r requirements.txt
+
+# Development dependencies
+isort
+pycodestyle
+pylint-django

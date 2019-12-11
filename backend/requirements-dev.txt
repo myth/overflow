@@ -1,7 +1,0 @@
-# Main dependencies
--r requirements.txt
-
-# Development dependencies
-isort ~= 4.3.4
-pycodestyle ~= 2.4.0
-pylint-django ~= 2.0.6

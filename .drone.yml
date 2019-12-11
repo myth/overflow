@@ -9,18 +9,18 @@ steps:
     - git fetch --tags
 
   # Install dependencies and test the python code
-- name: backend
+- name: overflow
   image: plugins/docker
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: mythern/overflow-backend
-    dockerfile: Dockerfile.backend
+    repo: mythern/overflow
+    dockerfile: Dockerfile
     context: .
     auto_tag: true
-    cache_from: mythern/overflow-backend:latest
+    cache_from: mythern/overflow:latest
     purge: false
   when:
     event: [push]
@@ -29,50 +29,7 @@ steps:
       host:
         path: /var/run/docker.sock:/var/run/docker.sock
 
-  # Install dependencies, build and test the typescript code
-- name: frontend-builder
-  image: plugins/docker
-  settings:
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    repo: mythern/overflow-frontend-builder
-    dockerfile: Dockerfile.frontend
-    context: .
-    auto_tag: true
-    target: builder
-    cache_from: mythern/overflow-frontend-builder:latest
-    purge: false
-  when:
-    event: [push]
-  volumes:
-    - name: docker_socket
-      host:
-        path: /var/run/docker.sock:/var/run/docker.sock
-
-  # Build the production runtime container
-- name: frontend
-  image: plugins/docker
-  settings:
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    repo: mythern/overflow-frontend
-    dockerfile: Dockerfile.frontend
-    context: .
-    auto_tag: true
-    cache_from: mythern/overflow-frontend-builder:latest
-    purge: false
-  when:
-    event: [push]
-  volumes:
-    - name: docker_socket
-      host:
-        path: /var/run/docker.sock:/var/run/docker.sock
-
-  # Copy compose-file
+# Copy compose-file
 - name: configure
   image: appleboy/drone-scp
   settings:
@@ -98,7 +55,7 @@ steps:
     command_timeout: 600s
     script:
       - cd /srv/www/overflow
-      - sed -i 's#backend/src/##g' docker-compose.yml
+      - sed -i 's#src/##g' docker-compose.yml
       - sed -i '/build:/d' docker-compose.yml
       - sed -i '/dockerfile:/d' docker-compose.yml
       - sed -i '/context:/d' docker-compose.yml

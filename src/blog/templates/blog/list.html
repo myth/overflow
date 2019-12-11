@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block meta_title %}
+Blog | Overflow
+{% endblock %}
+
+{% block main_header %}
+  {% if '/blog/tag/' in request.path %}
+    {% include 'blog/tag_filter.html' %}
+  {% else %}
+    {% include 'blog/datetime_filter.html' %}
+  {% endif %}
+{% endblock %}
+
+{% block main_content %}
+<section id="post-list">
+  {% for post in posts %}
+  <div class="row">
+    <div class="col-md-12">
+      <article class="post">
+        <header class="post-header">
+          <h2 class="post-title">
+            <a href="{% url 'blog:detail' post.published.year post.published.month post.published.day post.slug %}">{{ post.title }}</a>
+          </h2>
+          {% if post.image %}
+          <a href="{% url 'blog:detail' post.published.year post.published.month post.published.day post.slug %}" title="{{ post.title }}">
+            <img class="post-illustration" src="{{ post.image.file.url }}" />
+          </a>
+          {% endif %}
+          <section class="post-meta">
+            <span>Published {{ post.published }}</span>
+            <span class="right">Updated {{ post.edited }}</span>
+          </section>
+          {% if post.tags.all %}
+          <section class="post-tags">
+            {% for tag in post.tags.all %}
+            <a class="post-tag" href="{% url 'blog:tag' tag %}">{{ tag }}</a>
+            {% endfor %}
+          </section>
+          {% endif %}
+        </header>
+        <section class="post-description">
+          {{ post.description }}
+        </section>
+      </article>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}
+
+{% include "about.html" %}

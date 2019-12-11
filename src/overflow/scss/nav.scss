@@ -1,0 +1,27 @@
+@import './colors.scss';
+
+#page-nav {
+  padding: 0px 20px;
+  background-color: $primary-dark;
+
+  li {
+    display: inline-block;
+  }
+
+  a,
+  a:visited {
+    display: inline-block;
+    padding: 20px;
+    color: $link;
+  }
+  a:active,
+  a:hover {
+    background-color: lighten($primary-dark, 5%);
+    color: $link-hover;
+  }
+
+  a.active {
+    background-color: $white;
+    color: $primary-dark;
+  }
+}

@@ -2,31 +2,21 @@ version: '3.6'
 
 services:
   # Django container
-  backend:
+  overflow:
     build:
-      dockerfile: Dockerfile.backend
+      dockerfile: Dockerfile
       context: .
-    image: mythern/overflow-backend
+    image: mythern/overflow
     restart: unless-stopped
-    env_file: backend/src/.env
-    volumes:
-      - staticfiles:/app/static
+    env_file: .env
+    ports:
+      - "80:13571"
     depends_on:
       - db
       - redis
-
-  # nginx container
-  frontend:
-    build:
-      dockerfile: Dockerfile.frontend
-      context: .
-    image: mythern/overflow-frontend
-    restart: unless-stopped
     networks:
       - default
       - traefik
-    volumes:
-      - staticfiles:/usr/share/nginx/html/static:ro
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik"
@@ -34,14 +24,12 @@ services:
       - "traefik.frontend.rule=Host:overflow.no"
       - "traefik.protocol=http"
       - "traefik.port=80"
-    depends_on:
-      - backend
 
   # PostgreSQL container
   db:
     image: postgres:10-alpine
     restart: unless-stopped
-    env_file: backend/src/.env
+    env_file: .env
     volumes:
       - ./pgdata:/var/lib/postgresql/data
 
@@ -55,6 +43,3 @@ networks:
   traefik:
     external: true
 
-# Define shared data volumes
-volumes:
-  staticfiles:
