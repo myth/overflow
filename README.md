@@ -7,7 +7,7 @@ Codebase for [overflow.no](https://overflow.no)
 
 ## Docker
 
-Depends on a `.env` file in `.env`
+Depends on a `.env` file in the working directory.
 
 ```
 docker-compose build
