@@ -40,8 +40,9 @@ steps:
     repo: mythern/overflow
     context: .
     auto_tag: true
-    cache_from: mythern/overflow-frontend-builder:latest
-    cache_from: mythern/overflow:latest
+    cache_from:
+      - mythern/overflow-frontend-builder:latest
+      - mythern/overflow:latest
     purge: false
   when:
     event: [push]
