@@ -41,7 +41,7 @@ RUN apk add --update --no-cache \
     rm -rf /root/.cache /var/cache
 
 
-RUN mkdir -p /var/www/html/media /run/nginx
+RUN mkdir -p /var/www/html /run/nginx
 COPY --from=frontend-builder /app/src/overflow/static/ /app/src/overflow/static
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY docker-entrypoint.sh /usr/local/bin/

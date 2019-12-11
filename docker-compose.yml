@@ -22,6 +22,8 @@ services:
       - "traefik.frontend.rule=Host:overflow.no"
       - "traefik.protocol=http"
       - "traefik.port=80"
+    volumes:
+      - ./uploads:/var/www/html/media
 
   # PostgreSQL container
   db:
