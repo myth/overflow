@@ -19,7 +19,7 @@ steps:
     repo: mythern/overflow-frontend-builder
     context: .
     auto_tag: true
-    target: builder
+    target: frontend-builder
     cache_from: mythern/overflow-frontend-builder:latest
     purge: false
   when:
