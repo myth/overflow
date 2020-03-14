@@ -28,7 +28,7 @@ Blog | Overflow
           </a>
           {% endif %}
           <section class="post-meta">
-            <span>Published {{ post.published }}</span>
+            <span>{{ post.published }}</span>
             <span class="right">Updated {{ post.edited }}</span>
           </section>
           {% if post.tags.all %}
