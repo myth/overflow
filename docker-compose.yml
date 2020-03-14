@@ -17,11 +17,9 @@ services:
       - traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=traefik"
-      - "traefik.backend=overflow"
-      - "traefik.frontend.rule=Host:overflow.no"
-      - "traefik.protocol=http"
-      - "traefik.port=80"
+      - "traefik.http.routers.overflow.rule=Host(`overflow.no`)"
+      - "traefik.http.routers.overflow.tls=true"
+      - "traefik.http.routers.overflow.tls.certresolver=le"
     volumes:
       - ./uploads:/var/www/html/media
 
