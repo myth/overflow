@@ -23,7 +23,7 @@ RUN apk add --update --no-cache \
     uwsgi \
     uwsgi-python3 \
     postgresql-libs && \
-    apk add --virtual .build-deps python3-dev gcc build-base \
+    apk add --virtual .build-deps py3-pip python3-dev gcc build-base \
                                   linux-headers zlib-dev musl-dev libffi-dev \
                                   jpeg-dev postgresql-dev && \
     apk add --no-cache libjpeg nginx && \
