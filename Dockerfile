@@ -27,7 +27,7 @@ RUN apk add --update --no-cache \
                                   linux-headers zlib-dev musl-dev libffi-dev \
                                   jpeg-dev postgresql-dev && \
     apk add --no-cache libjpeg nginx && \
-    pip3 install --no-cache-dir --upgrade pip && \
+    pip3 install --no-cache-dir --upgrade pip wheel && \
     pip3 install --no-cache-dir -r requirements-dev.txt && \
     apk --purge del .build-deps && \
     find / -type d -name __pycache__ -exec rm -r {} + && \
