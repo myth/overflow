@@ -13,23 +13,17 @@ RUN yarn build && apk del .gyp
 
 
 # Runtime container
-FROM alpine:latest as runner
+FROM python:3.8.5-slim as runner
 
 WORKDIR /app
 
-ADD requirements.txt requirements-dev.txt ./
-RUN apk add --update --no-cache \
-    python3 \
-    uwsgi \
-    uwsgi-python3 \
-    postgresql-libs && \
-    apk add --virtual .build-deps py3-pip python3-dev gcc build-base \
-                                  linux-headers zlib-dev musl-dev libffi-dev \
-                                  jpeg-dev postgresql-dev && \
-    apk add --no-cache libjpeg nginx && \
+ADD requirements.txt requirements-dev.txt pyproject.toml ./
+RUN apt-get update && \
+    apt-get install -y build-essential nginx && \
     pip3 install --no-cache-dir --upgrade pip wheel && \
     pip3 install --no-cache-dir -r requirements-dev.txt && \
-    apk --purge del .build-deps && \
+    apt-get purge -y build-essential && \
+    apt-get autoremove -y && \
     find / -type d -name __pycache__ -exec rm -r {} + && \
     rm -rf /usr/lib/python*/ensurepip && \
     rm -rf /usr/lib/python*/turtledemo && \
@@ -40,8 +34,9 @@ RUN apk add --update --no-cache \
     rm -f /usr/lib/python*/pydoc.py && \
     rm -rf /root/.cache /var/cache
 
-
-RUN mkdir -p /var/www/html /run/nginx
+RUN groupadd -r nginx && \
+    useradd -r -g nginx nginx && \
+    mkdir -p /var/www/html /run/nginx
 COPY --from=frontend-builder /app/src/overflow/static/ /app/src/overflow/static
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY docker-entrypoint.sh /usr/local/bin/
