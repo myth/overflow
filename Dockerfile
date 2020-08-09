@@ -1,17 +1,3 @@
-# Frontend build container
-FROM node:lts-alpine as frontend-builder
-
-WORKDIR /app
-
-RUN apk add --no-cache --virtual .gyp python git make gcc g++
-
-COPY package.json tsconfig.json webpack.config.js yarn.lock ./
-RUN yarn install --ignore-optional
-
-COPY src/ src/
-RUN yarn build && apk del .gyp
-
-
 # Runtime container
 FROM python:3.8.5-slim as runner
 
@@ -37,7 +23,6 @@ RUN apt-get update && \
 RUN groupadd -r nginx && \
     useradd -r -g nginx nginx && \
     mkdir -p /var/www/html /run/nginx
-COPY --from=frontend-builder /app/src/overflow/static/ /app/src/overflow/static
 COPY nginx.conf /etc/nginx/sites-enabled/default
 COPY docker-entrypoint.sh /usr/local/bin/
 COPY src/ ./
