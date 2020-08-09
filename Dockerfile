@@ -38,7 +38,7 @@ RUN groupadd -r nginx && \
     useradd -r -g nginx nginx && \
     mkdir -p /var/www/html /run/nginx
 COPY --from=frontend-builder /app/src/overflow/static/ /app/src/overflow/static
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/sites-enabled/default
 COPY docker-entrypoint.sh /usr/local/bin/
 COPY src/ ./
 
