@@ -7,8 +7,6 @@ Blog | Overflow
 {% block main_header %}
   {% if '/blog/tag/' in request.path %}
     {% include 'blog/tag_filter.html' %}
-  {% else %}
-    {% include 'blog/datetime_filter.html' %}
   {% endif %}
 {% endblock %}
 

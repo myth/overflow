@@ -1,5 +1,5 @@
 # Runtime container
-FROM python:3.8.5-slim as runner
+FROM python:3.8.5-slim
 
 WORKDIR /app
 
