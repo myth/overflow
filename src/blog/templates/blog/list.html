@@ -16,23 +16,24 @@ Blog | Overflow
 <section id="post-list">
   {% for post in posts %}
   <div class="row">
-    <div class="col-md-12">
-      <article class="post">
+    <div class="col-xs-12">
+      <article class="post-summary">
         <header class="post-header">
-          <h2 class="post-title">
-            <a href="{% url 'blog:detail' post.published.year post.published.month post.published.day post.slug %}">{{ post.title }}</a>
-          </h2>
           {% if post.image %}
           <a href="{% url 'blog:detail' post.published.year post.published.month post.published.day post.slug %}" title="{{ post.title }}">
             <img class="post-illustration" src="{{ post.image.file.url }}" />
           </a>
           {% endif %}
+          <h2 class="post-title">
+            <a href="{% url 'blog:detail' post.published.year post.published.month post.published.day post.slug %}">{{ post.title }}</a>
+          </h2>
           <section class="post-meta">
             <span>{{ post.published }}</span>
             <span class="right">Updated {{ post.edited }}</span>
           </section>
           {% if post.tags.all %}
           <section class="post-tags">
+            Tags: 
             {% for tag in post.tags.all %}
             <a class="post-tag" href="{% url 'blog:tag' tag %}">{{ tag }}</a>
             {% endfor %}

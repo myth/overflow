@@ -17,8 +17,10 @@
         content="{% block meta_keywords %}Aleksander, Skraastad, blog, programming, ai, artificial intelligence, guides, rants, outdoors, nature, science, technology{% endblock %}" />
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" rel="stylesheet" type="text/css">
+  <link href="/static/overflow/reset.css" rel="stylesheet" type="text/css">
   <link href="/static/admin/css/fonts.css" rel="stylesheet" type="text/css">
   <link href="/static/overflow/main.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -26,10 +28,13 @@
 {% block page %}
 <header id="page-header" class="text-center">
   {% block page_header %}
+  <div id="page-logo">
     <a href="/" title="overflow.no">
-      overflow.no
+      <img src="/static/overflow/images/logo.png" title="overflow.no" />
     </a>
+  </div>
   {% endblock %}<!-- /page-header -->
+  {% include "nav.html" %}
 </header>
 
 {% if messages %}
@@ -42,51 +47,45 @@
 </section>
 {% endif %}
 
-<section id="page-content" class="margin-bottom-50">
+<section id="page-content">
   {% block page_content %}
-  <div class="row around-xs">
-    <section id="main" class="col-xs-12 col-md-8 col-lg-8">
-      <header id="main-header">
-        {% include "nav.html" %}
-        {% block main_header %}
-        {% endblock %}<!-- /main-header -->
-      </header>
-
-      <main id="main-content">
-        {% block main_content %}
-        {% endblock %}<!-- /main-content -->
-      </main>
-    </section>
-
-    <aside id="sidebar" class="col-xs-12 col-md-4 col-lg-4 last-xs last-md">
-      {% block sidebar %}
-        {% include "about.html" %}
-      {% endblock %}<!-- /sidebar -->
-    </aside>
+  <main id="main-content">
+    <div class="start-xs container">
+      {% block main_content %}
+      {% endblock %}<!-- /main-content -->
+    </div>
   </div>
   {% endblock %}<!-- /page-content -->
 </section>
 
 <footer id="page-footer">
   {% block page_footer %}
-    <div class="row center-xs margin-vertical-10">
-      <div class="col-xs-12 padding-vertical-5">
-        <span id="page-footer__copyright">
-          <script>document.write(new Date().getFullYear())</script> &copy; <a href="/">Overflow</a></span>
-      </div>
-      <div class="col-xs-12 padding-vertical-5">
-        <span id="page-footer__git">
-          <a target="_blank" href="https://github.com/myth/overflow">
-            v0.2.4-10-g344cb96 (master) 2019-09-03T13:29:26.091Z
-          </a>
-        </span>
-      </div>
-      <div class="col-xs-12">
-        <a href="https://ci.ulv.io/myth/overflow" target="_blank" title="Build Status">
-          <img id="page-footer__build-status" src="https://ci.ulv.io/api/badges/myth/overflow/status.svg" alt="Build status badge" title="Build Status" />
-        </a>
+  <div class="row center-xs">
+    {% block footer_about %}
+    <div class="col-xs-12">
+      <div id="page-footer__about" class="container">
+        {% include "about.html" %}
       </div>
     </div>
+    {% endblock %}
+    <div class="col-xs-12">
+      <span id="page-footer__copyright">
+        <script>document.write(new Date().getFullYear())</script> &copy; <a href="/">Overflow</a>
+      </span>
+    </div>
+    <div class="col-xs-12">
+      <span id="page-footer__git">
+        <a target="_blank" href="https://github.com/myth/overflow">
+          v0.2.4-10-g344cb96 (master) 2019-09-03T13:29:26.091Z
+        </a>
+      </span>
+    </div>
+    <div class="col-xs-12">
+      <a href="https://ci.ulv.io/myth/overflow" target="_blank" title="Build Status">
+        <img id="page-footer__build-status" src="https://ci.ulv.io/api/badges/myth/overflow/status.svg" alt="Build status badge" title="Build Status" />
+      </a>
+    </div>
+  </div>
   {% endblock %}<!-- /page-footer -->
 </footer>
 {% endblock %}<!-- /page -->

@@ -1,7 +1,7 @@
 # Main dependencies
+Django
 Pillow
 daphne
-Django ~= 3.0.0
 psycopg2-binary
 django-cors-headers
 django-redis

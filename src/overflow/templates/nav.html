@@ -1,7 +1,7 @@
 {% block nav %}
 <nav id="page-nav">
   <ul>
-    <li><a href="{% url 'blog:index' %}" class="{% if '/blog' in request.path or request.path == '/' %}active{% endif %}">BLOG</a></li>
+    <li><a href="{% url 'blog:index' %}" class="{% if '/blog' in request.path %}active{% endif %}">Blog</a></li>
   </ul>
 </nav>
 {% endblock %}
