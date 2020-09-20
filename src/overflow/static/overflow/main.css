@@ -151,7 +151,7 @@ nav > ul > li {
 
 #page-logo {
   background-color: var(--color-darkestgray);
-  padding: 100px;
+  padding: 100px 0;
 }
 
 #page-logo img {
