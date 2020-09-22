@@ -26,7 +26,7 @@ RUN groupadd -r nginx && \
 COPY nginx.conf /etc/nginx/sites-enabled/default
 COPY docker-entrypoint.sh /usr/local/bin/
 COPY src/ ./
-COPY .git/ ./.git/
+COPY ./.git/ ./.git/
 
 # Set some environment variables
 RUN export OF_BUILD_DATE=$(date --iso-8601=seconds)
