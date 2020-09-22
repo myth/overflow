@@ -29,6 +29,7 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+/build_metadata
 
 # Dynamic folders
 /static/
