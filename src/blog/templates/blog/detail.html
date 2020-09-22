@@ -18,9 +18,9 @@
         {% if post.image %}
         <img class="post-illustration" alt="{{ post.image.title }}" title="{{ post.image.title }}" src="{{ post.image.file.url }}" />
         {% endif %}
-        <section class="post-meta">
-          <span>{{ post.published }}</span>
-          <span class="right">Updated {{ post.edited }}</span>
+        <section class="row post-meta">
+          <div class="col-xs-12 col-md-6">{{ post.published }}</div>
+          <div class="col-xs-12 col-md-6 end-md">Updated {{ post.edited }}</div>
         </section>
         {% if post.tags.all %}
         <section class="post-tags">

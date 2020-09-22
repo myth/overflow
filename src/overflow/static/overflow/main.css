@@ -163,13 +163,10 @@ nav > ul > li {
 #main-header {
   margin-bottom: 50px;
 }
-#main-content {
-  margin: 0 1rem;
-}
 
 .post,
 .post-summary {
-  margin: 2rem 0;
+  margin: 2rem 1rem;
 }
 .post-summary h2 {
   margin: 1rem 0;

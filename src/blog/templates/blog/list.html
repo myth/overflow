@@ -12,9 +12,9 @@ Blog | Overflow
 
 {% block main_content %}
 <section id="post-list">
-  {% for post in posts %}
   <div class="row">
-    <div class="col-xs-12">
+    {% for post in posts %}
+    <div class="col-xs-12 col-lg-6">
       <article class="post-summary">
         <header class="post-header">
           {% if post.image %}
@@ -25,9 +25,9 @@ Blog | Overflow
           <h2 class="post-title">
             <a href="{% url 'blog:detail' post.published.year post.published.month post.published.day post.slug %}">{{ post.title }}</a>
           </h2>
-          <section class="post-meta">
-            <span>{{ post.published }}</span>
-            <span class="right">Updated {{ post.edited }}</span>
+          <section class="row post-meta">
+            <div class="col-xs-12 col-md-6">{{ post.published }}</div>
+            <div class="col-xs-12 col-md-6 end-md">Updated {{ post.edited }}</div>
           </section>
           {% if post.tags.all %}
           <section class="post-tags">
@@ -43,8 +43,8 @@ Blog | Overflow
         </section>
       </article>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 </section>
 {% endblock %}
 
