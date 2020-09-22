@@ -2,11 +2,13 @@
 Base settings module
 """
 
+from datetime import datetime
 import os
 
 from decouple import config
 
-from .security import DB_PASS, DEBUG, PRODUCTION
+from lib.utils.git import git_branch, git_describe
+from overflow.settings.security import DB_PASS, DEBUG, PRODUCTION
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -49,6 +51,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'overflow.context_processors.build_metadata'
             ],
             'debug': DEBUG
         },
@@ -121,3 +124,9 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = config('OF_MEDIA_ROOT', default=os.path.join(BASE_DIR, '..', 'media'))
+
+# Source information
+
+BUILD_DATE: str = config('OF_BUILD_DATE', default=datetime.now().isoformat())
+GIT_REVISION: str = config('OF_GIT_REVISION', default=git_describe())
+GIT_BRANCH: str = config('OF_GIT_BRANCH', default=git_branch())
