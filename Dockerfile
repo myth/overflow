@@ -25,13 +25,8 @@ RUN groupadd -r nginx && \
     mkdir -p /var/www/html /run/nginx
 COPY nginx.conf /etc/nginx/sites-enabled/default
 COPY docker-entrypoint.sh /usr/local/bin/
+COPY build_metadata .
 COPY src/ .
-
-# Source our environment variables if we have any
-RUN source build_metadata.env || true && rm -rf build_metadata
-ENV OF_BUILD_DATE ${OF_BUILD_DATE:-unknown}
-ENV OF_GIT_BRANCH ${OF_GIT_BRANCH:-unknown}
-ENV OF_GIT_REVISION ${OF_GIT_REVISION:-unknown}
 
 # Collect static files for the frontend container to serve
 RUN python3 manage.py collectstatic --no-input && mv /static /var/www/html/
