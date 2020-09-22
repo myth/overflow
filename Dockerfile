@@ -5,7 +5,7 @@ WORKDIR /app
 
 ADD requirements.txt requirements-dev.txt pyproject.toml ./
 RUN apt-get update && \
-    apt-get install -y build-essential nginx && \
+    apt-get install -y build-essential nginx git && \
     pip3 install --no-cache-dir --upgrade pip wheel && \
     pip3 install --no-cache-dir -r requirements-dev.txt && \
     apt-get purge -y build-essential && \
@@ -28,9 +28,7 @@ COPY docker-entrypoint.sh /usr/local/bin/
 COPY . /app
 
 # Set some environment variables
-RUN export OF_BUILD_DATE=$(date --iso-8601=seconds)
-RUN export OF_GIT_BRANCH=$(git branch --show-current)
-RUN export OF_GIT_REVISION=${git describe --always}
+RUN export OF_BUILD_DATE=$(date --iso-8601=seconds) && export OF_GIT_BRANCH=$(git branch --show-current) && export OF_GIT_REVISION=${git describe --always}
 ENV OF_BUILD_DATE=${OF_BUILD_DATE}
 ENV OF_GIT_BRANCH=${OF_GIT_BRANCH}
 ENV OF_GIT_REVISION=${OF_GIT_REVISION}
