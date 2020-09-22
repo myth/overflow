@@ -25,8 +25,7 @@ RUN groupadd -r nginx && \
     mkdir -p /var/www/html /run/nginx
 COPY nginx.conf /etc/nginx/sites-enabled/default
 COPY docker-entrypoint.sh /usr/local/bin/
-COPY src/ ./
-COPY ./.git/ ./.git/
+COPY . /app
 
 # Set some environment variables
 RUN export OF_BUILD_DATE=$(date --iso-8601=seconds)
@@ -35,6 +34,8 @@ RUN export OF_GIT_REVISION=${git describe --always}
 ENV OF_BUILD_DATE=${OF_BUILD_DATE}
 ENV OF_GIT_BRANCH=${OF_GIT_BRANCH}
 ENV OF_GIT_REVISION=${OF_GIT_REVISION}
+
+WORKDIR /app/src
 
 # Collect static files for the frontend container to serve
 RUN python3 manage.py collectstatic --no-input && mv /static /var/www/html/
