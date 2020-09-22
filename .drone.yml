@@ -7,6 +7,9 @@ steps:
   image: docker:git
   commands:
     - git fetch --tags
+    - echo "OF_BUILD_DATE=$(date --iso-8601=seconds)" >> build_metadata
+    - echo "OF_GIT_BRANCH=$(git branch --show-current)" >> build_metadata
+    - echo "OF_GIT_REVISION=$(git describe --always)" >> build_metadata
 
   # Install dependencies and test the python code
 - name: overflow
