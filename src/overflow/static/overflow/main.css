@@ -100,11 +100,13 @@ pre {
   overflow-x: auto;
   max-width: 100%;
 }
+
 pre code {
   color: unset;
   padding: unset;
   background: transparent;
 }
+
 code {
   font-family: 'Fira Code', monospace;
   background: var(--color-whitegray);
