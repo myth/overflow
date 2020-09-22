@@ -130,9 +130,3 @@ MEDIA_ROOT = config('OF_MEDIA_ROOT', default=os.path.join(BASE_DIR, '..', 'media
 BUILD_DATE: str = config('OF_BUILD_DATE', default=datetime.now().isoformat())
 GIT_REVISION: str = config('OF_GIT_REVISION', default=git_describe())
 GIT_BRANCH: str = config('OF_GIT_BRANCH', default=git_branch())
-
-print(BUILD_DATE, 'OF_BUILD_DATE' in os.environ)
-print(GIT_REVISION, 'OF_GIT_REVISION' in os.environ)
-print(GIT_BRANCH, 'OF_GIT_BRANCH' in os.environ)
-
-os.system('cat /app/build_metadata')
