@@ -15,7 +15,7 @@ def git_describe() -> str:
     """
 
     try:
-        version = popen('git describe').read().strip()
+        version = popen('git describe 2>/dev/null').read().strip()
     except Exception as e:
         LOG.error(f'Could not get git information: {e}')
         version = 'unknown git revision'
@@ -29,7 +29,7 @@ def git_branch() -> str:
     """
 
     try:
-        branch = popen('git branch --show-current').read().strip()
+        branch = popen('git branch --show-current 2>/dev/null').read().strip()
     except Exception as e:
         LOG.error(f'Could not get git information: {e}')
         branch = 'unknown branch'
