@@ -25,8 +25,10 @@ RUN groupadd -r nginx && \
     mkdir -p /var/www/html /run/nginx
 COPY nginx.conf /etc/nginx/sites-enabled/default
 COPY docker-entrypoint.sh /usr/local/bin/
-COPY build_metadata .
+COPY build_metadata /app/build_metadata
 COPY src/ .
+
+RUN cat /app/build_metadata
 
 # Collect static files for the frontend container to serve
 RUN python3 manage.py collectstatic --no-input && mv /static /var/www/html/
