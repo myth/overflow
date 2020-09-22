@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Source the build environment file if we have it
-. /app/build_metadata || true
+. /build_metadata || true
 
 # Give PostgreSQL a few extra seconds to get ready
 sleep 6
