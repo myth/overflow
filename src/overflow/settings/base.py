@@ -7,7 +7,7 @@ import os
 
 from decouple import config
 
-from lib.utils.git import git_branch, git_describe
+from lib.utils.git import git_branch, git_commit, git_describe
 from overflow.settings.security import DB_PASS, DEBUG, PRODUCTION
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -128,5 +128,6 @@ MEDIA_ROOT = config('OF_MEDIA_ROOT', default=os.path.join(BASE_DIR, '..', 'media
 # Source information
 
 BUILD_DATE: str = config('OF_BUILD_DATE', default=datetime.now().isoformat())
-GIT_REVISION: str = config('OF_GIT_REVISION', default=git_describe())
+GIT_COMMIT: str = config('OF_GIT_COMMIT', default=git_commit())
 GIT_BRANCH: str = config('OF_GIT_BRANCH', default=git_branch())
+GIT_RELEASE: str = config('OF_GIT_RELEASE', default=git_describe())

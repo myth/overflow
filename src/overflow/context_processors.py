@@ -6,7 +6,12 @@ from typing import Any, Dict
 
 from django.http import HttpRequest
 
-from overflow.settings import BUILD_DATE, GIT_BRANCH, GIT_REVISION
+from overflow.settings import (
+    BUILD_DATE,
+    GIT_BRANCH,
+    GIT_COMMIT,
+    GIT_RELEASE
+)
 
 
 def build_metadata(request: HttpRequest) -> Dict[str, Any]:
@@ -16,6 +21,7 @@ def build_metadata(request: HttpRequest) -> Dict[str, Any]:
 
     return {
         'build_date': BUILD_DATE,
-        'git_revision': GIT_REVISION,
+        'git_revision': GIT_RELEASE,
         'git_branch': GIT_BRANCH,
+        'git_commit': GIT_COMMIT
     }
