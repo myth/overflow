@@ -9,7 +9,7 @@ steps:
     - git fetch --tags
     - echo "export OF_BUILD_DATE=$(date -Iseconds)" >> build_metadata
     - echo "export OF_GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> build_metadata
-    - echo "export OF_GIT_REVISION=$(git describe --always)" >> build_metadata
+    - echo "export OF_GIT_REVISION=$(git describe --long --always)" >> build_metadata
 
   # Install dependencies and test the python code
 - name: overflow
