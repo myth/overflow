@@ -19,8 +19,8 @@
         <img class="post-illustration" alt="{{ post.image.title }}" title="{{ post.image.title }}" src="{{ post.image.file.url }}" />
         {% endif %}
         <section class="row post-meta">
-          <div class="col-xs-12 col-md-6">{{ post.published }}</div>
-          <div class="col-xs-12 col-md-6 end-md">Updated {{ post.edited }}</div>
+          <div class="col-xs-12 col-md-6">Published: {{ post.published|date:"Y-m-d H:i:s" }}</div>
+          <div class="col-xs-12 col-md-6 end-md">Updated: {{ post.edited|date:"Y-m-d H:i:s" }}</div>
         </section>
         {% if post.tags.all %}
         <section class="post-tags">
