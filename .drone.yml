@@ -7,8 +7,8 @@ steps:
   image: docker:git
   commands:
     - git fetch --tags
-    - echo "OF_BUILD_DATE=$(date --iso-8601=seconds)" >> build_metadata
-    - echo "OF_GIT_BRANCH=$(git branch --show-current)" >> build_metadata
+    - echo "OF_BUILD_DATE=$(date -Iseconds)" >> build_metadata
+    - echo "OF_GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> build_metadata
     - echo "OF_GIT_REVISION=$(git describe --always)" >> build_metadata
 
   # Install dependencies and test the python code
@@ -63,6 +63,7 @@ steps:
       - sed -i '/dockerfile:/d' docker-compose.yml
       - sed -i '/context:/d' docker-compose.yml
       - docker-compose pull
+      - docker-compose down
       - docker-compose up -d -t 600
       - docker image prune -f
       - docker-compose ps

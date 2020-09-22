@@ -5,7 +5,7 @@ WORKDIR /app
 
 ADD requirements.txt requirements-dev.txt pyproject.toml ./
 RUN apt-get update && \
-    apt-get install -y build-essential nginx git && \
+    apt-get install -y build-essential nginx && \
     pip3 install --no-cache-dir --upgrade pip wheel && \
     pip3 install --no-cache-dir -r requirements-dev.txt && \
     apt-get purge -y build-essential && \
