@@ -15,7 +15,10 @@ DB_PASS = config('POSTGRES_PASSWORD', default='replaceme')
 # (security.W020) ALLOWED_HOSTS must not be empty in deployment.
 if PRODUCTION:
     ALLOWED_HOSTS = ['overflow.no']
-    CORS_ALLOWED_ORIGINS = ['umami.ulv.io']
+    CORS_ALLOWED_ORIGINS = [
+        'https://umami.ulv.io',
+        'https://overflow.no'
+    ]
 else:
     ALLOWED_HOSTS = ['*']
     CORS_ORIGIN_ALLOW_ALL = True
