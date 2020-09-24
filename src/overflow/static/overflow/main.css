@@ -51,6 +51,8 @@ a:active {
   color: var(--color-orange);
 }
 
+b { font-weight: 600; }
+
 p {
   margin: 1.5rem 0;
   letter-spacing: 0.05rem;

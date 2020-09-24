@@ -7,12 +7,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from overflow.views import FrontPageView
+from overflow.views import FrontPageView, test_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', FrontPageView.as_view(), name='index'),
-    path('blog/', include('blog.urls', namespace='blog'))
+    path('blog/', include('blog.urls', namespace='blog')),
 ]
 
 if settings.DEBUG:

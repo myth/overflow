@@ -5,5 +5,13 @@
 {% endblock %}
 
 {% block page_content %}
-404 Not Found
+<div class="row center-xs">
+    <div class="col-xs-12">
+        <h1>404 Not Found</h1>
+        {% autoescape on %}
+        <p>The server hamster could not find the resource <b>{{ request.path }}</b></p>
+        {% endautoescape %}
+        <p><img src="/static/overflow/images/server-hamster.jpg" alt="Server Hamster OF0420" title="Server hamster gave up locating your request..." /></p>
+    </div>
+</div>
 {% endblock %}

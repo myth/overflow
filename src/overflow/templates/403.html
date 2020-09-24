@@ -5,5 +5,13 @@
 {% endblock %}
 
 {% block page_content %}
-403 Forbidden
+<div class="row center-xs">
+    <div class="col-xs-12">
+        <h1>403 Forbidden</h1>
+        {% autoescape on %}
+        <p>The server hamster forbids <b>{{ request.method }}</b> for URI <b>{{ request.path }}</b></p>
+        {% endautoescape %}
+        <p><img src="/static/overflow/images/server-hamster.jpg" alt="Server Hamster OF0420" title="Server hamster says you shall not pass..." /></p>
+    </div>
+</div>
 {% endblock %}
