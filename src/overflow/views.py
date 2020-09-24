@@ -2,9 +2,6 @@
 Main views
 """
 
-from django.core.exceptions import (
-    PermissionDenied,
-)
 from django.views.generic import ListView
 
 from blog.models import Post

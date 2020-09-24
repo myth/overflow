@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from overflow.views import FrontPageView, test_view
+from overflow.views import FrontPageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
