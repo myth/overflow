@@ -21,43 +21,36 @@ class BlogListView(ListView):
             now = datetime.now()
             qs = qs.filter(published__lte=now)
 
-        if 'tag' in self.kwargs:
-            return qs.filter(tags__name=self.kwargs['tag'])
-        else:
-            if 'year' in self.kwargs:
-                qs = qs.filter(published__year=self.kwargs['year'])
-            if 'month' in self.kwargs:
-                qs = qs.filter(published__month=self.kwargs['month'])
-            if 'day' in self.kwargs:
-                qs = qs.filter(published__day=self.kwargs['day'])
-
         return qs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context['tags'] = Tag.objects.all()
-
-        if 'year' not in self.kwargs and 'tag' not in self.kwargs:
-            context['years'] = list(sorted(
-                set(p.published.year for p in self.get_queryset()),
-                reverse=True
-            ))
-        elif 'month' not in self.kwargs:
-            context['months'] = list(sorted(
-                set(p.published.month for p in self.get_queryset()),
-                reverse=True
-            ))
-        else:
-            context['days'] = list(sorted(
-                set(p.published.day for p in self.get_queryset()),
-                reverse=True
-            ))
-
-        return context
 
 
 class BlogDetailView(DetailView):
     model = Post
     template_name = 'blog/detail.html'
     context_object_name = 'post'
+
+
+class BlogTagsView(BlogListView):
+    template_name = 'blog/tags.html'
+
+    def get_queryset(self) -> QuerySet:
+        qs = super().get_queryset()
+
+        if 'tag' in self.kwargs:
+            return qs.filter(tags__name=self.kwargs['tag'])
+
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        tag_count = {tag: 0 for tag in Tag.objects.all()}
+
+        for post in Post.objects.all():
+            for tag in post.tags.all():
+                tag_count[tag] = tag_count[tag] + 1
+
+        context['active'] = self.kwargs['tag'] if 'tag' in self.kwargs else None
+        context['tags'] = sorted(((tag, count) for tag, count in tag_count.items()), key=lambda x: x[1], reverse=True)
+
+        return context

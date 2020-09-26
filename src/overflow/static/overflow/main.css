@@ -168,6 +168,51 @@ nav > ul > li {
   margin-bottom: 50px;
 }
 
+/* Blog Tags */
+
+#post-filters {
+  margin: 2rem 1rem;
+}
+#post-filters__title {
+  margin: 0 0 2rem 0;
+}
+.post-filters__tag {
+  text-decoration: none;
+  font-family: 'Fira Code';
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.7rem;
+  line-height: 0.7rem;
+  color: var(--color-darkgray);
+}
+.post-filters__tag-name,
+.post-filters__tag-count {
+  padding: 5px;
+  display: block;
+  float: left;
+}
+.post-filters__tag-name {
+  background-color: var(--color-whitegray);
+}
+.post-filters__tag-name:hover {
+  background-color: var(--color-darkgray);
+}
+.active > .post-filters__tag-name {
+  background-color: var(--color-darkgray);
+  color: var(--color-whitegray);
+}
+.active > .post-filters__tag-name:hover {
+  background-color: var(--color-darkgray);
+  color: var(--color-orange);
+}
+.post-filters__tag-count {
+  background-color: var(--color-lightgray);
+  color: var(--color-darkgray);
+}
+
+/* Blog Posts */
+
 .post,
 .post-summary {
   margin: 2rem 1rem;
