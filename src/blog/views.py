@@ -2,6 +2,8 @@
 Blog views
 """
 
+from datetime import datetime
+
 from django.db.models import QuerySet
 from django.views.generic import DetailView, ListView
 
@@ -14,6 +16,10 @@ class BlogListView(ListView):
 
     def get_queryset(self) -> QuerySet:
         qs = Post.objects.all()
+
+        if not self.request.user.is_superuser:
+            now = datetime.now()
+            qs = qs.filter(published__lte=now)
 
         if 'tag' in self.kwargs:
             return qs.filter(tags__name=self.kwargs['tag'])

@@ -2,11 +2,7 @@
 Main views
 """
 
-from django.views.generic import ListView
+from blog.views import BlogListView
 
-from blog.models import Post
-
-class FrontPageView(ListView):
-    model = Post
+class FrontPageView(BlogListView):
     template_name = 'index.html'
-    context_object_name = 'posts'

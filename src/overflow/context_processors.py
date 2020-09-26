@@ -4,6 +4,7 @@ Site wide context processors
 
 from typing import Any, Dict
 
+from django.conf import settings
 from django.http import HttpRequest
 
 from overflow.settings import (
@@ -20,6 +21,7 @@ def build_metadata(request: HttpRequest) -> Dict[str, Any]:
     """
 
     return {
+        'production': settings.PRODUCTION,
         'build_date': BUILD_DATE,
         'git_revision': GIT_RELEASE,
         'git_branch': GIT_BRANCH,
