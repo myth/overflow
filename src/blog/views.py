@@ -2,12 +2,12 @@
 Blog views
 """
 
-from datetime import datetime
-
 from django.db.models import QuerySet
+from django.utils import timezone
 from django.views.generic import DetailView, ListView
 
 from blog.models import Post, Tag
+
 
 class BlogListView(ListView):
     model = Post
@@ -18,7 +18,7 @@ class BlogListView(ListView):
         qs = Post.objects.all()
 
         if not self.request.user.is_superuser:
-            now = datetime.now()
+            now = timezone.now()
             qs = qs.filter(published__lte=now)
 
         return qs

@@ -2,8 +2,8 @@
 Base settings module
 """
 
-from datetime import datetime
 import os
+from datetime import datetime
 
 from decouple import config
 

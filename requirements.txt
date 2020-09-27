@@ -1,12 +1,11 @@
 # Main dependencies
-Django
-Pillow
 daphne
-psycopg2-binary
+Django
 django-cors-headers
 django-redis
-six
-
-# Support libraries
-python-decouple
 markdown2
+Pillow
+psycopg2-binary
+python-decouple
+pytz
+six

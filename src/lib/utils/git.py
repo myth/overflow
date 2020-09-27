@@ -5,7 +5,6 @@ Git utilities
 from logging import getLogger
 from os import popen
 
-
 LOG = getLogger(__name__)
 
 

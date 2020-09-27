@@ -2,7 +2,7 @@
 Blog admin
 """
 
-from django.contrib.admin import site, ModelAdmin
+from django.contrib.admin import ModelAdmin, site
 
 from blog.models import Image, Post, Tag
 

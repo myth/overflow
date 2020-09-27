@@ -4,4 +4,3 @@
 # Development dependencies
 isort
 pycodestyle
-pylint-django
