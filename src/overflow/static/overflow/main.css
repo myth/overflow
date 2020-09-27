@@ -20,7 +20,7 @@ body {
   font-size: 1.0rem;
   line-height: 1.3rem;
   color: var(--color-darkestgray);
-  background-color: white;
+  background-color: var(--color-whitegray);
   display: flex;
   flex-direction: column;
   min-height: 100%;
@@ -168,6 +168,11 @@ nav > ul > li {
   margin-bottom: 50px;
 }
 
+#page-content {
+  background-color: white;
+  padding-bottom: 3rem;
+}
+
 /* Blog Tags */
 
 #post-filters {
@@ -249,9 +254,7 @@ nav > ul > li {
 
 #page-footer {
   color: var(--color-darkgray);
-  background-color: var(--color-whitegray);
   padding: 3rem 1rem;
-  margin-top: 3rem;
   font-family: 'Consolas', monospace;
   font-size: 0.8rem;
 }
