@@ -2,7 +2,7 @@
 
 {% block meta_title %}
 {% if active %}
-"{{ active }}" | Blog Tags | Overflow
+{{ active|safe }} | Blog Tags | Overflow
 {% else %}
 Blog Tags | Overflow
 {% endif %}
@@ -15,9 +15,9 @@ Blog Tags | Overflow
       <h5 id="post-filters__title">Tags</h5>
     </div>
     <div class="col-xs-12">
-      {% for tag, c in tags %}
-      <div class="post-filters__tag {% if '/blog/tag/' in request.path and tag.name in request.path %}active{% endif %}">
-        <a href="{% url 'blog:tags' tag.name %}" title="{{ tag.name }}" class="post-filters__tag-name">{{ tag.name }}</a>
+      {% for t, c in tags %}
+      <div class="post-filters__tag {% if active == t.name %}active{% endif %}">
+        <a href="{% url 'blog:tags' t.name %}" title="{{ t.name }}" class="post-filters__tag-name">{{ t.name }}</a>
         <div class="post-filters__tag-count">{{ c }}</div>
       </div>
       {% endfor %}
