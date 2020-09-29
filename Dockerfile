@@ -3,11 +3,11 @@ FROM python:3.8.5-slim
 
 WORKDIR /app
 
-ADD requirements.txt requirements-dev.txt pyproject.toml ./
+ADD requirements.txt pyproject.toml ./
 RUN apt-get update && \
     apt-get install -y build-essential nginx && \
     pip3 install --no-cache-dir --upgrade pip wheel && \
-    pip3 install --no-cache-dir -r requirements-dev.txt && \
+    pip3 install --no-cache-dir -r requirements.txt && \
     apt-get purge -y build-essential && \
     apt-get autoremove -y && \
     find / -type d -name __pycache__ -exec rm -r {} + && \
