@@ -18,21 +18,20 @@ RUN apt-get update && \
     rm -f /usr/lib/python*/webbrowser.py && \
     rm -f /usr/lib/python*/doctest.py && \
     rm -f /usr/lib/python*/pydoc.py && \
-    rm -rf /root/.cache /var/cache
-
-RUN groupadd -r nginx && \
+    rm -rf /root/.cache /var/cache && \
+    groupadd -r nginx && \
     useradd -r -g nginx nginx && \
     mkdir -p /var/www/html /run/nginx
+
 COPY nginx.conf /etc/nginx/sites-enabled/default
 COPY docker-entrypoint.sh /usr/local/bin/
 COPY build_metadata /app/build_metadata
 COPY src/ .
 
 # Collect static files for the frontend container to serve
-RUN python3 manage.py collectstatic --no-input && mv /static /var/www/html/
-
-# Set correct ownership
-RUN chown -R nginx:nginx /var/www/html && chown -R nginx:nginx /run/nginx
+RUN python3 manage.py collectstatic --no-input && mv /static /var/www/html/ && \
+    # Set correct ownership
+    chown -R nginx:nginx /var/www/html && chown -R nginx:nginx /run/nginx
 
 EXPOSE 80
 ENTRYPOINT [ "docker-entrypoint.sh" ]
