@@ -2,5 +2,6 @@
 -r requirements.txt
 
 # Development dependencies
+black
 isort
 pycodestyle
