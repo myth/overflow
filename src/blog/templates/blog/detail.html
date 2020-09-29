@@ -24,10 +24,7 @@
         </section>
         {% if post.tags.all %}
         <section class="post-tags">
-          Tags:
-          {% for tag in post.tags.all %}
-          <a class="post-tag" href="{% url 'blog:tags' tag %}">{{ tag }}</a>
-          {% endfor %}
+          Tags: {% for tag in post.tags.all %}<a class="post-tag" href="{% url 'blog:tags' tag %}">{{ tag }}</a>{% endfor %}
         </section>
         {% endif %}
       </header>
