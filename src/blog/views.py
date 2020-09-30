@@ -41,7 +41,7 @@ class BlogDetailView(DetailView):
         if age > timedelta(days=settings.BLOG_OUTDATED_POST_THRESHOLD):
             messages.warning(
                 self.request,
-                f'This post is more than {age.days} days old and may contain outdated information.'
+                f'This post is {age.days} days old and may contain outdated information.'
             )
 
         return obj
