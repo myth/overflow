@@ -7,6 +7,15 @@
   --color-darkestgray: #222;
   --color-darkgray: #333;
   --color-orange: #f3a712;
+
+  --color-info: #e5ebf7;
+  --color-info-text: #1b4285;
+  --color-success: #c8f0ca;
+  --color-success-text: #106312;
+  --color-warning: #e6d9aa;
+  --color-warning-text: #745d0e;
+  --color-error: #e0b0a9;
+  --color-error-text: #801f12;
 }
 
 /* Generic */
@@ -118,6 +127,17 @@ code {
   border-radius: 8px;
 }
 
+/* Header */
+
+#page-logo {
+  background-color: var(--color-darkestgray);
+  padding: 100px 0;
+}
+
+#page-logo img {
+  max-width: 256px;
+}
+
 /* Navbar */
 nav a {
   color: var(--color-darkgray);
@@ -151,15 +171,31 @@ nav > ul > li {
   color: var(--color-orange);
 }
 
-/* Header */
+/* Messages, buttons and boxes */
 
-#page-logo {
-  background-color: var(--color-darkestgray);
-  padding: 100px 0;
+#server-messages {
+  font-family: 'Fira Code';
+  font-size: 0.8rem;
+  background-color: white;
 }
-
-#page-logo img {
-  max-width: 256px;
+.server-message {
+  padding: 1rem;
+}
+.info {
+  color: var(--color-info-text);
+  background-color: var(--color-info);
+}
+.success {
+  color: var(--color-success-text);
+  background-color: var(--color-success);
+}
+.warning {
+  color: var(--color-warning-text);
+  background-color: var(--color-warning);
+}
+.error {
+  color: var(--color-error-text);
+  background-color: var(--color-error);
 }
 
 /* Content */

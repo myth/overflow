@@ -42,10 +42,12 @@
 </header>
 
 {% if messages %}
-<section id="server-messages" class="row">
+<section id="server-messages">
   {% for message in messages %}
-  <div class="server-message {% if message.tags %}{{ message.tags }}{% endif %} col-xs-12">
-    <b>{{ message.tags | upper }}</b>: {{ message }}
+  <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
+    <div class="container">
+      <div class="server-message"><b>{{ message.tags | upper }}</b>: {{ message }}</div>
+    </div>
   </div>
   {% endfor %}
 </section>

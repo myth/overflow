@@ -2,6 +2,9 @@
 Blog views
 """
 
+from datetime import timedelta
+
+from django.contrib import messages
 from django.db.models import QuerySet
 from django.utils import timezone
 from django.views.generic import DetailView, ListView
@@ -28,6 +31,19 @@ class BlogDetailView(DetailView):
     model = Post
     template_name = 'blog/detail.html'
     context_object_name = 'post'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+
+        age = timezone.now() - obj.published
+
+        if age > timedelta(days=365):
+            messages.warning(
+                self.request,
+                f'This post is more than {age.days} days old and may contain outdated information.'
+            )
+
+        return obj
 
 
 class BlogTagsView(BlogListView):
