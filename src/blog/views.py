@@ -4,6 +4,7 @@ Blog views
 
 from datetime import timedelta
 
+from django.conf import settings
 from django.contrib import messages
 from django.db.models import QuerySet
 from django.utils import timezone
@@ -37,7 +38,7 @@ class BlogDetailView(DetailView):
 
         age = timezone.now() - obj.published
 
-        if age > timedelta(days=365):
+        if age > timedelta(days=settings.BLOG_OUTDATED_POST_THRESHOLD):
             messages.warning(
                 self.request,
                 f'This post is more than {age.days} days old and may contain outdated information.'
