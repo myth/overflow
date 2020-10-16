@@ -147,4 +147,4 @@ GIT_RELEASE: str = config('OF_GIT_RELEASE', default=git_describe())
 
 
 # Custom configurables
-BLOG_OUTDATED_POST_THRESHOLD: int = 365 * 2
+BLOG_OUTDATED_POST_THRESHOLD: int = int(365 * 1.5)
