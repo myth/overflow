@@ -28,10 +28,6 @@ steps:
     purge: false
   when:
     event: [push]
-  volumes:
-    - name: docker-socket
-      host:
-        path: /var/run/docker.sock:/var/run/docker.sock
 
 # Copy compose-file
 - name: configure
