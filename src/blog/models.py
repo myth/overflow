@@ -70,7 +70,7 @@ class Post(models.Model):
         Returns a markdown rendered version of the content field
         """
 
-        return markdown(str(self.content), extras=['fenced-code-blocks'])
+        return markdown(str(self.content), extras=['fenced-code-blocks', 'tables'])
 
     def __str__(self) -> str:
         """

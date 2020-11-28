@@ -209,6 +209,32 @@ nav > ul > li {
   padding-bottom: 3rem;
 }
 
+/* Tables */
+
+table {
+  margin: 2rem 0;
+}
+thead {
+  border-top: 1px solid var(--color-orange);
+  border-bottom: 1px solid var(--color-orange);
+}
+thead th {
+  font-size: 0.9rem;
+  color: var(--color-darkgray);
+  vertical-align: middle;
+  padding: 0.5rem;
+  font-family: 'Fira Code';
+}
+tbody {
+  font-size: 0.8rem;
+}
+tbody > tr:nth-child(even) {
+  background-color: var(--color-whitegray);
+}
+tbody > tr > td {
+  padding: 0.25rem;
+}
+
 /* Blog Tags */
 
 #post-filters {
