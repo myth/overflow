@@ -212,6 +212,7 @@ nav > ul > li {
 /* Tables */
 
 table {
+  display: block;
   overflow-x: auto;
   margin: 2rem 0;
 }
