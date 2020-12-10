@@ -213,9 +213,6 @@ class Key {
     release(e) {
         this.element.innerText = e.code
         this.element.style.backgroundColor = "LimeGreen"
-
-        // Custom handling for PrintScreen
-        if (e.code == "PrintScreen") this.element.disabled = false
     }
 }
 
