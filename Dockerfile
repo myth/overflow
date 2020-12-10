@@ -29,6 +29,7 @@ COPY build_metadata /app/build_metadata
 COPY src/ .
 
 # Collect static files for the frontend container to serve
+ENV OF_STATIC_ROOT /static
 RUN python3 manage.py collectstatic --no-input && mv /static /var/www/html/ && \
     # Set correct ownership
     chown -R nginx:nginx /var/www/html && chown -R nginx:nginx /run/nginx
