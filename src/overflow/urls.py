@@ -13,6 +13,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', FrontPageView.as_view(), name='index'),
     path('blog/', include('blog.urls', namespace='blog')),
+    path('keyboard/', include('keyboard.urls', namespace='keyboard')),
 ]
 
 if settings.DEBUG:

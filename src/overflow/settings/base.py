@@ -16,6 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # Application definition
 INSTALLED_APPS = [
     'blog',
+    'keyboard',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -127,7 +128,7 @@ DATETIME_FORMAT: str = 'Y-m-d H:i'
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = config('OF_STATIC_ROOT', default=os.path.join(BASE_DIR, '..', 'static'))
+STATIC_ROOT = config('OF_STATIC_ROOT', default=None)
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'overflow', 'static'),
 ]

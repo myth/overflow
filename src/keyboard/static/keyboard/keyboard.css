@@ -1,0 +1,25 @@
+#keyboard {
+    width: 100%;
+    overflow: auto;
+}
+#keyboard div {
+    justify-content: space-between;
+    flex-direction: row;
+}
+#keyboard span {
+    display: flex;
+    font-size: 12px;
+    font-family: 'Fira Code', sans-serif;
+    background-color: transparent;
+    margin: 2px;
+    padding: 4px 6px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 2px 2px;
+    justify-content: center;
+}
+#keyboard-app {
+    margin: 1rem;
+}
+label {
+    font-weight: bold;
+}
