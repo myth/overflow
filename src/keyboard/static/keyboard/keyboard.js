@@ -223,7 +223,6 @@ class KeyListener {
     init() {
         this.kbd = document.getElementById("keyboard")
         this.log = document.getElementById("keyboard-log")
-        this.log.innerText = "Press Any key"
 
         // Set up key state tracking
         this.keys = new Map()
