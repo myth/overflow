@@ -4,6 +4,7 @@ Base settings module
 
 from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from decouple import config
 
@@ -111,7 +112,7 @@ else:
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
-TIME_ZONE = "CET"
+TIME_ZONE = "Europe/Oslo"
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -133,7 +134,9 @@ MEDIA_ROOT = config("OF_MEDIA_ROOT", default=BASE_DIR.parent / "media")
 
 # Source information
 
-BUILD_DATE: str = config("OF_BUILD_DATE", default=datetime.now().isoformat())
+BUILD_DATE: str = datetime.fromtimestamp(
+    config("OF_BUILD_DATE", default=int(datetime.now().timestamp())), tz=ZoneInfo(TIME_ZONE)
+).isoformat()
 GIT_COMMIT: str = config("OF_GIT_COMMIT", default=git_commit())
 GIT_BRANCH: str = config("OF_GIT_BRANCH", default=git_branch())
 GIT_RELEASE: str = config("OF_GIT_RELEASE", default=git_describe())
