@@ -15,7 +15,6 @@ steps:
     build_args:
       - build_date=$$(date -Iseconds)
       - git_tag=${DRONE_TAG}
-      - git_branch=${DRONE_BRANCH}
       - git_sha=${DRONE_COMMIT}
     auto_tag: true
     cache_from:
