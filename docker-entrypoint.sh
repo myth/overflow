@@ -7,4 +7,4 @@ python3 manage.py migrate --no-input
 uvicorn --port 8080 overflow.asgi:application
 
 # Start nginx
-nginx
+service nginx start
