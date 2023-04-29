@@ -135,7 +135,7 @@ MEDIA_ROOT = config("OF_MEDIA_ROOT", default=BASE_DIR.parent / "media")
 # Source information
 
 BUILD_DATE: str = datetime.fromtimestamp(
-    config("OF_BUILD_DATE", default=int(datetime.now().timestamp())), tz=ZoneInfo(TIME_ZONE)
+    config("OF_BUILD_DATE", cast=int, default=int(datetime.now().timestamp())), tz=ZoneInfo(TIME_ZONE)
 ).isoformat()
 GIT_COMMIT: str = config("OF_GIT_COMMIT", default=git_commit())
 GIT_BRANCH: str = config("OF_GIT_BRANCH", default=git_branch())
