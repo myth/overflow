@@ -24,6 +24,7 @@ RUN apt-get update && \
 
 COPY nginx.conf /etc/nginx/sites-enabled/default
 COPY docker-entrypoint.sh /usr/local/bin/
+COPY build_metadata /app/build_metadata
 COPY src/ .
 
 # Ensure flushing of stdout
@@ -33,16 +34,6 @@ ENV OF_STATIC_ROOT /static
 RUN python3 manage.py collectstatic --no-input && mv /static /var/www/html/ && \
     # Set correct ownership
     chown -R nginx:nginx /var/www/html && chown -R nginx:nginx /run/nginx
-
-# Build metadata
-ARG build_date=unknown
-ARG git_branch=master
-ARG git_tag=unknown
-ARG git_sha=unknown
-ENV OF_BUILD_DATE=${build_date}
-ENV OF_GIT_COMMIT=${git_sha}
-ENV OF_GIT_BRANCH=${git_branch}
-ENV OF_GIT_RELEASE=${git_tag}
 
 EXPOSE 80
 ENTRYPOINT [ "docker-entrypoint.sh" ]

@@ -2,6 +2,17 @@ kind: pipeline
 name: build
 
 steps:
+# Default clone does not fetch tags
+- name: metadata
+  image: docker
+  commands:
+    - echo "export OF_BUILD_DATE=$(date -Iseconds)" >> build_metadata
+    - echo "export OF_GIT_COMMIT=${DRONE_COMMIT}" >> build_metadata
+    - echo "export OF_GIT_BRANCH=master" >> build_metadata
+    - echo "export OF_GIT_RELEASE=${DRONE_TAG}" >> build_metadata
+  when:
+    event: [tag]
+
 # Install dependencies and test the python code
 - name: build-and-push
   image: plugins/docker
@@ -12,10 +23,8 @@ steps:
       from_secret: docker_password
     repo: mythern/overflow
     context: .
-    build_args:
-      - build_date=${DRONE_BUILD_STARTED}
-      - git_tag=${DRONE_TAG}
-      - git_sha=${DRONE_COMMIT}
+    cache_from:
+      - mythern/overflow:latest
     auto_tag: true
     tags:
       - latest
