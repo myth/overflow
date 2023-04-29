@@ -19,9 +19,6 @@ steps:
     auto_tag: true
     tags:
       - latest
-    cache_from:
-      - mythern/overflow:latest
-    purge: false
   when:
     event: [tag]
 

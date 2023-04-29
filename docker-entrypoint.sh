@@ -3,8 +3,8 @@
 # Migrate database
 python3 manage.py migrate --no-input
 
-# Start the application socket
-uvicorn --port 8080 overflow.asgi:application
-
 # Start nginx
 service nginx start
+
+# Start the application socket
+exec uvicorn --port 8080 overflow.asgi:application
