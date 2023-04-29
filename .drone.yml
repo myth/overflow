@@ -13,10 +13,12 @@ steps:
     repo: mythern/overflow
     context: .
     build_args:
-      - build_date=$$(date -Iseconds)
+      - build_date=${DRONE_BUILD_STARTED}
       - git_tag=${DRONE_TAG}
       - git_sha=${DRONE_COMMIT}
     auto_tag: true
+    tags:
+      - latest
     cache_from:
       - mythern/overflow:latest
     purge: false
