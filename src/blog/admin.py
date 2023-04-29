@@ -12,10 +12,8 @@ class PostAdmin(ModelAdmin):
     Blog post model admin controller
     """
 
-    prepopulated_fields = {
-        "slug": ("title",)
-    }
-    exclude = ['author']
+    prepopulated_fields = {"slug": ("title",)}
+    exclude = ["author"]
 
     def save_model(self, request, obj: Post, form, change):
         """

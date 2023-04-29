@@ -1,16 +1,15 @@
 # Runtime container
-FROM python:3.8.5-slim
+FROM python:3.10-slim
 
 WORKDIR /app
-
-ADD requirements.txt pyproject.toml ./
+ADD poetry.lock pyproject.toml ./
 RUN apt-get update && \
-    apt-get install -y build-essential nginx && \
-    pip3 install --no-cache-dir --upgrade pip wheel && \
-    pip3 install --no-cache-dir -r requirements.txt && \
-    apt-get purge -y build-essential && \
+    apt-get dist-upgrade -y && \
+    apt-get install -y nginx && \
+    pip3 install --no-cache-dir poetry && \
+    poetry config virtualenvs.create false && \
+    poetry install && \
     apt-get autoremove -y && \
-    find / -type d -name __pycache__ -exec rm -r {} + && \
     rm -rf /usr/lib/python*/ensurepip && \
     rm -rf /usr/lib/python*/turtledemo && \
     rm -rf /usr/lib/python*/idlelib && \
@@ -25,14 +24,25 @@ RUN apt-get update && \
 
 COPY nginx.conf /etc/nginx/sites-enabled/default
 COPY docker-entrypoint.sh /usr/local/bin/
-COPY build_metadata /app/build_metadata
 COPY src/ .
 
-# Collect static files for the frontend container to serve
+# Ensure flushing of stdout
+ENV PYTHONUNBUFFERED=1
+# Collect static files for nginx to serve
 ENV OF_STATIC_ROOT /static
 RUN python3 manage.py collectstatic --no-input && mv /static /var/www/html/ && \
     # Set correct ownership
     chown -R nginx:nginx /var/www/html && chown -R nginx:nginx /run/nginx
+
+# Build metadata
+ARG build_date=unknown
+ARG git_branch=master
+ARG git_tag=unknown
+ARG git_sha=unknown
+ENV OF_BUILD_DATE=${build_date}
+ENV OF_GIT_COMMIT=${git_sha}
+ENV OF_GIT_BRANCH=${git_branch}
+ENV OF_GIT_RELEASE=${git_tag}
 
 EXPOSE 80
 ENTRYPOINT [ "docker-entrypoint.sh" ]

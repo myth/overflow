@@ -1,7 +1,0 @@
-# Main dependencies
--r requirements.txt
-
-# Development dependencies
-black
-isort
-pylint

@@ -6,33 +6,34 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('blog', '0001_initial'),
+        ("blog", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Image',
+            name="Image",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('path', models.CharField(max_length=2048)),
-                ('title', models.CharField(max_length=512)),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("path", models.CharField(max_length=2048)),
+                ("title", models.CharField(max_length=512)),
             ],
         ),
         migrations.AddField(
-            model_name='post',
-            name='illustration',
+            model_name="post",
+            name="illustration",
             field=models.CharField(blank=True, max_length=2048, null=True),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='author',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL),
+            model_name="post",
+            name="author",
+            field=models.ForeignKey(
+                blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL
+            ),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='tags',
-            field=models.ManyToManyField(blank=True, to='blog.Tag'),
+            model_name="post",
+            name="tags",
+            field=models.ManyToManyField(blank=True, to="blog.Tag"),
         ),
     ]

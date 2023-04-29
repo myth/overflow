@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('blog', '0007_auto_20191207_0039'),
+        ("blog", "0007_auto_20191207_0039"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='PostImage',
-            new_name='Image',
+            old_name="PostImage",
+            new_name="Image",
         ),
     ]

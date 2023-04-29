@@ -4,19 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('blog', '0002_auto_20190415_2123'),
+        ("blog", "0002_auto_20190415_2123"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='post',
-            options={'ordering': ('-published',)},
+            name="post",
+            options={"ordering": ("-published",)},
         ),
         migrations.AddField(
-            model_name='post',
-            name='slug',
+            model_name="post",
+            name="slug",
             field=models.SlugField(max_length=256, null=True),
         ),
     ]

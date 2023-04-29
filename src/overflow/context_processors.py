@@ -16,9 +16,9 @@ def build_metadata(request: HttpRequest) -> Dict[str, Any]:
     """
 
     return {
-        'production': settings.PRODUCTION,
-        'build_date': BUILD_DATE,
-        'git_revision': GIT_RELEASE,
-        'git_branch': GIT_BRANCH,
-        'git_commit': GIT_COMMIT
+        "production": settings.PRODUCTION,
+        "build_date": BUILD_DATE,
+        "git_revision": GIT_RELEASE,
+        "git_branch": GIT_BRANCH,
+        "git_commit": GIT_COMMIT,
     }

@@ -1,10 +1,34 @@
-[build-system]
-requires = [
-    # Minimum requirements for the build system to execute. PEP 508 specifications.
-    "setuptools",
-    "wheel",
-]
-
 [tool.black]
 line-length = 120
-target-version = ['py37']
+target-version = ['py310']
+
+[tool.pylint]
+max-line-length=120
+target-version = ['py310']
+
+[tool.poetry]
+name = "overflow"
+version = "6.0.0"
+description = "overflow.no is the personal playground of Aleksander Skraastad. I'm a programmer, foodie and outdoors enthusiast."
+authors = ["Aleksander Skraastad <myth@overflow.no>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+uvicorn = "^0.22.0"
+Django = "^4.2"
+django-cors-headers = "^3.14.0"
+django-redis = "^5.2.0"
+markdown2 = "^2.4.8"
+psycopg2-binary = "^2.9.6"
+python-decouple = "^3.8"
+pillow = "^9.5.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+isort = "^5.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

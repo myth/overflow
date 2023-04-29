@@ -14,10 +14,10 @@ def git_describe() -> str:
     """
 
     try:
-        version = popen('git describe --long --always 2>/dev/null').read().strip()
+        version = popen("git describe --long --always 2>/dev/null").read().strip()
     except Exception as e:
-        LOG.error(f'Could not get git information: {e}')
-        version = 'unknown git revision'
+        LOG.error(f"Could not get git information: {e}")
+        version = "unknown git revision"
 
     return version
 
@@ -28,10 +28,10 @@ def git_branch() -> str:
     """
 
     try:
-        branch = popen('git rev-parse --abbrev-ref HEAD 2>/dev/null').read().strip()
+        branch = popen("git rev-parse --abbrev-ref HEAD 2>/dev/null").read().strip()
     except Exception as e:
-        LOG.error(f'Could not get git information: {e}')
-        branch = 'unknown branch'
+        LOG.error(f"Could not get git information: {e}")
+        branch = "unknown branch"
 
     return branch
 
@@ -42,9 +42,9 @@ def git_commit() -> str:
     """
 
     try:
-        commit = popen('git rev-parse HEAD 2>/dev/null').read().strip()
+        commit = popen("git rev-parse HEAD 2>/dev/null").read().strip()
     except Exception as e:
-        LOG.error(f'Could not get git information: {e}')
-        commit = 'unknown commit'
+        LOG.error(f"Could not get git information: {e}")
+        commit = "unknown commit"
 
     return commit

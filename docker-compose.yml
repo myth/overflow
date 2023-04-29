@@ -1,11 +1,8 @@
-version: '3.6'
+version: '3.8'
 
 services:
-  # Django container
-  overflow:
-    build:
-      dockerfile: Dockerfile
-      context: .
+  # Django + Nginx container
+  nginx:
     image: mythern/overflow
     restart: unless-stopped
     env_file: .env
@@ -25,7 +22,7 @@ services:
 
   # PostgreSQL container
   db:
-    image: postgres:10-alpine
+    image: postgres:15-alpine
     restart: unless-stopped
     env_file: .env
     volumes:
@@ -40,4 +37,3 @@ services:
 networks:
   traefik:
     external: true
-

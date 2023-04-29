@@ -2,18 +2,8 @@ kind: pipeline
 name: build
 
 steps:
-  # Default clone does not fetch tags
-- name: fetch-tags
-  image: docker:git
-  commands:
-    - git fetch --tags
-    - echo "export OF_BUILD_DATE=$(date -Iseconds)" >> build_metadata
-    - echo "export OF_GIT_COMMIT=$(git rev-parse HEAD)" >> build_metadata
-    - echo "export OF_GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> build_metadata
-    - echo "export OF_GIT_RELEASE=$(git describe --long --always)" >> build_metadata
-
-  # Install dependencies and test the python code
-- name: overflow
+# Install dependencies and test the python code
+- name: build-and-push
   image: plugins/docker
   settings:
     username:
@@ -22,12 +12,17 @@ steps:
       from_secret: docker_password
     repo: mythern/overflow
     context: .
+    build_args:
+      - build_date=$$(date -Iseconds)
+      - git_tag=${DRONE_TAG}
+      - git_branch=${DRONE_BRANCH}
+      - git_sha=${DRONE_COMMIT}
     auto_tag: true
     cache_from:
       - mythern/overflow:latest
     purge: false
   when:
-    event: [push]
+    event: [tag]
 
 # Copy compose-file
 - name: configure
@@ -41,7 +36,7 @@ steps:
     target: /srv/www/overflow/
     source: docker-compose.yml
   when:
-    event: [push]
+    event: [tag]
 
   # Pull fresh images, restart, cleanup and report status
 - name: deploy
@@ -55,15 +50,11 @@ steps:
     command_timeout: 600s
     script:
       - cd /srv/www/overflow
-      - sed -i 's#src/##g' docker-compose.yml
-      - sed -i '/build:/d' docker-compose.yml
-      - sed -i '/dockerfile:/d' docker-compose.yml
-      - sed -i '/context:/d' docker-compose.yml
       - docker-compose pull
       - docker-compose down
       - docker-compose up -d -t 600
       - docker image prune -f
       - docker-compose ps
   when:
-    event: [push]
+    event: [tag]
 

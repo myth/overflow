@@ -28,7 +28,7 @@ class Image(models.Model):
     Blog post image model
     """
 
-    file = models.ImageField(upload_to='blog/')
+    file = models.ImageField(upload_to="blog/")
     title = models.CharField(max_length=256)
 
     def __str__(self) -> str:
@@ -70,7 +70,7 @@ class Post(models.Model):
         Returns a markdown rendered version of the content field
         """
 
-        return markdown(str(self.content), extras=['fenced-code-blocks', 'tables'])
+        return markdown(str(self.content), extras=["fenced-code-blocks", "tables"])
 
     def __str__(self) -> str:
         """
@@ -84,4 +84,4 @@ class Post(models.Model):
         Post model metadata
         """
 
-        ordering = ('-published',)
+        ordering = ("-published",)

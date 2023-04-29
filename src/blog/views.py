@@ -15,8 +15,8 @@ from blog.models import Post, Tag
 
 class BlogListView(ListView):
     model = Post
-    template_name = 'blog/list.html'
-    context_object_name = 'posts'
+    template_name = "blog/list.html"
+    context_object_name = "posts"
 
     def get_queryset(self) -> QuerySet:
         qs = Post.objects.all()
@@ -30,8 +30,8 @@ class BlogListView(ListView):
 
 class BlogDetailView(DetailView):
     model = Post
-    template_name = 'blog/detail.html'
-    context_object_name = 'post'
+    template_name = "blog/detail.html"
+    context_object_name = "post"
 
     def get_object(self, queryset=None):
         obj = super().get_object()
@@ -39,22 +39,19 @@ class BlogDetailView(DetailView):
         age = timezone.now() - obj.published
 
         if age > timedelta(days=settings.BLOG_OUTDATED_POST_THRESHOLD):
-            messages.warning(
-                self.request,
-                f'This post is {age.days} days old and may contain outdated information.'
-            )
+            messages.warning(self.request, f"This post is {age.days} days old and may contain outdated information.")
 
         return obj
 
 
 class BlogTagsView(BlogListView):
-    template_name = 'blog/tags.html'
+    template_name = "blog/tags.html"
 
     def get_queryset(self) -> QuerySet:
         qs = super().get_queryset()
 
-        if 'tag' in self.kwargs:
-            return qs.filter(tags__name=self.kwargs['tag'])
+        if "tag" in self.kwargs:
+            return qs.filter(tags__name=self.kwargs["tag"])
 
         return qs
 
@@ -67,7 +64,7 @@ class BlogTagsView(BlogListView):
             for tag in post.tags.all():
                 tag_count[tag] = tag_count[tag] + 1
 
-        context['active'] = self.kwargs['tag'] if 'tag' in self.kwargs else None
-        context['tags'] = sorted(((tag, count) for tag, count in tag_count.items()), key=lambda x: x[1], reverse=True)
+        context["active"] = self.kwargs["tag"] if "tag" in self.kwargs else None
+        context["tags"] = sorted(((tag, count) for tag, count in tag_count.items()), key=lambda x: x[1], reverse=True)
 
         return context
