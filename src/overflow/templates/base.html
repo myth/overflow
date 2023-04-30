@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,34 +10,30 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <meta name="description"
         content="{% block meta_description %}overflow.no is the playground of Aleksander Skraastad. I'm a programmer, foodie, and outdoors enthusiast.{% endblock %}" />
-
   <meta name="keywords"
         content="{% block meta_keywords %}Aleksander, Skraastad, blog, programming, ai, artificial intelligence, guides, rants, outdoors, nature, science, technology{% endblock %}" />
 
-  <link href="/static/overflow/images/favicon.ico" rel="icon" type="image/x-icon" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" rel="stylesheet" type="text/css" />
-  <link href="/static/overflow/reset.css" rel="stylesheet" type="text/css" />
-  <link href="/static/admin/css/fonts.css" rel="stylesheet" type="text/css" />
-  <link href="/static/overflow/main.css" rel="stylesheet" type="text/css" />
   <link href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css" rel="stylesheet" type="text/css" />
+  <link href="{% static '/overflow/images/favicon.ico' %}" rel="icon" type="image/x-icon" />
+  <link href="{% static '/overflow/reset.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static '/overflow/main.css' %}" rel="stylesheet" type="text/css" />
   {% block css %}{% endblock %}
   {% block js %}{% endblock %}
   {% if production %}
-  <script async defer data-website-id="3e176dc4-33e3-4b1a-be3b-8d48525089ca" src="https://umami.ulv.io/umami.js"></script>
+  <script async src="https://umami.ulv.io/script.js" data-website-id="3e176dc4-33e3-4b1a-be3b-8d48525089ca"></script>
   {% endif %}
 </head>
 
 <body>
-
 {% block page %}
 <header id="page-header" class="text-center">
   {% block page_header %}
   <div id="page-logo">
     <a href="/" title="overflow.no">
-      <img src="/static/overflow/images/logo.png" title="overflow.no" />
+      <img src="{% static '/overflow/images/logo.png' %}" title="overflow.no" />
     </a>
   </div>
   {% endblock %}<!-- /page-header -->
@@ -96,8 +93,7 @@
   </div>
   {% endblock %}<!-- /page-footer -->
 </footer>
+
 {% endblock %}<!-- /page -->
-
 </body>
-
 </html>
