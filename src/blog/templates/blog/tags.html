@@ -9,21 +9,21 @@ Blog | Overflow
 {% endblock %}
 
 {% block main_content %}
-<section id="post-filters">
-  <div class="row">
-    <div class="col-xs-12">
-      <h5 id="post-filters__title"><a href="/blog/tag/">Tags</a></h5>
-    </div>
-    <div class="col-xs-12">
-      {% for t, c in tags %}
-      <div class="post-filters__tag {% if active == t.name %}active{% endif %}">
-        <a href="{% url 'blog:tags' t.name %}" title="{{ t.name }}" class="post-filters__tag-name">{{ t.name }}</a>
-        <div class="post-filters__tag-count">{{ c }}</div>
+<div class="row">
+  <div class="col-md-12">
+    <section id="post-filters">
+      <h3><a href="/blog/tag/">Tags</a></h3>
+      <div id="post-filters__list">
+        {% for t, c in tags %}
+        <div class="post-filters__tag {% if active == t.name %}active{% endif %}">
+          <a href="{% url 'blog:tags' t.name %}" title="{{ t.name }}" class="post-filters__tag-name">{{ t.name }}</a>
+          <div class="post-filters__tag-count">{{ c }}</div>
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
-    </div>
+    </section>
   </div>
-</section>
+</div>
 <section id="post-list">
   <div class="row">
     {% for post in posts %}

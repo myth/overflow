@@ -1,11 +1,9 @@
 {% block nav %}
 {% url 'blog:index' as blog_index %}
 {% url 'keyboard:index' as keyboard_index %}
-
 <nav id="page-nav">
   <ul>
     <li><a href="{{ blog_index }}" class="{% if blog_index in request.path %}active{% endif %}">Blog</a></li>
-    <li><a href="{{ keyboard_index }}" class="{% if keyboard_index == request.path %}active{% endif %}">Keyboard</a></li>
   </ul>
 </nav>
 {% endblock %}

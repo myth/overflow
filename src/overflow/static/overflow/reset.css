@@ -23,6 +23,10 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+html,
+body {
+  height: 100%;
+}
 body {
   line-height: 1;
 }
@@ -49,6 +53,7 @@ table {
   padding-left: 0px;
   padding-right: 0px;
 }
+
 * {
   box-sizing: border-box;
 }
