@@ -23,7 +23,7 @@ django-redis = "^5.2.0"
 markdown2 = "^2.4.8"
 psycopg2-binary = "^2.9.6"
 python-decouple = "^3.8"
-pillow = "^10.0.1"
+pillow = "^10.2.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
