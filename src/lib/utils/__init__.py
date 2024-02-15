@@ -1,3 +1,2 @@
-"""
-Utilities package
+"""Utilities package
 """

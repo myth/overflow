@@ -1,5 +1,4 @@
-"""
-ASGI config for overflow project.
+"""ASGI config for overflow project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

@@ -1,5 +1,4 @@
-"""
-Blog models
+"""Blog models
 """
 
 from django.contrib.auth import get_user_model
@@ -9,40 +8,28 @@ from markdown2 import markdown
 
 
 class Tag(models.Model):
-    """
-    Blog tag model
-    """
+    """Blog tag model"""
 
     name = models.CharField(max_length=256)
 
     def __str__(self) -> str:
-        """
-        String representation of this tag
-        """
-
+        """String representation of this tag"""
         return str(self.name)
 
 
 class Image(models.Model):
-    """
-    Blog post image model
-    """
+    """Blog post image model"""
 
     file = models.ImageField(upload_to="blog/")
     title = models.CharField(max_length=256)
 
     def __str__(self) -> str:
-        """
-        String representation of this blog post image
-        """
-
+        """String representation of this blog post image"""
         return str(self.title)
 
 
 class Post(models.Model):
-    """
-    Blog post model
-    """
+    """Blog post model"""
 
     title = models.CharField(max_length=256)
     description = models.CharField(max_length=1024)
@@ -55,10 +42,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=256, unique=True)
 
     def save(self, *args, **kwargs):
-        """
-        Saves the changes in this model.
-        """
-
+        """Saves the changes in this model."""
         if not self.slug:
             self.slug = slugify(self.title)
 
@@ -66,22 +50,14 @@ class Post(models.Model):
 
     @property
     def markdown(self) -> str:
-        """
-        Returns a markdown rendered version of the content field
-        """
-
+        """Returns a markdown rendered version of the content field"""
         return markdown(str(self.content), extras=["fenced-code-blocks", "tables"])
 
     def __str__(self) -> str:
-        """
-        String representation of this blog post
-        """
-
+        """String representation of this blog post"""
         return str(self.title)
 
     class Meta:
-        """
-        Post model metadata
-        """
+        """Post model metadata"""
 
         ordering = ("-published",)

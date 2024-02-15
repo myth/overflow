@@ -1,3 +1,2 @@
-"""
-Logging config
+"""Logging config
 """

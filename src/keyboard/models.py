@@ -1,3 +1,2 @@
-"""
-Keyboard models
+"""Keyboard models
 """

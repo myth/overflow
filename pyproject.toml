@@ -1,15 +1,27 @@
-[tool.black]
-line-length = 120
-target-version = ['py311']
+[tool.ruff]
+line-length=120
+target-version = "py311"
 
-[tool.pylint]
-max-line-length=120
-target-version = ['py311']
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
 
 [tool.poetry]
 name = "overflow"
-version = "6.0.0"
-description = "overflow.no is the personal playground of Aleksander Skraastad. I'm a programmer, science & technology nerd, and outdoors enthusiast."
+version = "6.0.5"
+description = "overflow.no is the personal website of Aleksander Skraastad. I like programming, science & technology, gaming, cooking and the outdoors."
 authors = ["Aleksander Skraastad <myth@overflow.no>"]
 license = "MIT"
 readme = "README.md"
@@ -24,13 +36,7 @@ markdown2 = "^2.4.12"
 psycopg2-binary = "^2.9.9"
 python-decouple = "^3.8"
 pillow = "^10.2.0"
-black = "^24.2.0"
-isort = "^5.13.2"
-
-[tool.poetry.group.dev.dependencies]
-black = "^24.1.1"
-isort = "^5.13.2"
-pylint = "^3.0.3"
+ruff = "^0.2.1"
 
 [build-system]
 requires = ["poetry-core"]

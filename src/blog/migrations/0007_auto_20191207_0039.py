@@ -22,7 +22,10 @@ class Migration(migrations.Migration):
             model_name="post",
             name="image",
             field=models.ForeignKey(
-                blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to="blog.PostImage"
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="blog.PostImage",
             ),
         ),
         migrations.AlterField(

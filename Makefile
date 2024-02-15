@@ -1,10 +1,13 @@
-all : lint deploy
+all : lint deploy dev
 .PHONY : all
 .DEFAULT_GOAL := deploy
 
+dev :
+	poetry run python src/manage.py runserver
+
 lint :
-	poetry run isort src/
-	poetry run black src/
+	poetry run ruff check src/
+	poetry run ruff format src/
 
 deploy : lint
 	./deploy.sh

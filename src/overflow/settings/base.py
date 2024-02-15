@@ -1,13 +1,12 @@
-"""
-Base settings module
+"""Base settings module
 """
 
 from datetime import datetime
 from pathlib import Path
 
 from decouple import config
-
 from lib.utils.git import git_branch, git_commit, git_describe
+
 from overflow.settings.security import DB_PASS, DEBUG, PRODUCTION
 
 # Build paths inside the project like this: BASE_DIR / "sub_dir"
@@ -74,14 +73,14 @@ if PRODUCTION:
             "USER": "overflow",
             "PASSWORD": DB_PASS,
             "HOST": "db",
-        }
+        },
     }
 else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": BASE_DIR / "db.sqlite3",
-        }
+        },
     }
 
 
@@ -96,14 +95,14 @@ if PRODUCTION:
             "OPTIONS": {
                 "CLIENT_CLASS": "django_redis.client.DefaultClient",
             },
-        }
+        },
     }
 else:
     CACHES = {
         "default": {
             "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
             "LOCATION": "unique-snowflake",
-        }
+        },
     }
 
 

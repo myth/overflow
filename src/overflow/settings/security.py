@@ -1,5 +1,4 @@
-"""
-Security settings
+"""Security settings
 """
 
 from decouple import config

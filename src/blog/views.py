@@ -1,5 +1,4 @@
-"""
-Blog views
+"""Blog views
 """
 
 from datetime import timedelta
@@ -64,7 +63,7 @@ class BlogTagsView(BlogListView):
             for tag in post.tags.all():
                 tag_count[tag] = tag_count[tag] + 1
 
-        context["active"] = self.kwargs["tag"] if "tag" in self.kwargs else None
+        context["active"] = self.kwargs.get("tag")
         context["tags"] = sorted(((tag, count) for tag, count in tag_count.items()), key=lambda x: x[1], reverse=True)
 
         return context

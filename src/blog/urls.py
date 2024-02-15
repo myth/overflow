@@ -1,10 +1,9 @@
-"""
-Blog urls
+"""Blog urls
 """
 
 from django.urls import path
 
-from blog.views import BlogDetailView, BlogListView, BlogTagsView
+from blog.views import BlogDetailView, BlogTagsView
 
 app_name = "blog"
 

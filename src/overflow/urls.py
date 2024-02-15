@@ -1,5 +1,4 @@
-"""
-Root URL config
+"""Root URL config
 """
 
 from django.conf import settings

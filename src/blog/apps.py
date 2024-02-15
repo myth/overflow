@@ -1,5 +1,4 @@
-"""
-Blog appconfig
+"""Blog appconfig
 """
 
 from django.apps import AppConfig

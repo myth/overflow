@@ -1,5 +1,4 @@
-"""
-Keyboard views
+"""Keyboard views
 """
 
 from django.views.generic.base import TemplateView

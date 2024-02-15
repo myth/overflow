@@ -1,5 +1,4 @@
-"""
-WSGI config for overflow project.
+"""WSGI config for overflow project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

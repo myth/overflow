@@ -1,5 +1,4 @@
-"""
-Keyboard appconfig
+"""Keyboard appconfig
 """
 
 from django.apps import AppConfig

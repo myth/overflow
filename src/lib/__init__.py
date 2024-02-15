@@ -1,3 +1,2 @@
-"""
-Library package
+"""Library package
 """
