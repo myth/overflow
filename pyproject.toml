@@ -36,6 +36,8 @@ markdown2 = "^2.4.12"
 psycopg2-binary = "^2.9.9"
 python-decouple = "^3.8"
 pillow = "^10.2.0"
+
+[tool.poetry.group.dev.dependencies]
 ruff = "^0.2.1"
 
 [build-system]
