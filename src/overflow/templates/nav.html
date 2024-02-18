@@ -1,9 +1,11 @@
 {% block nav %}
+{% url 'about:index' as about_index %}
 {% url 'blog:index' as blog_index %}
 
 <nav id="page-nav">
   <ul>
     <li><a href="{{ blog_index }}" class="{% if blog_index in request.path %}active{% endif %}">Blog</a></li>
+    <li><a href="{{ about_index }}" class="{% if about_index in request.path %}active{% endif %}">About</a></li>
   </ul>
 </nav>
 {% endblock %}

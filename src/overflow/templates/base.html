@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>
     {% block meta_title %}
@@ -11,12 +12,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-        content="{% block meta_description %}overflow.no is the personal website of Aleksander Skraastad. I'm a programmer, foodie, and outdoors enthusiast.{% endblock %}" />
+    content="{% block meta_description %}overflow.no is the personal website of Aleksander Skraastad. I'm a programmer, foodie, and outdoors enthusiast.{% endblock %}" />
   <meta name="keywords"
-        content="{% block meta_keywords %}Aleksander, Skraastad, blog, programming, ai, artificial intelligence, guides, memos, outdoors, nature, science, technology{% endblock %}" />
+    content="{% block meta_keywords %}Aleksander, Skraastad, blog, programming, ai, artificial intelligence, guides, memos, outdoors, nature, science, technology{% endblock %}" />
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" rel="stylesheet"
+    type="text/css" />
   <link href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800"
+    rel="stylesheet">
   <link href="{% static '/overflow/images/favicon.ico' %}" rel="icon" type="image/x-icon" />
   <link href="{% static '/overflow/reset.css' %}" rel="stylesheet" type="text/css" />
   <link href="{% static '/overflow/main.css' %}" rel="stylesheet" type="text/css" />
@@ -28,72 +34,77 @@
 </head>
 
 <body>
-{% block page %}
-<header id="page-header" class="text-center">
-  {% block page_header %}
-  <div id="page-logo">
-    <a href="/" title="overflow.no">
-      <img src="{% static '/overflow/images/logo.png' %}" title="overflow.no" />
-    </a>
-  </div>
-  {% endblock %}<!-- /page-header -->
-  {% include "nav.html" %}
-</header>
-
-{% if messages %}
-<section id="server-messages">
-  {% for message in messages %}
-  <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
-    <div class="container">
-      <div class="server-message"><b>{{ message.tags | upper }}</b>: {{ message }}</div>
-    </div>
-  </div>
-  {% endfor %}
-</section>
-{% endif %}
-
-<section id="page-content">
-  {% block page_content %}
-  <main id="main-content">
-    <div class="start-xs container">
-      {% block main_content %}
-      {% endblock %}<!-- /main-content -->
-    </div>
-  </div>
-  {% endblock %}<!-- /page-content -->
-</section>
-
-<footer id="page-footer">
-  {% block page_footer %}
-  <div class="row center-xs">
-    {% block footer_about %}
-    <div class="col-xs-12">
-      <div id="page-footer__about" class="container">
-        {% include "about.html" %}
+  <div id="page">
+    {% block page %}
+    <header id="page-header">
+      <div class="container">
+        {% block page_header %}
+        <div id="page-title">
+          <a href="/">
+            <span>o</span>
+            <span>v</span>
+            <span>e</span>
+            <span>r</span>
+            <span>f</span>
+            <span>l</span>
+            <span>o</span>
+            <span>w</span>
+            <span id="page-title-dot">»</span>
+            <span>n</span>
+            <span>o</span>
+          </a>
+        </div>
+        <section>
+          <div class="avatar">
+            <img src="{% static '/overflow/images/me.jpg' %}" alt="Aleksander Skraastad" title="Aleksander Skraastad "/>
+          </div>
+          <aside>
+            <h2>Aleksander Skraastad</h2>
+            <p>Programmer...</p>
+          </aside>
+        </section>
+        {% endblock %}<!-- /page-header -->
+        {% include "nav.html" %}
       </div>
-    </div>
-    {% endblock %}
-    <div class="col-xs-12">
-      <span id="page-footer__copyright">
-        2012-<script>document.write(new Date().getFullYear())</script> &copy; <a href="/">Overflow</a>
-      </span>
-    </div>
-    <div class="col-xs-12">
+    </header>
+
+    {% if messages %}
+    <section id="server-messages">
+      <div class="container">
+        {% for message in messages %}
+        <div class="server-message {% if message.tags %}{{ message.tags }}{% endif %}">
+          <b>{{ message.tags | upper }}</b>: {{ message }}
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    <section id="page-content">
+      {% block page_content %}
+      <main id="main-content">
+        <div class="start-xs container">
+          {% block main_content %}
+          {% endblock %}<!-- /main-content -->
+        </div>
+      </main>
+      {% endblock %}<!-- /page-content -->
+    </section>
+
+    <footer id="page-footer">
+      {% block page_footer %}
       <span id="page-footer__git">
         <a target="_blank" href="https://github.com/myth/overflow/tree/{{ git_commit }}">
           {{ git_revision }} ({{ git_branch }}) {{ build_date }}
         </a>
       </span>
-    </div>
-    <div class="col-xs-12">
-      <a href="https://ci.ulv.io/myth/overflow" target="_blank" title="Build Status">
-        <img id="page-footer__build-status" src="https://ci.ulv.io/api/badges/myth/overflow/status.svg" alt="Build status badge" title="Build Status" />
-      </a>
-    </div>
+      <span id="page-footer__copyright">
+        2012-<script>document.write(new Date().getFullYear())</script> &copy; <a href="/">Overflow</a>
+      </span>
+      {% endblock %}<!-- /page-footer -->
+    </footer>
+    {% endblock %}<!-- /page -->
   </div>
-  {% endblock %}<!-- /page-footer -->
-</footer>
-
-{% endblock %}<!-- /page -->
 </body>
+
 </html>

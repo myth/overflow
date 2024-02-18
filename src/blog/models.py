@@ -53,6 +53,16 @@ class Post(models.Model):
         """Returns a markdown rendered version of the content field"""
         return markdown(str(self.content), extras=["fenced-code-blocks", "tables"])
 
+    @property
+    def read_time(self) -> int:
+        """Returns a rough estimated read time in minutes based on 200 words per minute."""
+        return max(1, round(len(self.content.split(" ")) / 200))
+
+    @property
+    def updated(self) -> bool:
+        """Whether or not an edit has been made more than a day after publishing."""
+        return (self.edited.date() - self.published.date()).days > 1
+
     def __str__(self) -> str:
         """String representation of this blog post"""
         return str(self.title)

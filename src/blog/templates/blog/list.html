@@ -6,10 +6,16 @@ Blog | Overflow
 
 {% block main_content %}
 <section id="post-list">
-  <div class="row">
+  <h2>Latest posts</h2>
+  <ul>
     {% for post in posts %}
-    {% include 'blog/summary.html' %}
+    <li>
+      <span class="post-list-date">{{ post.published|date:"Y-m-d" }}</span>
+      <span class="post-list-title">
+        <a href="{% url 'blog:detail' post.published.year post.published.month post.published.day post.slug %}">{{ post.title }}</a>
+      </span>
+    </li>
     {% endfor %}
-  </div>
+  </ul>
 </section>
 {% endblock %}

@@ -24,312 +24,123 @@ html,
 body {
   width: 100%;
   height: 100%;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  font-size: 1.0rem;
-  line-height: 1.3rem;
-  color: var(--color-darkestgray);
-  background-color: var(--color-whitegray);
-  display: flex;
-  flex-direction: column;
   min-height: 100%;
 }
 
-/* Layout */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Open Sans', 'Helvetica Neue', 'Arial', sans-serif;
+  text-rendering: optimizeLegibility;
+  color: rgb(20, 20, 20);
+}
 
-.container { max-width: 1280px; width: 100%; }
-.center { margin: 0 auto; }
-.left { float: left; }
-.right { float: right; }
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-.padding-vertical-5 { padding: 5px 0; }
-.padding-vertical-10 { padding: 10px 0; }
-.margin-vertical-5 { margin: 5px 0; }
-.margin-vertical-10 { margin: 10px 0; }
+.container {
+  max-width: 1024px;
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+#page {
+  width: 100%;
+  max-height: 100%;
+  overflow-x: auto;
+}
+
+#page-header,
+#page-content,
+#server-messages,
+#page-nav,
+#page-footer {
+  margin: 0 0.5rem;
+}
 
 /* Typography */
 
-a,
-a:visited {
-  color: inherit;
-}
-a:hover,
-a:active {
-  color: var(--color-orange);
+a {
+  color: black;
 }
 
-b { font-weight: 600; }
+a:hover {
+  color: rgba(7, 90, 7, 0.5);
+}
+
+b, em {
+  font-weight: 600;
+}
+
+i {
+  font-style: italic;
+}
 
 p {
-  margin: 1.5rem 0;
-  letter-spacing: 0.05rem;
-  line-height: 2.0rem;
-}
-
-h1,h2,h3,h4,h5,h6 {
-  font-family: 'Fira Code', sans-serif;
-  font-weight: 300;
-  margin: 3rem 0;
-  color: var(--color-darkgray);
-}
-h3,h4 {
-  text-align: center;
-}
-h1 {
-  font-size: 1.8rem;
-  line-height: 2.2rem;
-}
-h2 {
-  font-size: 1.6rem;
-  line-height: 1.9rem;
-}
-h3 {
-  font-size: 1.4rem;
-  line-height: 1.6rem;
-}
-h4 {
-  font-size: 1.3rem;
+  margin-bottom: 1rem;
   line-height: 1.5rem;
 }
-h5 {
-  font-size: 1.15rem;
-  line-height: 1.35rem;
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  color: #444;
+  font-weight: 600;
 }
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2.25rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.75rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+}
+
 h6 {
-  font-size: 1.0rem;
-  line-height: 1.2rem;
+  font-size: 1.25rem;
+}
+
+code, pre {
+  font-family: 'Fira Code', monospace;
+  font-weight: 300;
+  background-color: #ddd;
+  line-height: 1.25rem;
+  overflow: scroll;
 }
 
 pre {
-  font-family: 'Fira Code', monospace;
-  background: var(--color-whitegray);
-  font-size: 0.8rem;
-  border-radius: 8px;
-  padding: 20px;
-  overflow-x: auto;
-  max-width: 100%;
-}
-
-pre code {
-  color: unset;
-  padding: unset;
-  background: transparent;
+  margin: 1.5rem 0;
+  padding: 0.5rem;
 }
 
 code {
-  font-family: 'Fira Code', monospace;
-  background: var(--color-whitegray);
-  color: var(--color-darkgray);
-  padding: 0.2rem 0.4rem;
-  font-size: 0.8rem;
-  border-radius: 8px;
+  padding: 0 0.25rem;
 }
 
-/* Header */
-
-#page-logo {
-  background-color: var(--color-darkestgray);
-  padding: 100px 0;
-}
-
-#page-logo img {
-  max-width: 256px;
-}
-
-/* Navbar */
-nav a {
-  color: var(--color-darkgray);
-  text-decoration: none;
-}
-nav > ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-nav > ul > li {
-  align-items: center;
-}
-#page-nav {
-  font-family: 'Fira Code';
-  background-color: var(--color-whitegray);
-}
-#page-nav a {
-  display: inline-block;
-  padding: 15px 25px;
-  font-size: 1.2rem;
-}
-#page-nav a.active {
-  background-color: var(--color-darkestgray);
-  color: var(--color-lightgray)
-}
-#page-nav a:hover {
-  background-color: var(--color-darkestgray);
-}
-#page-nav a.active:hover {
-  color: var(--color-orange);
-}
-
-/* Messages, buttons and boxes */
-
-#server-messages {
-  font-family: 'Fira Code';
-  font-size: 0.8rem;
-  background-color: white;
-}
-.server-message {
-  padding: 1rem;
-}
-.info {
-  color: var(--color-info-text);
-  background-color: var(--color-info);
-}
-.success {
-  color: var(--color-success-text);
-  background-color: var(--color-success);
-}
-.warning {
-  color: var(--color-warning-text);
-  background-color: var(--color-warning);
-}
-.error {
-  color: var(--color-error-text);
-  background-color: var(--color-error);
-}
-
-/* Content */
-
-#main-header {
-  margin-bottom: 50px;
-}
-
-#page-content {
-  background-color: white;
-  padding-bottom: 3rem;
-}
-
-/* Tables */
-
-table {
-  display: block;
-  overflow-x: auto;
-  margin: 2rem 0;
-}
-thead {
-  border-top: 1px solid var(--color-orange);
-  border-bottom: 1px solid var(--color-orange);
-}
-thead th {
-  font-size: 0.9rem;
-  color: var(--color-darkgray);
-  vertical-align: middle;
-  padding: 0.5rem;
-  font-family: 'Fira Code';
-}
-tbody {
-  font-size: 0.8rem;
-}
-tbody > tr:nth-child(even) {
-  background-color: var(--color-whitegray);
-}
-tbody > tr > td {
-  padding: 0.25rem;
-}
-
-/* Blog Tags */
-
-#post-filters {
-  margin: 2rem 1rem;
-}
-#post-filters__title {
-  margin: 0 0 2rem 0;
-}
-.post-filters__tag {
-  text-decoration: none;
-  font-family: 'Fira Code';
-  display: inline-block;
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
-  font-size: 0.7rem;
-  line-height: 0.7rem;
-  color: var(--color-darkgray);
-}
-.post-filters__tag-name,
-.post-filters__tag-count {
-  padding: 5px;
-  display: block;
-  float: left;
-}
-.post-filters__tag-name {
-  background-color: var(--color-whitegray);
-}
-.post-filters__tag-name:hover {
-  background-color: var(--color-darkgray);
-}
-.active > .post-filters__tag-name {
-  background-color: var(--color-darkgray);
-  color: var(--color-whitegray);
-}
-.active > .post-filters__tag-name:hover {
-  background-color: var(--color-darkgray);
-  color: var(--color-orange);
-}
-.post-filters__tag-count {
-  background-color: var(--color-lightgray);
-  color: var(--color-darkgray);
-}
-
-/* Blog Posts */
-
-.post,
-.post-summary {
-  margin: 2rem 1rem;
-}
-.post-summary h2 {
-  margin: 1rem 0;
-}
-.post-illustration {
-  max-width: 100%;
-}
-.post-description {
-  margin: 1.5rem 0;
-  font-weight: 300;
-  font-size: 1.2rem;
-  letter-spacing: 0.05rem;
-  line-height: 2.0rem;
-}
-.post-meta,
-.post-tags {
-  font-family: 'Fira Code';
-  font-size: 0.7rem;
-}
-.post-tag { margin-right: 0.4rem; }
-
-/* Footer */
-
-#about-header {
-  color: var(--color-gray);
-  font-size: 1.5rem;
-  margin: 1.5rem 0;
-}
-#about-body {
-  margin: 1.5rem 0;
-}
-
-#page-footer {
-  color: var(--color-darkgray);
-  padding: 3rem 1rem;
-  font-family: 'Consolas', monospace;
-  font-size: 0.8rem;
-}
-#page-footer a:hover,
-#page-footer a:active { color: var(--color-orange); }
-#page-footer__build-status {
-  margin-top: 1.5rem;
-}
-#page-footer__about {
-  margin-bottom: 1.5rem;
+pre>code {
+  padding: 0;
 }
 
 /* Icons */
@@ -337,6 +148,7 @@ tbody > tr > td {
 .socialicon {
   text-decoration: none;
 }
+
 .socialicon svg {
   box-sizing: content-box;
   padding: 5px;
@@ -346,6 +158,314 @@ tbody > tr > td {
   width: 25px;
   fill: var(--color-gray);
 }
+
 .socialicon svg:hover {
   fill: var(--color-orange);
+}
+
+/* Components */
+
+.avatar {
+  border-radius: 50%;
+  border: 1px solid #eee;
+  box-shadow: 1px 2px 8px #888;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar img {
+  max-width: 64px;
+  max-height: 64px;
+}
+
+/* Header */
+
+#page-header {
+  margin-top: 1rem;
+}
+
+#page-title a {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0;
+  color: rgba(7, 90, 7, 0.5);
+  font-family: 'Fira Code', 'Open Sans', sans-serif;
+  font-size: 5rem;
+  font-weight: 100;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 719px) {
+  #page-title a {
+    font-size: 3rem;
+  }
+}
+
+#page-title a:hover {
+  color: rgba(7, 90, 7, 0.7);
+}
+
+#page-title-dot {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+#page-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: unset;
+  margin-bottom: 0.5rem;
+}
+
+#page-header p {
+  color: var(--color-gray);
+  font-size: 1rem;
+  margin: unset;
+}
+
+#page-header section {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: row;
+}
+
+#page-header aside {
+  padding-left: 1rem;
+  align-self: center;
+}
+
+/* Nav */
+
+#page-nav {
+  margin: 2rem 0;
+}
+
+#page-nav ul {
+  display: flex;
+  flex-direction: row;
+}
+
+#page-nav li {
+  margin-right: 1.5rem;
+}
+
+#page-nav li>a {
+  font-size: 1.2rem;
+  color: var(--color-gray);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+#page-nav li>a.active {
+  color: rgba(7, 90, 7, 0.5);
+}
+
+#page-nav a:hover {
+  color: rgba(7, 90, 7, 0.5);
+}
+#page-nav li>a.active:hover {
+  color: rgba(7, 90, 7, 0.7);
+}
+
+/* Messages */
+
+#server-messages {
+  line-height: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.server-message {
+  padding: 0.5rem 0.75rem;
+}
+
+.success {
+  background-color: var(--color-success);
+  color: var(--color-success-text);
+}
+.info {
+  background-color: var(--color-info);
+  color: var(--color-info-text);
+}
+.warning {
+  background-color: var(--color-warning);
+  color: var(--color-warning-text);
+}
+.error {
+  background-color: var(--color-error);
+  color: var(--color-error-text);
+}
+
+/* Tables */
+
+table {
+  display: block;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  overflow-x: scroll;
+}
+thead {
+  border-top: 1px solid rgba(7, 90, 7, 0.5);
+  border-bottom: 1px solid rgba(7, 90, 7, 0.5);
+}
+td, th {
+  padding: 0.5rem;
+}
+tbody > tr:nth-child(2n) {
+  background-color: var(--color-whitegray);
+}
+
+/* Blog */
+
+#post-list li {
+  margin-bottom: 0.5rem;
+}
+
+#post-list h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+.post-list-date {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  vertical-align: baseline;
+  color: var(--color-gray);
+}
+
+.post-list-date::after {
+  color: rgba(7, 90, 7, 0.5);
+  content: "»";
+  margin-left: 5px;
+  font-size: 1.25rem;
+}
+
+.post {
+  margin-bottom: 1.5rem;
+}
+
+
+.post-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+.post-description, .ingress {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.post-meta {
+  margin-bottom: 1rem;
+}
+
+.post-tags, .post-meta {
+  color: #666;
+  line-height: 1.5rem;
+}
+
+.post-tags {
+  margin-top: 0.5rem;
+}
+
+.post-meta>span:not(:last-child)::after {
+  color: rgba(7, 90, 7, 0.5);
+  content: "»";
+  margin-left: 5px;
+  font-size: 1.25rem;
+}
+
+.post-illustration {
+  margin-bottom: 1rem;
+  max-height: 320px; /* Fixed height */
+  display: flex; /* Use flexbox to center the child */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  overflow: hidden; /* Hide parts of the image that overflow */
+}
+
+.post-illustration img {
+  width: 100%; /* Maximum height to maintain aspect ratio */
+}
+
+.post-content {
+  color: rgb(20, 20, 20);
+  margin: 1.5rem 0;
+}
+
+/* Blog Tag Filters */
+
+#post-filters__title {
+  margin: 0 0 1.5rem 0;
+}
+.post-filters__tag {
+  text-decoration: none;
+  /*font-family: 'Fira Code';*/
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.7rem;
+  line-height: 0.7rem;
+  color: var(--color-darkgray);
+}
+.post-filters__tag-name,
+.post-filters__tag-count {
+  padding: 0.4rem;
+  display: block;
+  float: left;
+}
+.post-filters__tag-name {
+  background-color: var(--color-whitegray);
+}
+.post-filters__tag-name:hover {
+  background-color: rgba(7, 90, 7, 0.5);
+  color: var(--color-whitegray);
+}
+.active > .post-filters__tag-name {
+  background-color: rgba(7, 90, 7, 0.5);
+  color: var(--color-whitegray);
+}
+.active > .post-filters__tag-name:hover {
+  background-color: rgba(7, 90, 7, 0.7);
+}
+.post-filters__tag-count {
+  background-color: var(--color-lightgray);
+  color: var(--color-darkgray);
+}
+
+/* Footer */
+
+#page-footer {
+  margin-top: 5rem;
+  margin-bottom: 2.5rem;
+  font-size: 0.75rem;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#page-footer__git {
+  font-family: 'Fira Code', sans-serif;
+  display: inline;
+}
+
+#page-footer span {
+  margin-bottom: 0.5rem;
+}
+
+#page-footer a {
+  color: #555;
+}
+
+#page-footer a:hover {
+  color: rgba(7, 90, 7, 0.8);
 }

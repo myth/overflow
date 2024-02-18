@@ -14,6 +14,7 @@ BASE_DIR = Path(__file__).parent.parent.parent
 
 # Application definition
 INSTALLED_APPS = [
+    "about",
     "blog",
     "corsheaders",
     "django.contrib.admin",

@@ -11,6 +11,7 @@ from overflow.views import FrontPageView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", FrontPageView.as_view(), name="index"),
+    path("about/", include("about.urls", namespace="about")),
     path("blog/", include("blog.urls", namespace="blog")),
 ]
 
