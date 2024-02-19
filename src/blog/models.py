@@ -55,8 +55,8 @@ class Post(models.Model):
 
     @property
     def read_time(self) -> int:
-        """Returns a rough estimated read time in minutes based on 200 words per minute."""
-        return max(1, round(len(self.content.split(" ")) / 200))
+        """Returns a rough estimated read time in minutes based on 100 words per minute as it's mostly technical."""
+        return max(1, round(len(self.content.split(" ")) / 100))
 
     @property
     def updated(self) -> bool:
