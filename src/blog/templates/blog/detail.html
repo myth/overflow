@@ -20,7 +20,7 @@
     </section>
     <section class="post-meta">
       <span><time datetime="{{ post.published.isoformat }}">{{ post.published|date:"M j, Y" }}</time></span>
-      <span>{{ post.read_time }} minute read</span>
+      <span>{{ post.estimated_read_time }} minute read</span>
       {% if post.updated %}
       <span>Updated <time datetime="{{ post.edited.isoformat }}">{{ post.edited|date:"M j, Y" }}</time></span>
       {% endif %}
@@ -35,7 +35,11 @@
     {% endif %}
   </header>
   <section class="post-content">
+    {% if post.raw %}
+    {{ post.content | safe }}
+    {% else %}
     {{ post.markdown | safe }}
+    {% endif %}
   </section>
 </article>
 {% endblock %}
