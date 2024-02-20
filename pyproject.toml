@@ -20,7 +20,7 @@ select = [
 
 [tool.poetry]
 name = "overflow"
-version = "7.0.1"
+version = "7.0.2"
 description = "overflow.no is the personal website of Aleksander Skraastad. I like programming, science & technology, gaming, cooking and the outdoors."
 authors = ["Aleksander Skraastad <myth@overflow.no>"]
 license = "MIT"

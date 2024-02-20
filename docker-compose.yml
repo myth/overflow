@@ -3,7 +3,7 @@ version: '3.6'
 services:
   # Django + Nginx container
   nginx:
-    image: mythern/overflow:7.0.1
+    image: mythern/overflow:7.0.2
     restart: unless-stopped
     env_file: .env
     depends_on:
