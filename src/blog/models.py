@@ -71,7 +71,7 @@ class Post(models.Model):
         Use read time if set, else default to the estimate."""
         if self.read_time:
             return self.read_time
-        return max(1, round(len(list(t for t in self.content.split(" ") if len(t) > 1))) / 100)
+        return max(1, round(len(list(t for t in self.content.split(" ") if len(t) > 1)) / 100))
 
     def __str__(self) -> str:
         """String representation of this blog post"""
