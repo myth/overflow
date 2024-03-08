@@ -18,7 +18,7 @@ read -p 'Enter a comment for this release: ' comment
 
 sed -i "s,mythern/overflow.*,mythern/overflow:$version," docker-compose.yml
 sed -i "/^version = /s/.*/version = \"$version\"/" pyproject.toml
-git commit -am "Prepare v${version}"
+git commit -am "chore: Prepare v${version}"
 echo "Pinned docker-compose.yml to mythern/overflow:$version and updated version in pyproject.toml"
 git tag -a -s -m "$comment" "v$version"
 echo "Created signed tag: 'v$version' ('$comment')"
