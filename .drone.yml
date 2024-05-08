@@ -57,11 +57,10 @@ steps:
     command_timeout: 600s
     script:
       - cd /srv/www/overflow
-      - docker-compose pull
-      - docker-compose down
-      - docker-compose up -d -t 600
+      - docker compose pull
+      - docker compose up -d -t 600
       - docker image prune -f
-      - docker-compose ps
+      - docker compose ps
   when:
     event: [tag]
 

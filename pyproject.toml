@@ -1,6 +1,30 @@
+[tool.poetry]
+name = "overflow"
+version = "7.0.6"
+description = "overflow.no is the personal website of Aleksander Skraastad. I like programming, science & technology, gaming, cooking and the outdoors."
+authors = ["Aleksander Skraastad <myth@overflow.no>"]
+license = "MIT"
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+uvicorn = "^0.27.1"
+Django = "^5.0.2"
+django-cors-headers = "^4.3.1"
+django-redis = "^5.4.0"
+markdown2 = "^2.4.12"
+psycopg2-binary = "^2.9.9"
+python-decouple = "^3.8"
+pillow = "^10.3.0"
+pygments = "^2.17.2"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.2.1"
+
 [tool.ruff]
 line-length=120
-target-version = "py311"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = [
@@ -17,29 +41,6 @@ select = [
     # isort
     "I",
 ]
-
-[tool.poetry]
-name = "overflow"
-version = "7.0.6"
-description = "overflow.no is the personal website of Aleksander Skraastad. I like programming, science & technology, gaming, cooking and the outdoors."
-authors = ["Aleksander Skraastad <myth@overflow.no>"]
-license = "MIT"
-readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.11"
-uvicorn = "^0.27.1"
-Django = "^5.0.2"
-django-cors-headers = "^4.3.1"
-django-redis = "^5.4.0"
-markdown2 = "^2.4.12"
-psycopg2-binary = "^2.9.9"
-python-decouple = "^3.8"
-pillow = "^10.3.0"
-pygments = "^2.17.2"
-
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.2.1"
 
 [build-system]
 requires = ["poetry-core"]
