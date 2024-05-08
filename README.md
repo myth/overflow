@@ -10,8 +10,8 @@ Codebase for [overflow.no](https://overflow.no)
 Depends on an `.env` file in the working directory.
 
 ```
-docker-compose pull
-docker-compose up -d
-docker-compose down
+docker compose pull
+docker compose up -d
+docker compose down
 ```
  
