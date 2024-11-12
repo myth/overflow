@@ -1,6 +1,6 @@
 [project]
 name = "overflow"
-version = "7.0.9"
+version = "7.0.10"
 description = "overflow.no is the personal website of Aleksander Skraastad. I like programming, science & technology, gaming, cooking and the outdoors."
 authors = ["Aleksander Skraastad <myth@overflow.no>"]
 license = "MIT"
