@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+uv sync
+
 # Validations
 dirty=$(git status -s)
 if [ "$dirty" ]; then
