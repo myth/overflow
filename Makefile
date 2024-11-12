@@ -3,11 +3,11 @@ all : lint deploy dev
 .DEFAULT_GOAL := deploy
 
 dev :
-	uv run python src/manage.py runserver
+	uv run --no-sync python src/manage.py runserver
 
 lint :
-	uv run ruff check src/
-	uv run ruff format src/
+	uv run --no-sync ruff check src/
+	uv run --no-sync ruff format src/
 
 deploy : lint
 	./deploy.sh

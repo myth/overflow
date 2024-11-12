@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-uv sync
-
 # Validations
 dirty=$(git status -s)
 if [ "$dirty" ]; then
@@ -20,6 +18,7 @@ read -p 'Enter a comment for this release: ' comment
 
 sed -i "s,mythern/overflow.*,mythern/overflow:$version," docker-compose.yml
 sed -i "/^version = /s/.*/version = \"$version\"/" pyproject.toml
+uv sync
 git commit -am "chore: Prepare v${version}"
 echo "Pinned docker-compose.yml to mythern/overflow:$version and updated version in pyproject.toml"
 git tag -a -s -m "$comment" "v$version"
