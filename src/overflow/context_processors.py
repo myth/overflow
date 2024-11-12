@@ -1,5 +1,4 @@
-"""Site wide context processors
-"""
+"""Site wide context processors"""
 
 from typing import Any
 

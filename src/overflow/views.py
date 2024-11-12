@@ -1,5 +1,4 @@
-"""Main views
-"""
+"""Main views"""
 
 from blog.views import BlogListView
 

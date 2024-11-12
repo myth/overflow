@@ -1,2 +1,1 @@
-"""Library package
-"""
+"""Library package"""

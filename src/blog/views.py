@@ -1,5 +1,4 @@
-"""Blog views
-"""
+"""Blog views"""
 
 from datetime import timedelta
 

@@ -1,5 +1,4 @@
-"""Blog urls
-"""
+"""Blog urls"""
 
 from django.urls import path
 
