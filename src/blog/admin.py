@@ -1,5 +1,4 @@
-"""Blog admin
-"""
+"""Blog admin"""
 
 from django.contrib.admin import ModelAdmin, site
 
