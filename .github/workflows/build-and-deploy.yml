@@ -3,7 +3,7 @@ name: Docker build and deploy
 on:
   push:
     tags:
-      - "v*"
+      - "*"
 
 jobs:
   build:
@@ -30,7 +30,7 @@ jobs:
           echo "export OF_GIT_RELEASE=${GITHUB_REF##*/}" >> build_metadata
 
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: true
