@@ -1,7 +1,7 @@
 Overflow
 ====
 
-[![Build Status](https://ci.ulv.io/api/badges/myth/overflow/status.svg)](https://ci.ulv.io/myth/overflow)
+[![Build status](https://github.com/myth/overflow/actions/workflows/build-and-deploy.yml/badge.svg)](https://github.com/myth/overflow/actions)
 
 Codebase for [overflow.no](https://overflow.no)
 

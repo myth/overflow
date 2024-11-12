@@ -37,3 +37,30 @@ jobs:
           tags: |
             ghcr.io/myth/overflow:${{ env.TAG_NAME }}
             ghcr.io/myth/overflow:latest
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: docker-compose.yml
+          target: /srv/www/overflow/
+      - name: Pull and restart
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /srv/www/overflow
+            docker compose pull
+            docker compose up -d -t 60
+            docker image prune -f
+            docker compose ps
