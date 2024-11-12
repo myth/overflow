@@ -27,4 +27,4 @@ echo "Created signed tag: 'v$version' ('$comment')"
 # Deployment
 echo "Pushing overflow $(git describe)"
 git push --follow-tags
-echo "Follow deployment at https://ci.ulv.io/myth/overflow"
+echo "Follow deployment at https://github.com/myth/overflow/actions/"
