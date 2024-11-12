@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Migrate database
-python3 manage.py migrate --no-input
+uv run --no-sync python3 manage.py migrate --no-input
 
 # Start nginx
 service nginx start
@@ -10,4 +10,4 @@ service nginx start
 . ./build_metadata || true
 
 # Start the application socket
-exec uvicorn --port 8080 overflow.asgi:application
+exec uv run --no-sync uvicorn --port 8080 overflow.asgi:application

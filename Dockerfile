@@ -2,13 +2,12 @@
 FROM python:3.12-slim
 
 WORKDIR /app
-ADD poetry.lock pyproject.toml ./
+ADD uv.lock pyproject.toml ./
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
     apt-get install -y nginx && \
-    pip3 install --no-cache-dir poetry && \
-    poetry config virtualenvs.create false && \
-    poetry install && \
+    pip3 install --no-cache-dir uv && \
+    uv sync --no-dev --locked && \
     apt-get autoremove -y && \
     rm -rf /usr/lib/python*/ensurepip && \
     rm -rf /usr/lib/python*/turtledemo && \
@@ -31,7 +30,7 @@ COPY src/ .
 ENV PYTHONUNBUFFERED=1
 # Collect static files for nginx to serve
 ENV OF_STATIC_ROOT /static
-RUN python3 manage.py collectstatic --no-input && mv /static /var/www/html/ && \
+RUN uv run --no-sync python3 manage.py collectstatic --no-input && mv /static /var/www/html/ && \
     # Set correct ownership
     chown -R nginx:nginx /var/www/html && chown -R nginx:nginx /run/nginx
 

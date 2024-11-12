@@ -5,8 +5,8 @@ from datetime import datetime
 from pathlib import Path
 
 from decouple import config
-from lib.utils.git import git_branch, git_commit, git_describe
 
+from lib.utils.git import git_branch, git_commit, git_describe
 from overflow.settings.security import DB_PASS, DEBUG, PRODUCTION
 
 # Build paths inside the project like this: BASE_DIR / "sub_dir"

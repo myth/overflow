@@ -3,11 +3,11 @@ all : lint deploy dev
 .DEFAULT_GOAL := deploy
 
 dev :
-	poetry run python src/manage.py runserver
+	uv run python src/manage.py runserver
 
 lint :
-	poetry run ruff check src/
-	poetry run ruff format src/
+	uv run ruff check src/
+	uv run ruff format src/
 
 deploy : lint
 	./deploy.sh
