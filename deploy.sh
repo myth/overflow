@@ -16,7 +16,7 @@ latest=$(git tag | sort -V | tail -1)
 read -p "Enter a version for this release (current is $latest): v" version
 read -p 'Enter a comment for this release: ' comment
 
-sed -i "s,mythern/overflow.*,mythern/overflow:$version," docker-compose.yml
+sed -i "s,myth/overflow.*,myth/overflow:$version," docker-compose.yml
 sed -i "/^version = /s/.*/version = \"$version\"/" pyproject.toml
 uv sync
 git commit -am "chore: Prepare v${version}"
