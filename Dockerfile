@@ -29,7 +29,7 @@ COPY src/ .
 # Ensure flushing of stdout
 ENV PYTHONUNBUFFERED=1
 # Collect static files for nginx to serve
-ENV OF_STATIC_ROOT /static
+ENV OF_STATIC_ROOT="/static"
 RUN uv run --no-sync python3 manage.py collectstatic --no-input && mv /static /var/www/html/ && \
     # Set correct ownership
     chown -R nginx:nginx /var/www/html && chown -R nginx:nginx /run/nginx
