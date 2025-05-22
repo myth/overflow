@@ -3,7 +3,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.text import slugify
-from markdown2 import markdown
+from markdown2 import markdown  # type: ignore
 
 
 class Tag(models.Model):
@@ -25,11 +25,6 @@ class Image(models.Model):
     def __str__(self) -> str:
         """String representation of this blog post image"""
         return str(self.title)
-
-
-def estimated_read_time(text: str) -> int:
-    """Returns a rough estimated read time in minutes based on 100 words per minute as it's mostly technical."""
-    max(1, round(len(t for t in text.split(" ") if len(t) > 1)) / 100)
 
 
 class Post(models.Model):

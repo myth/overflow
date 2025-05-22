@@ -2,8 +2,9 @@
 
 from datetime import datetime
 from pathlib import Path
+from typing import cast
 
-from decouple import config
+from decouple import config  # type: ignore
 
 from lib.utils.git import git_branch, git_commit, git_describe
 from overflow.settings.security import DB_PASS, DEBUG, PRODUCTION
@@ -131,10 +132,10 @@ MEDIA_ROOT = config("OF_MEDIA_ROOT", default=BASE_DIR.parent / "media")
 
 # Source information
 
-BUILD_DATE: str = config("OF_BUILD_DATE", default=datetime.now().isoformat())
-GIT_COMMIT: str = config("OF_GIT_COMMIT", default=git_commit())
-GIT_BRANCH: str = config("OF_GIT_BRANCH", default=git_branch())
-GIT_RELEASE: str = config("OF_GIT_RELEASE", default=git_describe())
+BUILD_DATE: str = cast(str, config("OF_BUILD_DATE", default=datetime.now().isoformat()))
+GIT_COMMIT: str = cast(str, config("OF_GIT_COMMIT", default=git_commit()))
+GIT_BRANCH: str = cast(str, config("OF_GIT_BRANCH", default=git_branch()))
+GIT_RELEASE: str = cast(str, config("OF_GIT_RELEASE", default=git_describe()))
 
 
 # Custom configurables
