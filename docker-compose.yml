@@ -1,7 +1,7 @@
 services:
   # Django + Nginx container
   nginx:
-    image: ghcr.io/myth/overflow:v7.0.19
+    image: ghcr.io/myth/overflow:v7.0.20
     restart: unless-stopped
     env_file: .env
     depends_on:
