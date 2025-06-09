@@ -2,6 +2,7 @@
 
 from django.urls import path
 
+from blog.feed import BlogAtomFeed, BlogRSSFeed
 from blog.views import BlogDetailView, BlogTagsView
 
 app_name = "blog"
@@ -11,4 +12,6 @@ urlpatterns = [
     path("<int:year>/<int:month>/<int:day>/<str:slug>/", BlogDetailView.as_view(), name="detail"),
     path("tag/", BlogTagsView.as_view(), name="tags"),
     path("tag/<str:tag>/", BlogTagsView.as_view(), name="tags"),
+    path("rss/", BlogRSSFeed(), name="rss"),
+    path("atom/", BlogAtomFeed(), name="atom"),
 ]

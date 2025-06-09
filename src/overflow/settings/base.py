@@ -140,3 +140,5 @@ GIT_RELEASE: str = cast(str, config("OF_GIT_RELEASE", default=git_describe()))
 
 # Custom configurables
 BLOG_OUTDATED_POST_THRESHOLD: int = int(365 * 1.5)
+BLOG_FEED_MAX_ITEMS: int = 20
+BLOG_FEED_BASE_URL: str = "https://overflow.no" if PRODUCTION else "http://127.0.0.1:8000"

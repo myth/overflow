@@ -2,6 +2,7 @@
 
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 from markdown2 import markdown  # type: ignore
 
@@ -48,6 +49,17 @@ class Post(models.Model):
             self.slug = slugify(self.title)
 
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse(
+            "blog:detail",
+            kwargs={
+                "year": self.published.year,
+                "month": self.published.month,
+                "day": self.published.day,
+                "slug": self.slug,
+            },
+        )
 
     @property
     def markdown(self) -> str:

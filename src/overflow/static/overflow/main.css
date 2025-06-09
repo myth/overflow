@@ -499,3 +499,8 @@ tbody > tr:nth-child(2n) {
 #page-footer a:hover {
   color: rgba(7, 90, 7, 0.8);
 }
+
+#page-footer svg {
+  height: 0.75rem;
+  vertical-align: top;
+}
