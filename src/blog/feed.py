@@ -12,6 +12,7 @@ if TYPE_CHECKING:
 
 from django.conf import settings
 from django.contrib.syndication.views import Feed
+from django.urls import reverse_lazy
 from django.utils.feedgenerator import Atom1Feed
 
 from .models import Post
@@ -19,6 +20,8 @@ from .models import Post
 
 class BaseBlogFeed(Feed):
     title = "Overflow Blog - Latest posts"
+    author_name = "Aleksander S."
+    author_link = reverse_lazy("about:index")
 
     def items(self) -> Iterable[Post]:
         tz = ZoneInfo(settings.TIME_ZONE)
@@ -32,11 +35,17 @@ class BaseBlogFeed(Feed):
     def item_description(self, item: Post) -> str:
         return item.description
 
+    def item_author_name(self, item: Post) -> str:  # noqa
+        return self.author_name
+
     def item_link(self, item: Post) -> str:
         return item.get_absolute_url()
 
     def item_pubdate(self, item: Post) -> datetime:
         return item.published
+
+    def item_updated(self, item: Post) -> datetime:
+        return item.edited
 
     def item_categories(self, item: Post) -> Sequence[str]:
         return [tag.name for tag in item.tags.all()]
