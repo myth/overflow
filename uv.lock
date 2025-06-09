@@ -160,7 +160,7 @@ wheels = [
 
 [[package]]
 name = "overflow"
-version = "7.0.20"
+version = "7.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "django" },
