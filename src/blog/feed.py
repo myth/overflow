@@ -44,7 +44,7 @@ class BaseBlogFeed(Feed):
     def item_pubdate(self, item: Post) -> datetime:
         return item.published
 
-    def item_updated(self, item: Post) -> datetime:
+    def item_updateddate(self, item: Post) -> datetime:
         return item.edited
 
     def item_categories(self, item: Post) -> Sequence[str]:
@@ -52,13 +52,13 @@ class BaseBlogFeed(Feed):
 
 
 class BlogRSSFeed(BaseBlogFeed):
-    link = "/rss/"
+    link = "/blog/rss/"
     description = "Latest posts from overflow.no"
 
 
 class BlogAtomFeed(BaseBlogFeed):
     feed_type = Atom1Feed
-    link = "/atom/"
+    link = "/blog/atom/"
     subtitle = "Latest posts from overflow.no"
 
     def item_enclosure_url(self, item: Post) -> str | None:
