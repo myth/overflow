@@ -5,6 +5,7 @@ from datetime import timedelta
 from django.conf import settings
 from django.contrib import messages
 from django.db.models import QuerySet
+from django.http import Http404
 from django.utils import timezone
 from django.views.generic import DetailView, ListView
 
@@ -33,6 +34,12 @@ class BlogDetailView(DetailView):
 
     def get_object(self, queryset=None):
         obj = super().get_object()
+        day = self.kwargs["day"]
+        month = self.kwargs["month"]
+        year = self.kwargs["year"]
+
+        if not all([obj.published.year == year, obj.published.month == month, obj.published.day == day]):
+            raise Http404("Post date mismatch for slug")
 
         age = timezone.now() - obj.published
 
