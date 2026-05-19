@@ -1,11 +1,13 @@
 """Site wide context processors"""
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from django.conf import settings
-from django.http import HttpRequest
 
 from overflow.settings import BUILD_DATE, GIT_BRANCH, GIT_COMMIT, GIT_RELEASE
+
+if TYPE_CHECKING:
+    from django.http import HttpRequest
 
 
 def build_metadata(request: HttpRequest) -> dict[str, Any]:

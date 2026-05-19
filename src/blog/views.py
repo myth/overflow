@@ -1,15 +1,18 @@
 """Blog views"""
 
 from datetime import timedelta
+from typing import TYPE_CHECKING
 
 from django.conf import settings
 from django.contrib import messages
-from django.db.models import QuerySet
 from django.http import Http404
 from django.utils import timezone
 from django.views.generic import DetailView, ListView
 
 from blog.models import Post
+
+if TYPE_CHECKING:
+    from django.db.models import QuerySet
 
 
 class BlogListView(ListView):
@@ -20,7 +23,7 @@ class BlogListView(ListView):
     def get_queryset(self) -> QuerySet:
         qs = Post.objects.all()
 
-        if not self.request.user.is_superuser:
+        if not getattr(self.request.user, "is_superuser", False):
             now = timezone.now()
             qs = qs.filter(published__lte=now)
 

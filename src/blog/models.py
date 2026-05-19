@@ -14,7 +14,7 @@ class Tag(models.Model):
 
     def __str__(self) -> str:
         """String representation of this tag"""
-        return str(self.name)
+        return self.name
 
 
 class Image(models.Model):
@@ -25,7 +25,7 @@ class Image(models.Model):
 
     def __str__(self) -> str:
         """String representation of this blog post image"""
-        return str(self.title)
+        return self.title
 
 
 class Post(models.Model):
@@ -64,7 +64,7 @@ class Post(models.Model):
     @property
     def markdown(self) -> str:
         """Returns a markdown rendered version of the content field"""
-        return markdown(str(self.content), extras=["fenced-code-blocks", "tables"])
+        return markdown(self.content, extras=["fenced-code-blocks", "tables"])
 
     @property
     def updated(self) -> bool:
@@ -77,11 +77,11 @@ class Post(models.Model):
         Use read time if set, else default to the estimate."""
         if self.read_time:
             return self.read_time
-        return max(1, round(len(list(t for t in self.content.split(" ") if len(t) > 1)) / 100))
+        return max(1, round(len([t for t in self.content.split(" ") if len(t) > 1]) / 100))
 
     def __str__(self) -> str:
         """String representation of this blog post"""
-        return str(self.title)
+        return self.title
 
     class Meta:
         """Post model metadata"""
