@@ -1,18 +1,7 @@
 {% extends "base.html" %}
-{% load static %}
 
-{% block meta_title %}
-403 Forbidden | Overflow
-{% endblock %}
+{% block meta_title %}403 Forbidden | overflow.no{% endblock %}
 
-{% block page_content %}
-<div class="row center-xs">
-    <div class="col-xs-12">
-        <h1>403 Forbidden</h1>
-        {% autoescape on %}
-        <p>The server hamster forbids <b>{{ request.method }}</b> for URI <b>{{ request.path }}</b></p>
-        {% endautoescape %}
-        <p><img src="{% static '/overflow/images/server-hamster.jpg' %}" alt="Server Hamster OF0420" title="Server hamster says you shall not pass..." /></p>
-    </div>
-</div>
+{% block main_content %}
+{% include "components.html#error-page" with code="403" title="Forbidden" body="The server hamster will not let that through." %}
 {% endblock %}

@@ -1,31 +1,55 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block meta_title %}
-Me | Overflow
-{% endblock %}
+{% block meta_title %}About | overflow.no{% endblock %}
+{% block og_title %}About Aleksander Skraastad{% endblock %}
+{% block og_description %}Programmer in Oslo, former Air Force officer, outdoors enthusiast.{% endblock %}
 
 {% block main_content %}
-<h1>Hi! 👋</h1>
+<header class="flex flex-col gap-6 sm:flex-row sm:items-center">
+  <img src="{% static 'overflow/images/me.jpg' %}" alt="Aleksander Skraastad"
+       class="ring-line h-20 w-20 shrink-0 rounded-full object-cover ring-1" width="80" height="80">
+  <div>
+    <h1 class="text-[1.75rem] font-semibold tracking-tight">Aleksander Skraastad</h1>
+    <p class="text-muted mt-1.5 font-mono text-xs">
+      <span class="caret-sep">programmer</span><span class="caret-sep">oslo, norway</span><span class="caret-sep">since 2012</span>
+    </p>
+  </div>
+</header>
 
-<p>I'm Aleks, a software engineer from Norway.</p>
+<div class="prose prose-of mt-12">
+  <p>Hi! 👋 I'm Aleks, a software engineer from Norway.</p>
 
-<p>
-  I'm currently employed at <a href="https://kodeworks.no" title="KodeWorks Oslo AS">KodeWorks Oslo</a>, a small IT consultancy company situated in Oslo, where my role is CEO of our Oslo department.
-  I have a masters degree in Informatics (Artificial Intelligence) from the <a href="https://ntnu.edu">Norwegian University of Science and Technology (NTNU)</a>.
-</p>
+  <p>
+    I'm currently employed at <a href="https://kodeworks.no" title="KodeWorks Oslo AS">KodeWorks Oslo</a>, a small IT
+    consultancy company situated in Oslo, where my role is CEO of our Oslo department. I have a masters degree in
+    Informatics (Artificial Intelligence) from the
+    <a href="https://ntnu.edu">Norwegian University of Science and Technology</a>.
+  </p>
 
-<p>
-  After university I started out in embedded, in the B2B television contribution segment. A couple of years later I joined KodeWorks, and have been working mostly in the energy and banking sector, while
-  gradually taking over the CEO role.
-</p>
+  <p>
+    After university I started out in embedded, in the B2B television contribution segment. A couple of years later I
+    joined KodeWorks, and have been working mostly in the energy and banking sector, while gradually taking over the
+    CEO role.
+  </p>
 
-<p>
-  Before starting my career in software engineering, I was working as an officer in the <a href="https://www.forsvaret.no/en/organisation/air-force">Royal Norwegian Air Force</a> for about 5 years.
-  My positions varied, mostly as a platoon commander at basic training, but my final year was as a public relations officer and also managing an IT-project.
-</p>
+  <p>
+    Before starting my career in software engineering, I was working as an officer in the
+    <a href="https://www.forsvaret.no/en/organisation/air-force">Royal Norwegian Air Force</a> for about 5 years. My
+    positions varied, mostly as a platoon commander at basic training, but my final year was as a public relations
+    officer and also managing an IT-project.
+  </p>
 
-<p>
-  Outside of work I enjoy cooking, computer tinkering, gaming and the outdoors.
-  From time to time I post various computer related stuff here, mostly mental notes to help me remember how to do certain things.
-</p>
+  <p>
+    Outside of work I enjoy cooking, computer tinkering, gaming and the outdoors. From time to time I post various
+    computer related stuff here, mostly mental notes to help me remember how to do certain things.
+  </p>
+</div>
+
+<section class="border-line/70 mt-14 border-t pt-8">
+  <h2 class="eyebrow">elsewhere</h2>
+  <div class="mt-5">
+    {% include "components.html#socials" %}
+  </div>
+</section>
 {% endblock %}

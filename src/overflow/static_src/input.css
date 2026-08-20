@@ -1,0 +1,677 @@
+@import "tailwindcss" source(none);
+@plugin "@tailwindcss/typography";
+
+@source "../templates";
+@source "../../blog/templates";
+@source "../../about/templates";
+
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url("/static/overflow/fonts/geist-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url("/static/overflow/fonts/geist-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url("/static/overflow/fonts/geist-mono-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url("/static/overflow/fonts/geist-mono-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@custom-variant dark {
+  &:where(.dark, .dark *) {
+    @slot;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not(.light):not(.dark), :root:not(.light):not(.dark) *) {
+      @slot;
+    }
+  }
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+@theme inline {
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  --color-canvas: var(--of-canvas);
+  --color-elevated: var(--of-elevated);
+  --color-line: var(--of-line);
+  --color-ink: var(--of-ink);
+  --color-muted: var(--of-muted);
+  --color-accent: var(--of-accent);
+  --color-accent-strong: var(--of-accent-strong);
+  --color-ember: var(--of-ember);
+
+  --radius-card: 0.625rem;
+  --header-h: 3.5rem;
+
+  --default-transition-duration: 75ms;
+
+    --width-text: 38rem;
+  --width-shell: 56rem;
+  --width-break: 64rem;
+}
+
+@layer base {
+    :root {
+    color-scheme: light dark;
+
+        --runover: min(
+      calc(100vw - 2.5rem),
+      max(100%, calc(50vw + var(--width-shell) / 2 - 3rem)),
+      var(--width-break)
+    );
+
+    --of-canvas: light-dark(oklch(0.988 0.004 130), oklch(0.2 0.011 152));
+    --of-elevated: light-dark(oklch(0.945 0.006 140), oklch(0.253 0.013 152));
+    --of-line: light-dark(oklch(0.878 0.009 145), oklch(0.33 0.015 152));
+    --of-ink: light-dark(oklch(0.28 0.016 150), oklch(0.9 0.01 130));
+    --of-muted: light-dark(oklch(0.52 0.014 150), oklch(0.68 0.014 145));
+    --of-accent: light-dark(oklch(0.5 0.11 152), oklch(0.72 0.125 155));
+    --of-accent-strong: light-dark(oklch(0.44 0.116 152), oklch(0.79 0.128 155));
+    --of-ember: light-dark(oklch(0.55 0.13 55), oklch(0.78 0.11 68));
+
+        --of-syn-comment: light-dark(oklch(0.52 0.012 150), oklch(0.66 0.014 150));
+    --of-syn-keyword: light-dark(oklch(0.5 0.115 292), oklch(0.78 0.104 292));
+    --of-syn-string: light-dark(oklch(0.47 0.095 172), oklch(0.8 0.1 172));
+    --of-syn-number: light-dark(oklch(0.52 0.12 58), oklch(0.82 0.098 68));
+    --of-syn-function: light-dark(oklch(0.5 0.104 245), oklch(0.78 0.094 245));
+    --of-syn-type: light-dark(oklch(0.5 0.088 205), oklch(0.8 0.078 205));
+    --of-syn-punct: light-dark(oklch(0.5 0.014 150), oklch(0.68 0.014 150));
+  }
+
+    :root.light {
+    color-scheme: light;
+  }
+
+  :root.dark {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--color-accent) 26%, transparent);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    transition-property: color, background-color, border-color, text-decoration-color, opacity, transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation: none !important;
+    }
+  }
+}
+
+@layer components {
+    .shell {
+    @apply mx-auto w-full px-5 sm:px-8;
+    max-width: var(--width-shell);
+  }
+
+    .measure {
+    max-width: var(--width-text);
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50;
+    @apply focus:rounded-md focus:bg-elevated focus:px-3 focus:py-2 focus:text-sm focus:ring-1 focus:ring-line;
+  }
+
+    .caret {
+    @apply font-mono text-accent select-none;
+  }
+
+  .caret-sep::after {
+    content: "»" / "";
+    @apply text-accent mx-2 inline-block font-mono opacity-70;
+  }
+
+  .caret-sep:last-child::after {
+    content: none;
+  }
+
+  
+  .wordmark {
+    @apply font-mono font-light tracking-[0.02em] whitespace-nowrap;
+  }
+
+    .wordmark-hero {
+    font-size: clamp(2.25rem, 13vw - 0.52rem, 6.75rem);
+    @apply font-mono font-extralight tracking-[0.1em] whitespace-nowrap;
+  }
+
+  .wordmark .dot,
+  .wordmark-hero .dot {
+    @apply text-accent;
+  }
+
+  
+  .link {
+    @apply text-ink decoration-line underline decoration-1 underline-offset-4;
+    @apply transition-colors hover:text-accent hover:decoration-accent;
+  }
+
+  .link-quiet {
+    @apply text-muted no-underline transition-colors hover:text-accent;
+  }
+
+  
+  .entry {
+    @apply -mx-3 flex flex-col items-start gap-0.5 rounded-md px-3 py-2.5 transition-colors;
+    @apply sm:flex-row sm:items-baseline sm:gap-3 hover:bg-elevated focus-visible:bg-elevated;
+  }
+
+  .entry-lead {
+    @apply text-muted w-auto shrink-0 font-mono text-xs tabular-nums sm:w-14;
+  }
+
+  .entry-read-inline {
+    @apply text-muted/80 ml-1.5 sm:hidden;
+  }
+
+    .entry-caret {
+    @apply text-muted/70 hidden w-3 shrink-0 font-mono select-none sm:block;
+    @apply transition-colors group-hover:text-accent group-focus-visible:text-accent;
+  }
+
+  .entry-title {
+    @apply text-ink decoration-transparent transition-colors;
+    @apply group-hover:text-accent group-focus-visible:text-accent;
+  }
+
+  .entry-read {
+    @apply text-muted ml-auto hidden shrink-0 pl-6 font-mono text-xs sm:block;
+  }
+
+    .entry-year {
+    @apply text-muted -mx-3 mt-8 px-3 pb-1 font-mono text-[0.6875rem] tracking-[0.18em] first:mt-0;
+  }
+
+  
+    .tag {
+    @apply text-muted hover:text-accent inline-flex items-center gap-1.5 rounded-full;
+    @apply border border-transparent px-0 py-0.5 font-mono text-xs lowercase transition-colors;
+  }
+
+  .tag-list {
+    @apply flex flex-wrap gap-x-4 gap-y-1.5;
+  }
+
+  .tag::before {
+    content: "»" / "";
+    @apply text-muted/50 transition-colors;
+  }
+
+  .tag:hover::before {
+    @apply text-accent;
+  }
+
+  .tag-count {
+    @apply text-muted tabular-nums;
+  }
+
+  .tag-active {
+    @apply border-accent/30 text-accent -mx-2 px-2 py-0.5;
+    background-color: color-mix(in oklab, var(--color-accent) 12%, transparent);
+  }
+
+  .tag-active::before,
+  .tag-active .tag-count {
+    @apply text-accent/70;
+  }
+
+  
+  .notice {
+    @apply text-muted flex items-baseline gap-3 border-l-2 py-1.5 pl-4 text-sm;
+  }
+
+  .notice-label {
+    @apply shrink-0 font-mono text-xs tracking-wider uppercase;
+  }
+
+  .notice-ember {
+    border-color: color-mix(in oklab, var(--color-ember) 60%, transparent);
+  }
+
+  .notice-ember .notice-label {
+    @apply text-ember;
+  }
+
+  .notice-accent {
+    border-color: color-mix(in oklab, var(--color-accent) 60%, transparent);
+  }
+
+  .notice-accent .notice-label {
+    @apply text-accent;
+  }
+
+  
+  .eyebrow {
+    @apply text-muted flex items-center gap-3 font-mono text-xs tracking-[0.18em] uppercase;
+  }
+
+  .eyebrow::before {
+    content: "»" / "";
+    @apply text-accent -mr-1 tracking-normal normal-case;
+  }
+
+  .eyebrow::after {
+    content: "";
+    @apply bg-line h-px flex-1;
+  }
+
+  
+  .progress {
+    @apply bg-accent fixed inset-x-0 top-0 z-50 h-0.5 origin-left;
+    transform: scaleX(var(--progress, 0));
+  }
+}
+
+.prose-of {
+  --tw-prose-body: var(--color-ink);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-lead: var(--color-muted);
+  --tw-prose-links: var(--color-ink);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-counters: var(--color-muted);
+  --tw-prose-bullets: var(--color-accent);
+  --tw-prose-hr: var(--color-line);
+  --tw-prose-quotes: var(--color-ink);
+  --tw-prose-quote-borders: var(--color-accent);
+  --tw-prose-captions: var(--color-muted);
+  --tw-prose-code: var(--color-ink);
+  --tw-prose-pre-code: var(--color-ink);
+  --tw-prose-pre-bg: var(--color-elevated);
+  --tw-prose-th-borders: var(--color-line);
+  --tw-prose-td-borders: var(--color-line);
+
+  max-width: var(--width-text);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+.prose-of :where(h1, h2, h3, h4, h5, h6) {
+  @apply text-ink font-semibold tracking-tight;
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+.prose-of :where(h1) {
+  @apply mt-12 mb-4 text-[1.75rem] leading-tight;
+}
+
+.prose-of :where(h2) {
+  @apply mt-12 mb-4 text-2xl;
+}
+
+.prose-of :where(h3) {
+  @apply mt-10 mb-3 text-xl;
+}
+
+.prose-of :where(h4, h5, h6) {
+  @apply mt-8 mb-2 text-[1.0625rem];
+}
+
+.prose-of :where(h2, h3) .heading-anchor {
+  @apply text-muted hover:text-accent ml-2 font-mono text-[0.7em] no-underline opacity-0 transition;
+}
+
+.prose-of :where(h2, h3):hover .heading-anchor,
+.prose-of :where(h2, h3) .heading-anchor:focus-visible {
+  @apply opacity-100;
+}
+
+.prose-of :where(h2, h3)::after {
+  content: "";
+  @apply bg-line mt-3 block h-px w-full;
+}
+
+.prose-of :where(a) {
+  @apply underline decoration-1 underline-offset-[3px];
+  text-decoration-color: color-mix(in oklab, var(--color-accent) 45%, transparent);
+  @apply transition-colors hover:text-accent hover:decoration-accent;
+}
+
+.prose-of :where(code):not(pre code) {
+  @apply text-ink rounded px-1 py-0.5 font-mono text-[0.875em] font-normal;
+  background-color: color-mix(in oklab, var(--color-accent) 13%, transparent);
+}
+
+.prose-of :where(code)::before,
+.prose-of :where(code)::after {
+  content: none;
+}
+
+.prose-of :where(pre),
+.prose-of :where(.codehilite) {
+  width: min(calc(100% + 5rem), var(--runover));
+  @apply border-line bg-elevated overflow-x-auto rounded-card border;
+  @apply my-7 p-4 font-mono text-[0.8125rem] leading-relaxed;
+}
+
+.prose-of :where(.codehilite) pre {
+  @apply m-0 w-full border-0 bg-transparent p-0;
+  max-width: none;
+}
+
+.prose-of :where(pre code) {
+  @apply bg-transparent p-0 text-[inherit];
+  font-variant-ligatures: none;
+}
+
+.prose-of :where(blockquote) {
+  @apply border-l-2 py-0.5 pl-5 font-normal not-italic;
+  border-color: color-mix(in oklab, var(--color-accent) 55%, transparent);
+}
+
+.prose-of :where(blockquote p:first-of-type)::before,
+.prose-of :where(blockquote p:last-of-type)::after {
+  content: none;
+}
+
+.prose-of :where(img) {
+  @apply border-line rounded-card border;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) .prose-of :where(img),
+  :root:not(.light):not(.dark) img[data-dimmable] {
+    filter: brightness(0.88) contrast(1.02);
+  }
+}
+
+.dark .prose-of :where(img),
+.dark img[data-dimmable] {
+  filter: brightness(0.88) contrast(1.02);
+}
+
+.prose-of :where(hr) {
+  @apply my-12;
+}
+
+.prose-of :where(ul > li)::marker {
+  color: var(--color-accent);
+}
+
+.prose-of :where(table) {
+  @apply my-8 block overflow-x-auto text-sm tabular-nums;
+  border-collapse: collapse;
+  width: fit-content;
+  max-width: var(--runover);
+}
+
+.table-scroll {
+  @apply my-8 block overflow-x-auto;
+  width: fit-content;
+  max-width: var(--runover);
+}
+
+.table-scroll[data-wide] {
+  width: max-content;
+  max-width: var(--runover);
+  margin-left: var(--breakout-shift, 50%);
+  transform: translateX(-50%);
+}
+
+.table-scroll > table {
+  @apply my-0 block text-sm tabular-nums;
+  display: table;
+  width: auto;
+  max-width: none;
+  border-collapse: collapse;
+}
+
+.prose-of :where(thead) {
+  @apply border-line border-y;
+}
+
+.prose-of :where(th) {
+  @apply text-muted px-3 py-2 text-left font-mono text-xs font-medium tracking-wide uppercase;
+}
+
+.prose-of :where(td) {
+  @apply border-line/60 border-b px-3 py-2;
+}
+
+.prose-of :where(tbody tr:last-child td) {
+  @apply border-b-0;
+}
+
+.prose-of :where(tbody tr):hover {
+  background-color: var(--color-elevated);
+}
+
+.prose-of :where(canvas) {
+  @apply border-line mx-auto block rounded-card border;
+  background: light-dark(oklch(0.995 0.002 130), oklch(0.93 0.004 130));
+  max-width: 100%;
+  height: auto;
+}
+
+.codehilite .c,
+.codehilite .ch,
+.codehilite .cm,
+.codehilite .c1,
+.codehilite .cs,
+.codehilite .cp,
+.codehilite .cpf {
+  color: var(--of-syn-comment);
+  font-style: italic;
+}
+
+.codehilite .k,
+.codehilite .kc,
+.codehilite .kd,
+.codehilite .kn,
+.codehilite .kp,
+.codehilite .kr,
+.codehilite .ow {
+  color: var(--of-syn-keyword);
+}
+
+.codehilite .kt,
+.codehilite .nc,
+.codehilite .nn,
+.codehilite .ne,
+.codehilite .nt {
+  color: var(--of-syn-type);
+}
+
+.codehilite .s,
+.codehilite .s1,
+.codehilite .s2,
+.codehilite .sb,
+.codehilite .sc,
+.codehilite .sd,
+.codehilite .se,
+.codehilite .sh,
+.codehilite .si,
+.codehilite .sx,
+.codehilite .sr,
+.codehilite .ss,
+.codehilite .dl {
+  color: var(--of-syn-string);
+}
+
+.codehilite .m,
+.codehilite .mb,
+.codehilite .mf,
+.codehilite .mh,
+.codehilite .mi,
+.codehilite .mo,
+.codehilite .il {
+  color: var(--of-syn-number);
+}
+
+.codehilite .nf,
+.codehilite .fm,
+.codehilite .nd {
+  color: var(--of-syn-function);
+}
+
+.codehilite .nb,
+.codehilite .bp {
+  color: var(--of-syn-type);
+}
+
+.codehilite .na,
+.codehilite .nv,
+.codehilite .vc,
+.codehilite .vg,
+.codehilite .vi {
+  color: var(--of-syn-function);
+}
+
+.codehilite .o,
+.codehilite .p,
+.codehilite .si {
+  color: var(--of-syn-punct);
+}
+
+.codehilite .gd {
+  color: var(--of-syn-number);
+}
+
+.codehilite .gi {
+  color: var(--of-syn-string);
+}
+
+.codehilite .gh,
+.codehilite .gu,
+.codehilite .gs {
+  font-weight: 600;
+}
+
+.codehilite .err {
+  color: var(--color-ember);
+}
+
+[data-overflowing] {
+  mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+}
+
+[data-overflowing][data-scrolled-end] {
+  mask-image: none;
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  header:has(nav),
+  footer,
+  .progress,
+  .skip-link {
+    display: none !important;
+  }
+
+  main {
+    max-width: none;
+    padding: 0;
+  }
+
+  .prose-of :where(pre),
+  .prose-of :where(.codehilite),
+  .prose-of :where(table),
+  .prose-of :where(img) {
+    border: 1px solid #ccc;
+    background: #fff;
+    break-inside: avoid;
+  }
+
+  .prose-of :where(table) {
+    width: 100%;
+    margin-left: 0;
+    transform: none;
+  }
+
+  .prose-of :where(a)::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    word-break: break-all;
+  }
+}
+
+.prose-of :where(pre),
+.prose-of :where(.codehilite),
+.table-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+.prose-of :where(pre)::-webkit-scrollbar,
+.prose-of :where(.codehilite)::-webkit-scrollbar,
+.table-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.prose-of :where(pre)::-webkit-scrollbar-track,
+.prose-of :where(.codehilite)::-webkit-scrollbar-track,
+.table-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.prose-of :where(pre)::-webkit-scrollbar-thumb,
+.prose-of :where(.codehilite)::-webkit-scrollbar-thumb,
+.table-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border: 3px solid var(--color-elevated);
+  border-radius: 999px;
+}

@@ -1,16 +1,7 @@
 {% extends "base.html" %}
-{% load static %}
 
-{% block meta_title %}
-500 Server Error | Overflow
-{% endblock %}
+{% block meta_title %}500 Server Error | overflow.no{% endblock %}
 
-{% block page_content %}
-<div class="row center-xs">
-    <div class="col-xs-12">
-        <h1>500 Server Error</h1>
-        <p>Woops. Our server hamster managed to throw your request into <b>/dev/null</b> without telling us why.</p>
-        <p><img src="{% static '/overflow/images/server-hamster.jpg' %}" alt="Server Hamster OF0420" title="Server hamster fucked up..." /></p>
-    </div>
-</div>
+{% block main_content %}
+{% include "components.html#error-page" with code="500" title="Server Error" body="The server hamster threw the request into /dev/null without telling anyone why." %}
 {% endblock %}

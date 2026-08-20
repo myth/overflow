@@ -1,18 +1,7 @@
 {% extends "base.html" %}
-{% load static %}
 
-{% block meta_title %}
-404 Not Found | Overflow
-{% endblock %}
+{% block meta_title %}404 Not Found | overflow.no{% endblock %}
 
-{% block page_content %}
-<div class="row center-xs">
-    <div class="col-xs-12">
-        <h1>404 Not Found</h1>
-        {% autoescape on %}
-        <p>The server hamster could not find the resource <b>{{ request.path }}</b></p>
-        {% endautoescape %}
-        <p><img src="{% static '/overflow/images/server-hamster.jpg' %}" alt="Server Hamster OF0420" title="Server hamster gave up locating your request..." /></p>
-    </div>
-</div>
+{% block main_content %}
+{% include "components.html#error-page" with code="404" title="Not Found" body="The server hamster could not find that resource." %}
 {% endblock %}

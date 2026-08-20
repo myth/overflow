@@ -1,40 +1,60 @@
 {% extends "base.html" %}
 
-{% block meta_title %}
-{% if active %}
-{{ active|safe }} | Blog | Overflow
-{% else %}
-Blog | Overflow
-{% endif %}
-{% endblock %}
+{% block meta_title %}{% if active and active != "anything" %}{{ active }} | {% endif %}Writing | overflow.no{% endblock %}
+{% block og_title %}{% if active and active != "anything" %}Posts tagged {{ active }}{% else %}Writing{% endif %} | overflow.no{% endblock %}
 
 {% block main_content %}
-<section id="post-filters">
-  <div class="row">
-    <div class="col-xs-12">
-      <h5 id="post-filters__title">Tags</h5>
-    </div>
-    <div class="col-xs-12">
-      {% for t, c in tags %}
-      <div class="post-filters__tag {% if active == t.name %}active{% endif %}">
-        <a href="{% url 'blog:tags' t.name %}" title="{{ t.name }}" class="post-filters__tag-name">{{ t.name }}</a>
-        <div class="post-filters__tag-count">{{ c }}</div>
-      </div>
+<header>
+  <h1 class="text-[1.75rem] font-semibold tracking-tight">
+    {% if active and active != "anything" %}
+    Posts tagged <span class="text-accent font-mono text-[0.8em] lowercase">{{ active }}</span>
+    {% else %}
+    Writing
+    {% endif %}
+  </h1>
+  <p class="text-muted mt-2 font-mono text-xs">
+    {{ posts|length }} post{{ posts|length|pluralize }}
+    {% if active and active != "anything" %}
+    <span class="caret mx-1.5 opacity-70" aria-hidden="true">»</span>
+    <a href="{% url 'blog:index' %}" class="link-quiet">show all</a>
+    {% endif %}
+  </p>
+</header>
+
+<section class="mt-9">
+  <div class="tag-list">
+    {% for t, c in tags|slice:":10" %}
+    {% include "components.html#tag" with name=t.name count=c %}
+    {% endfor %}
+  </div>
+
+  {% if tags|length > 10 %}
+  <details class="group mt-3" {% if active and active != "anything" %}open{% endif %}>
+    <summary
+      class="text-muted hover:text-accent inline-flex cursor-pointer list-none items-center gap-1.5 font-mono text-xs transition-colors">
+      <span class="caret" aria-hidden="true">»</span>
+      <span class="group-open:hidden">{{ tags|length|add:"-10" }} more tags</span>
+      <span class="hidden group-open:inline">fewer tags</span>
+    </summary>
+    <div class="tag-list mt-3">
+      {% for t, c in tags|slice:"10:" %}
+      {% include "components.html#tag" with name=t.name count=c %}
       {% endfor %}
     </div>
-  </div>
+  </details>
+  {% endif %}
 </section>
-<section id="post-list">
-  <h2>Posts about '{{ active|safe }}'</h2>
-  <ul>
+
+<section class="mt-12">
+  <div class="flex flex-col">
     {% for post in posts %}
-    <li>
-      <span class="post-list-date">{{ post.published|date:"Y-m-d" }}</span>
-      <span class="post-list-title">
-        <a href="{% url 'blog:detail' post.published.year post.published.month post.published.day post.slug %}">{{ post.title }}</a>
-      </span>
-    </li>
+    {% ifchanged post.published.year %}
+    <div class="entry-year">{{ post.published|date:"Y" }}</div>
+    {% endifchanged %}
+    {% include "components.html#entry" with post=post %}
+    {% empty %}
+    <p class="text-muted text-sm">No posts here yet.</p>
     {% endfor %}
-  </ul>
+  </div>
 </section>
 {% endblock %}

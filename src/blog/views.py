@@ -51,6 +51,19 @@ class BlogDetailView(DetailView):
 
         return obj
 
+    def get_context_data(self, **kwargs):
+        """Adds the neighbouring posts, so a reader can keep going without a detour via the list."""
+        context = super().get_context_data(**kwargs)
+        siblings = Post.objects.exclude(pk=self.object.pk)
+
+        if not getattr(self.request.user, "is_superuser", False):
+            siblings = siblings.filter(published__lte=timezone.now())
+
+        context["previous_post"] = siblings.filter(published__lt=self.object.published).first()
+        context["next_post"] = siblings.filter(published__gt=self.object.published).order_by("published").first()
+
+        return context
+
 
 class BlogTagsView(BlogListView):
     template_name = "blog/tags.html"

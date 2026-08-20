@@ -1,5 +1,40 @@
-{% extends "blog/list.html" %}
+{% extends "base.html" %}
+{% load static %}
 
-{% block meta_title %}
-Overflow
+{% block meta_title %}overflow.no — Aleksander Skraastad{% endblock %}
+{% block og_title %}overflow.no{% endblock %}
+
+{% block main_content %}
+<section>
+  <h1 class="wordmark-hero text-ink">overflow<span class="dot">»</span>no</h1>
+
+  <div class="mt-9 flex items-start gap-4">
+    <img src="{% static 'overflow/images/me.jpg' %}" alt="Aleksander Skraastad"
+         class="ring-line h-11 w-11 shrink-0 rounded-full object-cover ring-1" width="44" height="44">
+    <p class="text-muted max-w-[34rem] text-[0.9375rem] leading-relaxed">
+      <span class="text-ink font-medium">Aleksander Skraastad</span> — programmer in Oslo, former Air Force
+      officer, outdoors enthusiast. Mostly notes to myself about things worth remembering.
+    </p>
+  </div>
+</section>
+
+<section class="mt-16">
+  <h2 class="eyebrow">writing</h2>
+
+  <div class="mt-6 flex flex-col">
+    {% for post in posts|slice:":8" %}
+    {% ifchanged post.published.year %}
+    <div class="entry-year">{{ post.published|date:"Y" }}</div>
+    {% endifchanged %}
+    {% include "components.html#entry" with post=post %}
+    {% empty %}
+    <p class="text-muted text-sm">Nothing published yet.</p>
+    {% endfor %}
+  </div>
+
+  <a href="{% url 'blog:index' %}" class="link-quiet group mt-8 inline-flex items-center gap-2 px-3 font-mono text-xs">
+    all {{ posts|length }} posts
+    <span class="caret" aria-hidden="true">»</span>
+  </a>
+</section>
 {% endblock %}

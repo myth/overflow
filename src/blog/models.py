@@ -64,7 +64,7 @@ class Post(models.Model):
     @property
     def markdown(self) -> str:
         """Returns a markdown rendered version of the content field"""
-        return markdown(self.content, extras=["fenced-code-blocks", "tables"])
+        return markdown(self.content, extras=["fenced-code-blocks", "header-ids", "tables"])
 
     @property
     def updated(self) -> bool:

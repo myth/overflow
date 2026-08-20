@@ -1,45 +1,96 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block meta_title %}{{ post.title }} | Overflow{% endblock meta_title %}
+{% block meta_title %}{{ post.title }} | overflow.no{% endblock %}
+{% block meta_description %}{{ post.description }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ post.title }}{% endblock %}
+{% block og_description %}{{ post.description }}{% endblock %}
+{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% if post.image %}{{ post.image.file.url }}{% else %}{% static 'overflow/images/logo.png' %}{% endif %}{% endblock %}
 
-{% block meta_description %}{{ post.description }}{% endblock meta_description %}
+{% block progress %}<div class="progress" data-progress></div>{% endblock %}
 
-{% block css %}
-<link href="{% static '/overflow/syntax.css' %}" rel="stylesheet" type="text/css" />
-{% endblock css %}
+{# Rendered inside the article header instead, next to the post's own metadata. #}
+{% block messages %}{% endblock %}
 
 {% block main_content %}
-<article class="post">
-  <header class="post-header">
-    <h1 class="post-title">
+<article>
+  <header>
+    <a href="{% url 'blog:index' %}" class="link-quiet inline-flex items-center gap-2 font-mono text-xs">
+      <span class="caret" aria-hidden="true">«</span> writing
+    </a>
+
+    <h1 class="mt-7 text-[2rem] leading-[1.12] font-semibold tracking-tight sm:text-[2.625rem]">
       {{ post.title }}
     </h1>
-    <section class="post-description">
-      {{ post.description }}
-    </section>
-    <section class="post-meta">
-      <span><time datetime="{{ post.published.isoformat }}">{{ post.published|date:"M j, Y" }}</time></span>
-      <span>{{ post.estimated_read_time }} minute read</span>
-      {% if post.updated %}
-      <span>Updated <time datetime="{{ post.edited.isoformat }}">{{ post.edited|date:"M j, Y" }}</time></span>
-      {% endif %}
+
+    {% if post.description %}
+    <p class="text-muted measure mt-5 text-lg leading-relaxed">{{ post.description }}</p>
+    {% endif %}
+
+    <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+      {% include "components.html#post-meta" with post=post %}
       {% if post.tags.all %}
-      <span>{% for tag in post.tags.all %}<a class="post-tag" href="{% url 'blog:tags' tag %}">{{ tag }}</a> {% endfor %}</span>
+      <div class="tag-list">
+        {% for tag in post.tags.all %}
+        {% include "components.html#tag" with name=tag.name %}
+        {% endfor %}
+      </div>
       {% endif %}
-    </section>
-    {% if post.image %}
-    <div class="post-illustration">
-      <img alt="{{ post.image.title }}" title="{{ post.image.title }}" src="{{ post.image.file.url }}" />
+    </div>
+
+    {% if messages %}
+    <div class="mt-7 flex flex-col gap-3">
+      {% for message in messages %}
+      {% include "components.html#notice" with label="note" body=message tone="ember" %}
+      {% endfor %}
     </div>
     {% endif %}
-  </header>
-  <section class="post-content">
-    {% if post.raw %}
-    {{ post.content | safe }}
-    {% else %}
-    {{ post.markdown | safe }}
+
+    {% if post.image %}
+    {% comment %}
+    Intrinsic width/height reserve the box before the JPEG header lands, or the whole
+    article jumps down when it does. The caption carries the description, so the alt
+    text is empty rather than a duplicate announcement.
+    {% endcomment %}
+    <figure class="mt-10">
+      <img src="{{ post.image.file.url }}" alt="{% if not post.image.title %}{{ post.title }}{% endif %}"
+           width="{{ post.image.file.width }}" height="{{ post.image.file.height }}"
+           class="border-line rounded-card h-auto w-full border" loading="eager" decoding="async"
+           fetchpriority="high" data-dimmable>
+      {% if post.image.title %}
+      <figcaption class="text-muted mt-2 font-mono text-xs">{{ post.image.title }}</figcaption>
+      {% endif %}
+    </figure>
     {% endif %}
-  </section>
+  </header>
+
+  <div class="prose prose-of mt-10">
+    {% if post.raw %}{{ post.content|safe }}{% else %}{{ post.markdown|safe }}{% endif %}
+  </div>
+
+  {% if previous_post or next_post %}
+  <nav class="border-line/70 mt-20 grid gap-3 border-t pt-8 {% if previous_post and next_post %}sm:grid-cols-2{% endif %}" aria-label="More posts">
+    {% if previous_post %}
+    <a href="{{ previous_post.get_absolute_url }}"
+       class="group border-line hover:border-accent/60 hover:bg-elevated rounded-card border p-4 transition-colors">
+      <span class="text-muted font-mono text-xs"><span class="caret" aria-hidden="true">«</span> older</span>
+      <span class="text-ink group-hover:text-accent mt-1.5 block text-sm leading-snug transition-colors">
+        {{ previous_post.title }}
+      </span>
+    </a>
+    {% endif %}
+
+    {% if next_post %}
+    <a href="{{ next_post.get_absolute_url }}"
+       class="group border-line hover:border-accent/60 hover:bg-elevated rounded-card border p-4 transition-colors sm:text-right">
+      <span class="text-muted font-mono text-xs">newer <span class="caret" aria-hidden="true">»</span></span>
+      <span class="text-ink group-hover:text-accent mt-1.5 block text-sm leading-snug transition-colors">
+        {{ next_post.title }}
+      </span>
+    </a>
+    {% endif %}
+  </nav>
+  {% endif %}
 </article>
 {% endblock %}

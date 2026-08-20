@@ -117,3 +117,6 @@ yarn-error.log
 
 # Backend postgres data
 pgdata/
+
+# Tailwind standalone CLI
+/.tools/
