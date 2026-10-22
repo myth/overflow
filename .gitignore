@@ -120,3 +120,4 @@ pgdata/
 
 # Tailwind standalone CLI
 /.tools/
+bump-deps.fish
