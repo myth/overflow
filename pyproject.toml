@@ -22,7 +22,7 @@ dependencies = [
 dev = [
     "django-stubs>=6.1.2",
     "pyrefly>=1.4.0",
-    "ruff>=0.17.1",
+    "ruff>=0.17.2",
 ]
 
 [tool.pyrefly]
