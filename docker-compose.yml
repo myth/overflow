@@ -20,11 +20,11 @@ services:
 
   # PostgreSQL container
   db:
-    image: docker.io/postgres:15-alpine
+    image: docker.io/postgres:18-alpine
     restart: unless-stopped
     env_file: .env
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql
     networks:
       - default
 
