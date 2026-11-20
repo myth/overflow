@@ -12,7 +12,6 @@ dependencies = [
     "django-cors-headers>=4.9.0",
     "django-redis>=7.0.0",
     "markdown2>=2.5.5",
-    "pillow>=13.0.0",
     "psycopg2-binary>=2.9.13",
     "pygments>=2.21.0",
     "python-decouple>=3.8",
